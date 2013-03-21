@@ -1,1 +1,13 @@
-signup adn register functionality for katibeen
+This is a rails application.
+
+To test the Sign up and register/welcome functionality, follow the instructions:
+  - Install rails
+  - Go into the app directory, run the command "bundle install"
+  - Then install "mailcatcher" onto your system, start and open it in your browser
+  - Run the command "rails s" , this starts the server
+  - Visit "localhost:3000", you will see a raw signup form.
+  - Enter a valid email address.
+  - Open the mail catcher tab in your browser, open the email, copy the url-key.
+  - Enter localhost:3000/welcome/url-key
+  - To check the db, close the server and type "rails console"
+  - In this, run "PotentialUser.all" to see unregistered users and "User.all" to see registered users
