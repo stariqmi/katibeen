@@ -1,0 +1,19 @@
+<!--
+	SIGN UP FORM 
+	method => post
+	ajax => true (set by the hash "remote: true", to the action signup, i.e url => base/katibeen/signup)
+	class => signupForm 
+	
+	FORM FIELDS
+	email label: class => emailLabel
+	email input field: class => emailInput, id => email
+	timezone text field: class => timezoneInput, id => timezone (this class is set to "display:none" in the application.css.scss under the id tag => timezone)
+	submit button class => emailButton	
+-->
+<%= form_tag '/katibeen/signup', method: "post", remote: true, class: "signupForm" do %>
+	<%= label_tag :label, "Email", {class: "emailLabel"} %>
+	<%= text_field_tag :email, nil, {class: "emailInput", placeholder: "Enter your email here..."} %>
+	<%= text_field_tag :timezone, nil, {class: "timezoneInput"} %>
+	<%= submit_tag "Sign Up", class: "emailButton" %>
+<% end %>
+

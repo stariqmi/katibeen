@@ -1,0 +1,11 @@
+
+<h1 class="header">Katibeen</h1>
+
+<!-- RENDER THE FORM -->
+<%= render "form" %>	
+
+<!-- TAG TO CATCH RESULT OF INPUT, THE AJAX JS IS EXECUTED IN signup.js.erb -->
+<p class="result"></p>
+
+<!-- THIS LINE IS ONLY FOR DEBUGGING IN DEVELOPMENT ENVIRONMENT -->
+<%= debug(params) if Rails.env.development? %> 
