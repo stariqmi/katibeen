@@ -96,6 +96,7 @@ include UrlKeyGenerator # To generate a unique url key
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
+    @param = params[:url]
   end
 
   # Deals with the request to the katibeen/welcome/key url

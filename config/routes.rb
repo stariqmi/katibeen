@@ -2,8 +2,10 @@ KatApp::Application.routes.draw do
   root :to => "katibeen#home"
   get "katibeen/home"
   
+
   post "katibeen/signup"
   get "katibeen/performance"
+  match "/:url" => "katibeen#performance"
 
   #match "/register" => "katibeen#register"
   match "/welcome/:url" => "katibeen#welcome"
