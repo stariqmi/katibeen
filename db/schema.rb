@@ -11,7 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320220816) do
+ActiveRecord::Schema.define(:version => 20130322030628) do
+
+  create_table "incoming_day_prayers", :force => true do |t|
+    t.string   "url"
+    t.datetime "time"
+    t.string   "weekday"
+    t.integer  "fajr"
+    t.integer  "zuhr"
+    t.integer  "asr"
+    t.integer  "maghrib"
+    t.integer  "isha"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "outgoing_day_prayers", :force => true do |t|
+    t.string   "url"
+    t.datetime "time"
+    t.string   "weekday"
+    t.integer  "fajr"
+    t.integer  "zuhr"
+    t.integer  "asr"
+    t.integer  "maghrib"
+    t.integer  "isha"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "potential_users", :force => true do |t|
     t.string   "email"

@@ -25,3 +25,7 @@
  #timezone {
  	display: none;
  }
+
+ td {
+ 	text-align:  center;
+ }

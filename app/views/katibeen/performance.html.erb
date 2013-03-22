@@ -1,2 +1,17 @@
-<h1><%= @param %></h1>
+
+<table>
+	<tbody>
+		<tr><th>Date/Time</th><th>Fajr</th><th>Zuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th></tr>
+		<% @data.each do |day| %>
+			<tr>
+				<td><%= day[:created_at] %></td>
+				<td><%= day[:fajr] %></td>
+				<td><%= day[:zuhr] %></td>
+				<td><%= day[:asr] %></td>
+				<td><%= day[:maghrib] %></td>
+				<td><%= day[:isha] %></td> 
+			</tr>
+		<% end %>
+	</tbody>
+</table>
 

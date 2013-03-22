@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  url: MyString
+  time: 2013-03-21 23:06:01
+  weekday: MyString
+  fajr: 1
+  zuhr: 1
+  asr: 1
+  maghrib: 1
+  isha: 1
+  user_id: 1
+
+two:
+  url: MyString
+  time: 2013-03-21 23:06:01
+  weekday: MyString
+  fajr: 1
+  zuhr: 1
+  asr: 1
+  maghrib: 1
+  isha: 1
+  user_id: 1

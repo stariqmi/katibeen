@@ -1,46 +1,3 @@
-# Module to generate unique url.
-module UrlKeyGenerator
-
-  # Generates a 5 character long random string
-  def urlKeyGenerator
-    # Used as a string from which characters are pulled out from random positions
-    library = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    arr = []  # Empty array
-    # Loop of length 5 to pick a random character from "library"
-    # Push the character picked out into the empty array
-    (1..5).each { arr << library[rand(61)] } 
-    return arr.join # Join the array i.e make it a string and return it
-  end
-
-  # Checks each generated key for uniqueness and outputs only a unique key
-  def uniqueUrlKeyGenerator
-    url = urlKeyGenerator  # Generate a url
-    # Extract the user in the user db with that url
-    checkInUsers = User.find_by_url(url)
-    
-    # Loop while a user with the generated url exists already in the user db
-    while checkInUsers != nil
-      url = urlKeyGenerator # Generate a new url
-      # Extract a user with the generated url in the user db
-      checkInUsers = User.find_by_url(url)
-    end
-
-    # Extract the potential_user in the potential_user db with that url
-    checkInPotentialUsers = PotentialUser.find_by_url(url)
-
-    # Loop while a potential_user with the generated url exists already in the potential_user db
-    while checkInPotentialUsers != nil
-      url = urlKeyGenerator # Generate a new url
-      # Extract a potential_user with the generated url in the potential_user db
-      checkInPotentialUsers = PotentialUser.find_by_url(url)
-    end
-
-    return url # Return a unique url
-  end
-end
-
-
-
 #Main controller for the application
 class KatibeenController < ApplicationController
   
@@ -64,7 +21,7 @@ include UrlKeyGenerator # To generate a unique url key
   	#create a new PotentialUser object with the extarcted email, timezone and url key
   	puser = PotentialUser.new(email: email, url: @url, timezone: timezone)
 
-    # Count all users in the user db with the same email as extracted in the params
+    # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
   	
     # If no such user exists
@@ -96,13 +53,22 @@ include UrlKeyGenerator # To generate a unique url key
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
-    @param = params[:url]
+    url = params[:url]                      # Extract the url-key from the parameters
+    # Find the user with the url, eager leading the prayer data aswell.
+    user = User.includes(:incoming_day_prayers).find_by_url(url)
+   # If no such user exists
+   if user == nil
+      redirect_to :action => "home"         # Redirect to the home page
+    else
+      @data = user.incoming_day_prayers      # Extract all the prayer data
+      @json = @data.as_json                  # Assign an instance variable all the above data in json format
+    end
   end
 
   # Deals with the request to the katibeen/welcome/key url
   def welcome
     url = params[:url]                      # Extract the url key from the parameters
-    puser = PotentialUser.find_by_url(url)  # Extract all users with the same url key
+    puser = PotentialUser.find_by_url(url)  # Extract the user with the same url key
     
     if puser == nil                     
       redirect_to :action => "home"         # Redirect to the home page
