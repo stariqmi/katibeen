@@ -3,7 +3,9 @@ class KatibeenController < ApplicationController
   
 
 #Helper Code ----------------------- START ------------------------------------
-include UrlKeyGenerator # To generate a unique url key
+include UrlKeyGeneratorHelper # To generate a unique url key
+# include TimeZoneManager
+include UserPerformanceDataHelper # To generate missed prayers data for a user
 #Helper Code ------------------------ END ----------------------------------
 
 
@@ -30,7 +32,6 @@ include UrlKeyGenerator # To generate a unique url key
       #If the new PotentialUser is valid and can be saved
     	if puser.save
         # Send an email to the potential user
-        PotentialUserMailer.signup_email(puser).deliver
     		# Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
 
@@ -53,17 +54,22 @@ include UrlKeyGenerator # To generate a unique url key
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
-    url = params[:url]                      # Extract the url-key from the parameters
+    url = params[:url]                            # Extract the url-key from the parameters
     # Find the user with the url, eager leading the prayer data aswell.
     user = User.includes(:incoming_day_prayers).find_by_url(url)
+    rawData = rawDataExtractor user               # Extracts all the day prayers of the user
    # If no such user exists
    if user == nil
-      redirect_to :action => "home"         # Redirect to the home page
+      redirect_to :action => "home"               # Redirect to the home page
     else
-      @data = user.incoming_day_prayers      # Extract all the prayer data
-      @json = @data.as_json                  # Assign an instance variable all the above data in json format
+      @data = user.incoming_day_prayers           # Extract all the prayer data
+      missedData = missedPrayerData rawData       # Extract all the missed prayer data
+      processedData = { missedPrayerData: missedData}
+      @json = processedData.as_json
     end
   end
+
+
 
   # Deals with the request to the katibeen/welcome/key url
   def welcome
