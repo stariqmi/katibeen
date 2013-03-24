@@ -1,10 +1,15 @@
+<p>Joined at: <%= @user.created_at %></p>
+<p>Weeks since joined: <%= @weeks %></p>
+<p>Your average: <%= @average %></p>
+<p>Longest streak: <%= @longestStreak %></p>
 
 <table>
 	<tbody>
-		<tr><th>Date/Time</th><th>Fajr</th><th>Zuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th></tr>
+		<tr><th>Date/Time</th><th>Weekday</th><th>Fajr</th><th>Zuhr</th><th>Asr</th><th>Maghrib</th><th>Isha</th></tr>
 		<% @data.each do |day| %>
 			<tr>
 				<td><%= day[:created_at] %></td>
+				<td><%= day[:weekday] %></td>
 				<td><%= day[:fajr] %></td>
 				<td><%= day[:zuhr] %></td>
 				<td><%= day[:asr] %></td>
@@ -14,5 +19,8 @@
 		<% end %>
 	</tbody>
 </table>
-<p><%= @json %></p>
+
+	<% @filteredData.each do |key,data| %>
+		<p><%= key %>:  <%= data %><p>
+	<% end %>
 

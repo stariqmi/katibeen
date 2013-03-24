@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322030628) do
+ActiveRecord::Schema.define(:version => 20130323224418) do
 
   create_table "incoming_day_prayers", :force => true do |t|
     t.string   "url"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130322030628) do
     t.string   "timezone"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "average"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

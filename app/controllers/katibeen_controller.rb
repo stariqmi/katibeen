@@ -56,17 +56,25 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def performance
     url = params[:url]                            # Extract the url-key from the parameters
     # Find the user with the url, eager leading the prayer data aswell.
-    user = User.includes(:incoming_day_prayers).find_by_url(url)
-    rawData = rawDataExtractor user               # Extracts all the day prayers of the user
-   # If no such user exists
-   if user == nil
+    @user = User.includes(:incoming_day_prayers).find_by_url(url)
+    
+    if @user == nil
       redirect_to :action => "home"               # Redirect to the home page
     else
-      @data = user.incoming_day_prayers           # Extract all the prayer data
-      missedData = missedPrayerData rawData       # Extract all the missed prayer data
-      processedData = { missedPrayerData: missedData}
-      @json = processedData.as_json
+      performance  = PerformanceData.new @user    # New PerformanceData object
+      @data = performance.rawData                 # Raw Data from the object
+      @weeks = performance.weeks                  # Weeks passed since joined katibeen.com
+      prayersData = performance.prayersData
+      @average = performance.userAvgCalculator
+      @longestStreak = performance.longestStreak
+      # Filtered data using PerformanceData instance functions
+      @filteredData = { 
+                        missedPrayerData:     prayersData[:missedPrayersData],
+                        performedPrayersData: prayersData[:performedPrayersData],
+                        avgWeekData:          prayersData[:weekdayAvgPrayersData]
+                    } 
     end
+
   end
 
 
@@ -75,7 +83,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def welcome
     url = params[:url]                      # Extract the url key from the parameters
     puser = PotentialUser.find_by_url(url)  # Extract the user with the same url key
-    
+  
     if puser == nil                     
       redirect_to :action => "home"         # Redirect to the home page
     
