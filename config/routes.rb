@@ -6,7 +6,7 @@ KatApp::Application.routes.draw do
   match "/welcome/:url" => "katibeen#welcome"
   
   match "/:url" => "katibeen#performance"
-  
+  match "widgetData/:url" => "katibeen#widgetData"
   post "katibeen/signup"
 
   # The priority is based upon order of creation:

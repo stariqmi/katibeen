@@ -19,6 +19,7 @@ module UserPerformanceDataHelper
 			@weeks = (@days / 7.0).round(10) 						# Convert days to weeks, rounding to 10 decimal places
 		end
 
+
 		# Creates a hash of the # of missed prayer of each type, totalMissed 
 		# missed prayers and the type missed the most 
 		def prayersData
@@ -127,6 +128,11 @@ module UserPerformanceDataHelper
 			missedData[:totalMissed] = totalMissed
 			missedData[:mostMissed] = mostMissed.to_s.capitalize
 			
+			# Loop through the performed prayer data to convert to weekly prayer average for each prayer type
+			performedData.each do |key, value|
+				performedData[key] = (value / @weeks).round(2)
+			end
+
 			# Convert weekdayData to averages
 			weekdayData = weekdayAvgCalculator weekdayData
 			# Sort the hash into an array
@@ -135,8 +141,13 @@ module UserPerformanceDataHelper
 			weekdayData << ["worst", weekdayData[0][0]]				# Push in ["worst", weekday]
 			weekdayData << ["best", weekdayData[length - 1][0]]		# Push in ["best", weekday]
 
+			avgWeekdayData = {}
+			weekdayData.each do |data|
+				avgWeekdayData[data[0]] = data[1]
+			end
+
 			# Arrange the above 3 hashes in a single hash
-			data = { missedPrayersData: missedData, performedPrayersData: performedData, weekdayAvgPrayersData: weekdayData }
+			data = { missedPrayersData: missedData, weeklyPerformedAvgData: performedData, weekdayAvgPrayersData: avgWeekdayData }
 		end
 
 		# Converts a nested hash into a non-nested hash
@@ -194,6 +205,21 @@ module UserPerformanceDataHelper
 			end
 			streakArray << streak
 			streakArray.max
+		end
+
+		def mainWidgetData
+			data = []
+			rawData.each do |day|
+				dayHash = {
+					fajr: 		day[:fajr],
+					zuhr: 		day[:zuhr],
+					asr: 		day[:asr],
+					maghrib: 	day[:maghrib],
+					isha: 		day[:isha]
+				}
+				data <<	dayHash 
+			end
+			data
 		end
 
 	end	# -------------------------------------END OF CLASS -------------------------------------

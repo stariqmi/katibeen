@@ -70,9 +70,10 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       # Filtered data using PerformanceData instance functions
       @filteredData = { 
                         missedPrayerData:     prayersData[:missedPrayersData],
-                        performedPrayersData: prayersData[:performedPrayersData],
-                        avgWeekData:          prayersData[:weekdayAvgPrayersData]
+                        weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
+                        avgWeekdayData:          prayersData[:weekdayAvgPrayersData]
                     } 
+      @mainWidgetData = performance.mainWidgetData
     end
 
   end
@@ -95,6 +96,17 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       # Create a new User object with the extracted email, url key and timezone
       user = User.create(email: @email, url: url, timezone: timezone)
       puser.destroy                      # Delete the PotentialUser in the potential_users table 
+    end
+  end
+
+  def widgetData
+    url = params[:url]
+    user = User.find_by_url(url)
+    performance = PerformanceData.new user
+    @data = performance.mainWidgetData
+
+    respond_to do |format|
+      format.json { render json: @data }
     end
   end
 end
