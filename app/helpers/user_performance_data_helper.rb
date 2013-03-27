@@ -134,8 +134,10 @@ module UserPerformanceDataHelper
 			end
 
 			# Convert weekdayData to averages
+			
 			weekdayData = weekdayAvgCalculator weekdayData
 			# Sort the hash into an array
+			puts weekdayData.inspect
 			weekdayData = weekdayData.sort_by {|key, value| value}
 			length = weekdayData.count 								# Extract the length of the sorted array
 			weekdayData << ["worst", weekdayData[0][0]]				# Push in ["worst", weekday]
@@ -153,7 +155,9 @@ module UserPerformanceDataHelper
 		# Converts a nested hash into a non-nested hash
 		def weekdayAvgCalculator data
 			data.each do |key, value|
-				data[key] = (value[:prayerCount] / value[:count].to_f).round(2)	# Sets the value of the hash as a division of the nested hash fields
+				avg = (value[:prayerCount] / value[:count].to_f).round(2)	# Sets the value of the hash as a division of the nested hash fields
+				if avg.nan? ? data[key] = 0 : data[key] = avg
+				end
 			end
 		end
 
