@@ -10,13 +10,8 @@ module UserPerformanceDataHelper
 		def initialize user
 			@user = user 											# Set the class user variable as the model user
 			@rawData = user.incoming_day_prayers					# Extract all the prayer data
-			timezone = @user[:timezone]								# Extract his timezone
-			joinedAt = @user[:created_at].in_time_zone(timezone)	# Find the time he registered relevant to his time zone
-			timeNow = Time.now.in_time_zone(timezone)				# Find his current time relevant to his timezone
-			time_diff = Time.diff(joinedAt, timeNow)				# Find the difference between his join date and now 
-			#Extract the number of days since the user joined
-			@days = time_diff[:year]*12*4*7 + time_diff[:month]*4*7 + time_diff[:week]*7 + time_diff[:day]
-			@weeks = (@days / 7.0).round(10) 						# Convert days to weeks, rounding to 10 decimal places
+			@timesRequestSent = user.outgoing_day_prayers.count
+			@weeks = (@timesRequestSent / 7.0) 					# Convert days to weeks, rounding to 10 decimal places
 		end
 
 
@@ -130,14 +125,20 @@ module UserPerformanceDataHelper
 			
 			# Loop through the performed prayer data to convert to weekly prayer average for each prayer type
 			performedData.each do |key, value|
-				performedData[key] = (value / @weeks).round(2)
+				avg = value / @weeks
+
+				#puts "#{value} / #{@weeks} = #{avg}"
+				if avg > 7
+					performedData[key] = 7
+				else
+					performedData[key] = avg.round(2)
+				end
 			end
 
 			# Convert weekdayData to averages
 			
 			weekdayData = weekdayAvgCalculator weekdayData
 			# Sort the hash into an array
-			puts weekdayData.inspect
 			weekdayData = weekdayData.sort_by {|key, value| value}
 			length = weekdayData.count 								# Extract the length of the sorted array
 			weekdayData << ["worst", weekdayData[0][0]]				# Push in ["worst", weekday]
@@ -167,20 +168,15 @@ module UserPerformanceDataHelper
 			total = 0											# Initial total prayers
 			# Loop through each all the Day prayers											
 			rawData.each do |day|
-				if day[:fajr] == 2 ? total += 1 : nil			# Add one to total if prayer performed
-				end
-				if day[:fajr] == 2 ? total += 1 : nil			# Add one to total if prayer performed
-				end
-				if day[:zuhr] == 2 ? total += 1 : nil			# Add one to total if prayer performed
-				end
-				if day[:asr] == 2 ? total += 1 : nil			# Add one to total if prayer performed
-				end
-				if day[:maghrib] == 2 ? total += 1 : nil		# Add one to total if prayer performed
-				end
-				if day[:isha] == 2 ? total += 1 : nil			# Add one to total if prayer performed
-				end
+				total += 1 if day[:fajr] == 2			# Add one to total if prayer performed
+				total += 1 if day[:zuhr] == 2			# Add one to total if prayer performed
+				total += 1 if day[:asr] == 2			# Add one to total if prayer performed
+				total += 1 if day[:maghrib] == 2		# Add one to total if prayer performed
+				total += 1 if day[:isha] == 2			# Add one to total if prayer performed
 			end
-			avg = (total / (rawData.count - 1).to_f).round(2)	# Calculate the average
+			# Calculate how many days the user was requested for a response, each response request represents a day
+			avg = (total / @timesRequestSent.to_f).round(2) # Calculate the average
+		
 		end
 
 		def perfectDayChecker day
@@ -198,8 +194,7 @@ module UserPerformanceDataHelper
 				if perfectDayChecker day
 					streak += 1 
 				else
-					if streak > 0
-						puts streak  
+					if streak > 0  
 						streakArray << streak
 					else
 						nil
