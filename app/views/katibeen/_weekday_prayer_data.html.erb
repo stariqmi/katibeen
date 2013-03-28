@@ -1,0 +1,62 @@
+<div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"] %></span> best day</p></div>
+<div style="margin-left: 9%;" id="weekly_prayers">
+<table>
+    <tbody><tr>
+        <td>
+            <span>Mon</span>
+            
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_mon" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Monday"] %>"></div>
+            <p></p>
+        </td>
+        <td>
+            <span>Tues</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_tues" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Tuesday"] %>"></div>
+            <p></p>
+        </td>
+        <td>
+            <span>Wed</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_wed" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Wednesday"] %>"></div>
+            <p></p>
+        </td>
+        <td>
+            <span>Thurs</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_thurs" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Thursday"] %>"></div><p></p>
+        </td>
+        <td>
+            <span>Fri</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_fri" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Friday"] %>"></div><p></p>
+        </td>
+        <td>
+            <span>Sat</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_sat" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Saturday"] %>"></div><p></p>
+        </td>
+        <td>
+            <span>Sun</span>
+            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
+            <div id="weekly_average_background"></div>
+            <div class="weekly_average_streak" id="weekly_average_streak_sun" 
+            data-average="<%= @filteredData[:avgWeekdayData]["Sunday"] %>"></div><p></p>
+        </td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div id="worst_day"><p>worst day - <%= @filteredData[:avgWeekdayData]["worst"] %></p></div>

@@ -1,257 +1,37 @@
 <body>
-    	<div id="top_logo">
-            <img src="./images/Katibean_logo_2.png">
+    <div id="top_logo">
+        <img src="./images/Katibean_logo_2.png">
+    </div>
+    <center>
+        <div id="prayers_per_week">
+            <%= render "overall_data" %>
         </div>
-        <center>
-            <div id="performance_summary">
-                <p id="performance_summary_line1">Masha Allah!</p>
-                <p id="performance_summary_line2">Your Salah improved by 25% this past week</p>
-            </div>
-            <!--
-            <svg height="60px" width="380px">
-                <path fill="#606060" fill-opacity="0.1" stroke-width="0" stroke="none" d="M0 60 L0 50 L100 20 L160 50 L230 20 L300 20 L360 50 L420 20 L450 20 L450 60Z"/>
-            </svg>
-            <div id="main_chart">
-                <table style="display: none;" id="table_1">
-                    <tbody><tr>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                    </tr>
+        <%= render "main_chart" %>
+        <table>
+            <tbody>
+                <% @mainWidgetData.each do |data| %>
+                                       
+                <% end %>
+            </tbody>
+        </table>
+        <%= render "performance_summary" %>
+        <div id="overall_analytics">
+            <table id="table_of_analytics">
+                <tbody>
                     <tr>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                    </tr>
-                    <tr>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody></table>
-                <table style="display: visible;" id="table_2">
-                    <tbody><tr>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px fajr main_chart_adjustment"></div></td>
-                    </tr>
-                    <tr>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px duhr main_chart_adjustment"></div></td>
-                    </tr>
-                    <tr>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px asr main_chart_adjustment"></div></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px maghrib main_chart_adjustment"></div></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td><div class="circle size_20px isha main_chart_adjustment"></div></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody></table>
-                <div id="slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 100%;"></a></div>
-            </div>
-        -->
-            <div id="prayers_per_week">
-                <p>Prayers per week</p>
-                <table>
-                    <tbody><tr>
-                        <td><div class="circle size_75px fajr"><p><%= @filteredData[:weeklyPerformedAvgData][:fajr] %></p></div></td>
-                        <td><div class="circle size_75px duhr"><p><%= @filteredData[:weeklyPerformedAvgData][:zuhr] %></p></div></td>
-                        <td><div class="circle size_75px asr"><p><%= @filteredData[:weeklyPerformedAvgData][:asr] %></p></div></td>
-                        <td><div class="circle size_75px maghrib"><p><%= @filteredData[:weeklyPerformedAvgData][:maghrib] %></p></div></td>
-                        <td><div class="circle size_75px isha"><p><%= @filteredData[:weeklyPerformedAvgData][:isha] %></p></div></td>
-                    </tr>
-                    <tr>
-                        <td><div class="prayer_title">FAJR</div></td>
-                        <td><div class="prayer_title">DUHR</div></td>
-                        <td><div class="prayer_title">ASR</div></td>
-                        <td><div class="prayer_title">MAGHRIB</div></td>
-                        <td><div class="prayer_title">ISHA</div></td>
-                    </tr>
-                </tbody></table>
-            </div>
-            <div id="overall_analytics">
-                <table id="table_of_analytics">
-                    <tbody><tr>
                         <td class="analytics_cells">
-                            <div id="prayer_per_day"><p><span><%= @average %></span> per day</p></div>
-                            <div id="prayer_per_day_average">
-                                <%= image_tag "stencil_dayaverage.png", :id => "prayer_per_day_average_image" %>
-
-                                <div id="prayer_per_day_average_background"></div>
-                                <div id="prayer_per_day_average_streak" data-average="<%= @average %>"></div>
-                            </div>
-                            <div id="longest_streak" ><p>longest streak - <%= @longestStreak %> days</p></div>
+                            <%= render "user_average" %>
                         </td>
                         <td width="450px" class="analytics_cells">
-                            <div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"] %></span> best day</p></div>
-                            <div style="margin-left: 9%;" id="weekly_prayers">
-                                <table>
-                                    <tbody><tr>
-                                        <td>
-                                            <span>Mon</span>
-                                            
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_mon" data-average="<%= @filteredData[:avgWeekdayData]["Monday"] %>"></div>
-                                            <p></p>
-                                        </td>
-                                        <td>
-                                            <span>Tues</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_tues" data-average="<%= @filteredData[:avgWeekdayData]["Tuesday"] %>"></div>
-                                            <p></p>
-                                        </td>
-                                        <td>
-                                            <span>Wed</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_wed" data-average="<%= @filteredData[:avgWeekdayData]["Wednesday"] %>"></div>
-                                            <p></p>
-                                        </td>
-                                        <td>
-                                            <span>Thurs</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_thurs" data-average="<%= @filteredData[:avgWeekdayData]["Thursday"] %>"></div><p></p>
-                                        </td>
-                                        <td>
-                                            <span>Fri</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_fri" data-average="<%= @filteredData[:avgWeekdayData]["Friday"] %>"></div><p></p>
-                                        </td>
-                                        <td>
-                                            <span>Sat</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_sat" data-average="<%= @filteredData[:avgWeekdayData]["Saturday"] %>"></div><p></p>
-                                        </td>
-                                        <td>
-                                            <span>Sun</span>
-                                            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-                                            <div id="weekly_average_background"></div>
-                                            <div class="weekly_average_streak" id="weekly_average_streak_sun" data-average="<%= @filteredData[:avgWeekdayData]["Sunday"] %>"></div><p></p>
-                                        </td>
-                                    </tr>
-                                </tbody></table>
-                            </div>
-                            <div id="worst_day"><p>worst day - <%= @filteredData[:avgWeekdayData]["worst"] %></p></div>
+                            <%= render "weekday_prayer_data" %>
                         </td>
                         <td class="analytics_cells">
-                            <div id="total_missed_prayers"><p><span><%= @filteredData[:missedPrayerData][:totalMissed] %></span> missed</p></div>
-                            <div id="missed_prayers">
-                                <table>
-                                    <tbody><tr>
-                                        <td><div class="circle size_50px fajr"><p><%= @filteredData[:missedPrayerData][:fajr] %></p></div></td>
-                                        <td><div class="circle size_50px duhr"><p><%= @filteredData[:missedPrayerData][:zuhr] %></p></div></td>
-                                        <td><div class="circle size_50px asr"><p><%= @filteredData[:missedPrayerData][:asr] %></p></div></td>
-                                        <td><div class="circle size_50px maghrib"><p><%= @filteredData[:missedPrayerData][:maghrib] %></p></div></td>
-                                        <td><div class="circle size_50px isha"><p><%= @filteredData[:missedPrayerData][:isha] %></p></div></td>
-                                    </tr>
-                                </tbody></table>
-                            </div>
-                            <div id="most_missed"><p>most missed - <%= @filteredData[:missedPrayerData][:mostMissed] %></p></div>
+                            <%= render "missed_prayers" %>
                         </td>
                     </tr>
-                </tbody></table>
-            </div>
-        <center>
-        <div id="footer"></div>
-    
-
+                </tbody>
+            </table>
+        </div>
+    <center>
+    <div id="footer"></div>
 </center></center></body>

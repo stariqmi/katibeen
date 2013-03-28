@@ -75,10 +75,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                     } 
       @mainWidgetData = performance.mainWidgetData
     end
-
   end
-
-
 
   # Deals with the request to the katibeen/welcome/key url
   def welcome
@@ -109,5 +106,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       format.json { render json: @data }
     end
   end
+
 end
 

@@ -125,14 +125,10 @@ module UserPerformanceDataHelper
 			
 			# Loop through the performed prayer data to convert to weekly prayer average for each prayer type
 			performedData.each do |key, value|
-				avg = value / @weeks
-
-				#puts "#{value} / #{@weeks} = #{avg}"
-				if avg > 7
-					performedData[key] = 7
-				else
-					performedData[key] = avg.round(2)
-				end
+				avg = value/@timesRequestSent
+				avg = avg * 100
+				#puts "#{value} / #{@timesRequestSent} = #{avg}"
+				performedData[key] = "#{avg}%"
 			end
 
 			# Convert weekdayData to averages
@@ -211,7 +207,7 @@ module UserPerformanceDataHelper
 			rawData.each do |day|
 				dayHash = {
 					fajr: 		day[:fajr],
-					zuhr: 		day[:zuhr],
+					duhr: 		day[:zuhr],
 					asr: 		day[:asr],
 					maghrib: 	day[:maghrib],
 					isha: 		day[:isha]

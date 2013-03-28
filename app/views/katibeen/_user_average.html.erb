@@ -1,0 +1,7 @@
+<div id="prayer_per_day"><p><span><%= @average %></span> per day</p></div>
+<div id="prayer_per_day_average">
+    <%= image_tag "stencil_dayaverage.png", :id => "prayer_per_day_average_image" %>
+    <div id="prayer_per_day_average_background"></div>
+    <div id="prayer_per_day_average_streak" data-average="<%= @average %>"></div>
+</div>
+<div id="longest_streak" ><p>longest streak - <%= @longestStreak %> days</p></div>

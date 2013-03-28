@@ -25,4 +25,13 @@
  #timezone {
  	display: none;
  }
+.day {
+	float:left;
+}
+ .prayer_dot {
+ 	width: 20px;
+ 	height: 20px;
+ 	border-radius: 50% 50% 50% 50%;
+ 	margin-top: 1%;
+ }
 
