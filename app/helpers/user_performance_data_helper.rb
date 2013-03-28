@@ -125,9 +125,9 @@ module UserPerformanceDataHelper
 			
 			# Loop through the performed prayer data to convert to weekly prayer average for each prayer type
 			performedData.each do |key, value|
-				avg = value/@timesRequestSent
-				avg = avg * 100
-				#puts "#{value} / #{@timesRequestSent} = #{avg}"
+				avg = value/@timesRequestSent.to_f
+				avg = (avg.round(2) * 100).to_i
+				puts "#{value} / #{@timesRequestSent} = #{avg}"
 				performedData[key] = "#{avg}%"
 			end
 
@@ -205,13 +205,14 @@ module UserPerformanceDataHelper
 		def mainWidgetData
 			data = []
 			rawData.each do |day|
-				dayHash = {
-					fajr: 		day[:fajr],
-					duhr: 		day[:zuhr],
-					asr: 		day[:asr],
-					maghrib: 	day[:maghrib],
-					isha: 		day[:isha]
-				}
+				dayHash = []
+		
+				dayHash << [day[:fajr], "fajr"]
+				dayHash << [day[:zuhr], "duhr"]
+				dayHash << [day[:asr], "asr"]
+				dayHash << [day[:maghrib], "maghrib"]
+				dayHash << [day[:isha], "isha"]
+		
 				data <<	dayHash 
 			end
 			data
