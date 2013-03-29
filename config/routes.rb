@@ -4,11 +4,11 @@ KatApp::Application.routes.draw do
 
   match "/welcome" => "katibeen#home"
   match "/welcome/:url" => "katibeen#welcome"
-  
+
   match "/:url" => "katibeen#performance"
   match "widgetData/:url" => "katibeen#widgetData"
   post "katibeen/signup"
-  match "/day_data/:prayer_day_id" => "katibeen#requestData"
+  match "/day_data/:url/:prayer_day_id" => "katibeen#requestData"
   post "/katibeen/submitDayData"
   get "/katibeen/about"
 
