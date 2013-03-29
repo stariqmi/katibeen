@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require "rubygems"
+require "bundler/setup"
+require "mailman"
+
+#Mailman Config Settings
+Mailman.config.pop3 = {
+  server: 'pop.gmail.com', port: 995, ssl: true,
+  username: 'katibeantest',
+  password: 'foobar123'
+}
+
+Mailman::Application.run do
+  default do
+  	puts 'Hello World'
+  	puts message.body.decoded
+  	puts message.subject
+
+  	#Run some random function to do stuff
+  end
+end
