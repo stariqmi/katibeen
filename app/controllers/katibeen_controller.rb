@@ -94,7 +94,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @email = puser.email               # Extract the email of this user
       puts @email + "\n"
       # Create a new User object with the extracted email, url key and timezone
-      user = User.create(email: @email, url: url, timezone: timezone)
+      user = User.create(email: @email, url: url, timezone: timezone, day: 1)
       puser.destroy                      # Delete the PotentialUser in the potential_users table
     end
   end
@@ -123,11 +123,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     respond_to do |format|
       format.js
     end
-  end
-
-  def daily_prayer
-
-
   end
 
 end
