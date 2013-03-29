@@ -8,6 +8,8 @@ KatApp::Application.routes.draw do
   match "/:url" => "katibeen#performance"
   match "widgetData/:url" => "katibeen#widgetData"
   post "katibeen/signup"
+  match "/day_data/:prayer_day_id" => "katibeen#requestData"
+  post "/katibeen/submitDayData"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -56,8 +56,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def performance
     url = params[:url]                            # Extract the url-key from the parameters
     # Find the user with the url, eager leading the prayer data aswell.
-    @user = User.includes(:incoming_day_prayers).find_by_url(url)
-    
+    @user = User.includes(:outgoing_day_prayers).find_by_url(url)
     if @user == nil
       redirect_to :action => "home"               # Redirect to the home page
     else
@@ -96,14 +95,29 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
   end
 
-  def widgetData
-    url = params[:url]
-    user = User.find_by_url(url)
-    performance = PerformanceData.new user
-    @data = performance.mainWidgetData
+  #def widgetData
+  #  url = params[:url]
+  #  user = User.find_by_url(url)
+  #  performance = PerformanceData.new user
+  #  @data = performance.mainWidgetData
 
+  # respond_to do |format|
+  #   format.json { render json: @data }
+  # end
+  #end
+
+  def requestData
+    @prayer_day_id = params[:prayer_day_id]
+  end
+
+  def submitDayData
+    dayData = outgoing_day_prayer.find_by_url(params[:prayer_day_id])
+    if dayData == nil
+      redirect_to :action => "home"
+    else
+    end
     respond_to do |format|
-      format.json { render json: @data }
+      format.js
     end
   end
 

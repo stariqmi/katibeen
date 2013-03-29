@@ -9,8 +9,9 @@ module UserPerformanceDataHelper
 		# Initializer for the class
 		def initialize user
 			@user = user 											# Set the class user variable as the model user
-			@rawData = user.incoming_day_prayers					# Extract all the prayer data
-			@timesRequestSent = user.outgoing_day_prayers.count
+			@rawData = user.outgoing_day_prayers.where("status = ? OR status = ?", "responded", "deactivated")					# Extract all the prayer data
+			 puts "USER DAYS COUNT => #{@rawData.count}"
+			@timesRequestSent = @rawData.count
 			@weeks = (@timesRequestSent / 7.0) 					# Convert days to weeks, rounding to 10 decimal places
 		end
 
@@ -163,7 +164,7 @@ module UserPerformanceDataHelper
 		def userAvgCalculator
 			total = 0											# Initial total prayers
 			# Loop through each all the Day prayers											
-			rawData.each do |day|
+			@rawData.each do |day|
 				total += 1 if day[:fajr] == 2			# Add one to total if prayer performed
 				total += 1 if day[:zuhr] == 2			# Add one to total if prayer performed
 				total += 1 if day[:asr] == 2			# Add one to total if prayer performed
@@ -186,7 +187,7 @@ module UserPerformanceDataHelper
 		def longestStreak
 			streak = 0
 			streakArray = []
-			rawData.each do |day|
+			@rawData.each do |day|
 				if perfectDayChecker day
 					streak += 1 
 				else
@@ -204,7 +205,7 @@ module UserPerformanceDataHelper
 
 		def mainWidgetData
 			data = []
-			rawData.each do |day|
+			@rawData.each do |day|
 				dayHash = []
 		
 				dayHash << [day[:fajr], "fajr"]

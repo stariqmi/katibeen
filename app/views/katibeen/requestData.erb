@@ -1,0 +1,28 @@
+<table>
+	<tbody>
+		<%= form_tag '/katibeen/submitDayData', method: "post", remote: true, class: "submitDayDataForm" do %>
+			<tr>
+			<td><%= label_tag :label, "Fajr", :class => "checkbox_label" %></td>
+			<td><%= check_box_tag :fajr, 2, false, :class => 'fajr_checkbox' %></td>
+			</tr>
+			<div>
+			<td><%= label_tag :label, "Duhr", :class => "checkbox_label" %></td>
+			<td><%= check_box_tag :zuhr, 2,false, :class => 'duhr_checkbox' %></td>
+			</tr>
+			<tr>
+			<td><%= label_tag :label, "Asr", :class => "checkbox_label" %></td>
+			<td><%= check_box_tag :asr, 2, false, :class => 'asr_checkbox' %></td>
+			</tr>
+			<tr>
+			<td><%= label_tag :label, "Maghrib", :class => "checkbox_label" %></td>
+			<td><%= check_box_tag :maghrib, 2, false, :class => 'maghrib_checkbox' %></td>
+			</tr>
+			<tr>
+			<td><%= label_tag :label, "Isha", :class => "checkbox_label" %></td>
+			<td><%= check_box_tag :isha, 2, false, :class => 'isha_checkbox' %></td>
+			</tr>	
+	</tbody>
+</table>
+		<%= hidden_field_tag :prayer_day_id, @prayer_day_id, :class => 'prayer_day_id_tag' %> 
+		<%= submit_tag "Submit", class: "submitButton" %>
+		<% end %>
