@@ -25,13 +25,15 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
     # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
+    PotentialUserMailer.confirmation_email(puser).deliver
   	
     # If no such user exists
     if check_users == nil
 
       #If the new PotentialUser is valid and can be saved
-    	if puser.save
+    	if puser.save!
         # Send an email to the potential user
+        #PotentialUserMailer.signup_email(puser).deliver
     		# Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
 
