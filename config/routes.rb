@@ -10,6 +10,7 @@ KatApp::Application.routes.draw do
   post "katibeen/signup"
   match "/day_data/:prayer_day_id" => "katibeen#requestData"
   post "/katibeen/submitDayData"
+  get "/katibeen/about"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

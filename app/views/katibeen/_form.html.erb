@@ -1,19 +1,9 @@
-<!--
-	SIGN UP FORM 
-	method => post
-	ajax => true (set by the hash "remote: true", to the action signup, i.e url => base/katibeen/signup)
-	class => signupForm 
-	
-	FORM FIELDS
-	email label: class => emailLabel
-	email input field: class => emailInput, id => email
-	timezone text field: class => timezoneInput, id => timezone (this class is set to "display:none" in the application.css.scss under the id tag => timezone)
-	submit button class => emailButton	
--->
-<%= form_tag '/katibeen/signup', method: "post", remote: true, class: "signupForm" do %>
-	<%= label_tag :label, "Email", {class: "emailLabel"} %>
-	<%= text_field_tag :email, nil, {class: "emailInput", placeholder: "Enter your email here..."} %>
-	<%= text_field_tag :timezone, nil, {class: "timezoneInput"} %>
-	<%= submit_tag "Sign Up", class: "emailButton" %>
-<% end %>
+
+<form method="post" data-remote="true" class="signupForm" action="/katibeen/signup" accept-charset="UTF-8"><div style="margin:0;padding:0;display:inline">
+	<input type="hidden" value="✓" name="utf8"><input type="hidden" value="vZ88JZ8/UaxCXOioJOT3WD23Avuj/f5X5nBErv6N38k=" name="authenticity_token"></div>
+	<div id="email">
+	<input type="text" placeholder="youremail@something.com" name="email" id="email_input">
+	<input type="text" name="timezone" id="timezone" class="timezoneInput">
+	<input type="submit" value="Add Me" name="commit" id="add_email">
+</form>
 

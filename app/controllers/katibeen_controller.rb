@@ -13,6 +13,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def home
   end
 
+  def about
+  end
+
   #Deals with the post request to the /katibeen/signup url
   def signup
 
