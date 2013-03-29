@@ -1,6 +1,6 @@
 #Main controller for the application
 class KatibeenController < ApplicationController
-  
+
 
 #Helper Code ----------------------- START ------------------------------------
 include UrlKeyGeneratorHelper # To generate a unique url key
@@ -25,27 +25,27 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
     # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
-  	
+
     # If no such user exists
     if check_users.nil?
 
       #If the new PotentialUser is valid and can be saved
     	if puser.save!
         # Send an email to the potential user
-        PotentialUserMailer.confirmation_email(puser).deliver
+        UserMailer.confirmation_email(puser).deliver
     		# Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
 
     	#If the new PotentialUser is not valid
     	else
-    		#Set @result as the error message 
+    		#Set @result as the error message
     		@result = "Email #{puser.errors[:email][0]}.".html_safe
     	end
-    # User by this email already exists  
+    # User by this email already exists
     else
       # Result instance variable for the view
       @result = "User by this email already exists"
-    end 
+    end
 
     # Respond to only javascript, set for AJAX
   	respond_to do |format|
@@ -68,11 +68,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @average = performance.userAvgCalculator
       @longestStreak = performance.longestStreak
       # Filtered data using PerformanceData instance functions
-      @filteredData = { 
+      @filteredData = {
                         missedPrayerData:     prayersData[:missedPrayersData],
                         weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
                         avgWeekdayData:          prayersData[:weekdayAvgPrayersData]
-                    } 
+                    }
       @mainWidgetData = performance.mainWidgetData
     end
   end
@@ -81,18 +81,18 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def welcome
     url = params[:url]                      # Extract the url key from the parameters
     puser = PotentialUser.find_by_url(url)  # Extract the user with the same url key
-  
-    if puser == nil                     
+
+    if puser == nil
       redirect_to :action => "home"         # Redirect to the home page
-    
+
     # If such a user exists
-    else        
-      timezone = puser.timezone          # Extract the timezone of this user 
+    else
+      timezone = puser.timezone          # Extract the timezone of this user
       @email = puser.email               # Extract the email of this user
       puts @email + "\n"
       # Create a new User object with the extracted email, url key and timezone
       user = User.create(email: @email, url: url, timezone: timezone)
-      puser.destroy                      # Delete the PotentialUser in the potential_users table 
+      puser.destroy                      # Delete the PotentialUser in the potential_users table
     end
   end
 
@@ -120,6 +120,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     respond_to do |format|
       format.js
     end
+  end
+
+  def daily_prayer
+
+
   end
 
 end
