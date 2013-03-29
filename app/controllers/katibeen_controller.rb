@@ -13,6 +13,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def home
   end
 
+  def about
+  end
+
   #Deals with the post request to the /katibeen/signup url
   def signup
 
@@ -27,11 +30,12 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     check_users = User.find_by_email(email)
   	
     # If no such user exists
-    if check_users == nil
+    if check_users.nil?
 
       #If the new PotentialUser is valid and can be saved
-    	if puser.save
+    	if puser.save!
         # Send an email to the potential user
+        PotentialUserMailer.confirmation_email(puser).deliver
     		# Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
 
