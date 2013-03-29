@@ -8,8 +8,8 @@ class PotentialUser < ActiveRecord::Base
   validates :timezone, presence: true
 
   private
-  def sendWelcomeEmail 
-  	PotentialUserMailer.signup_email(self).deliver
+  def sendWelcomeEmail
+  	UserMailer.signup_email(self).deliver
   end
 
 
