@@ -7,8 +7,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => puser.email, :subject => "Confirm your Account")
   end
 
-  def daily_check_email(user)
+  def daily_check_email(user, dayData)
   	@user = user
+    @dayData = dayData
   	mail(:to => user.email, :subject => "Check your prayers")
   end
 end
