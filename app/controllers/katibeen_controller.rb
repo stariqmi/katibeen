@@ -99,19 +99,15 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
   end
 
-  #def widgetData
-  # url = params[:url]
-  # user = User.find_by_url(url)
-  # performance = PerformanceData.new user
-  # @data = performance.mainWidgetData
+  def widgetData
+   url = params[:url]
+   user = User.find_by_url(url)
+   performance = PerformanceData.new user
+   @data = performance.mainWidgetData
 
-  # respond_to do |format|
-  # format.json { render json: @data }
-  # end
-  #end
-
-  def requestData
-    @prayer_day_id = params[:prayer_day_id]
+   respond_to do |format|
+   format.json { render json: @data }
+   end
   end
 
   def submitDayData
