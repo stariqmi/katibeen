@@ -1,4 +1,30 @@
 <!DOCTYPE html>
-<html>
-	<%= root_url()%>day_data/<%=@user.url%>/<%=@dayData.id%>
-</html>
+<body>
+
+
+<form action="http://localhost:3000/katibeen/submitDayData" method="post" target="_blank">
+
+	<input name="fajr" type="checkbox" value="2">
+	<br>
+	<input name="zuhr" type="checkbox" value="2">
+	<br>
+	<input name="asr" type="checkbox" value="2">
+	<br>
+	<input name="maghrib" type="checkbox" value="2">
+	<br>
+	<input name="isha" type="checkbox" value="2">
+	<br>
+
+
+	<input name="prayer_day_id" type="hidden" value= <%=@dayData.id%> >
+	<input name="url" type="hidden" value= <%=@dayData.url%> >
+	<input type="submit" value="Submit" />&nbsp;</form>
+
+</form>
+
+
+<a href = <%= root_url()%>day_data/<%=@user.url%>/<%=@dayData.id%>>
+	Can't see a form? Click here!
+</a>
+<!--<![endif]-->
+</body>
