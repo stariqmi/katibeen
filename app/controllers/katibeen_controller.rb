@@ -36,7 +36,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
      if puser.save!
         # Send an email to the potential user
         UserMailer.confirmation_email(puser).deliver
-     # Result instance variable for confirmation in the view
+        # Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
 
      #If the new PotentialUser is not valid
