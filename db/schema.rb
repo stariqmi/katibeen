@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330191140) do
+ActiveRecord::Schema.define(:version => 20130330230244) do
 
   create_table "outgoing_day_prayers", :force => true do |t|
     t.string   "url"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20130330191140) do
     t.datetime "updated_at",    :null => false
     t.string   "status"
     t.integer  "times_updated"
+    t.float    "average"
+    t.integer  "total_prayed"
   end
 
   create_table "users", :force => true do |t|

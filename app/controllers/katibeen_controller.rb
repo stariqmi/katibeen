@@ -75,6 +75,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                         avgWeekdayData: prayersData[:weekdayAvgPrayersData]
                     }
       @mainWidgetData = performance.mainWidgetData
+      @lineGraphData = "hello"
     end
   end
 
@@ -109,10 +110,17 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
+    data = OutgoingDayPrayer.find_by_url(params[:url])
+    dataCount = data.count
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
     if dayData == nil
       redirect_to :action => "home"
     else
+      if dataCount <= 15
+        
+      else
+      end
+
     end
     respond_to do |format|
       format.js

@@ -1,0 +1,289 @@
+body {
+padding: 0;
+margin: 0;
+font-family: 'Open Sans', sans-serif;
+font-size: 0.9em;
+}
+#top_logo {
+position: absolute;
+float: left;
+top: 0;
+margin: 1%;
+}
+#performance_summary {
+/*margin-top: 7.5%;*/
+}
+#performance_summary p {
+text-align: center;
+margin-bottom: 0%;
+}
+#performance_summary_line1 {
+margin-top: 0%;
+color: #FD5737;
+font-size: 1.75em;
+font-weight: bold;
+}
+#performance_summary_line2 {
+font-size: 1.25em;
+}
+#main_chart {
+margin-top: -4px;
+}
+#main_chart table {
+background-color: #EEEEEE;
+height:100%;
+margin: 0;
+padding: 0;
+border: 0;
+}
+#main_chart td {
+vertical-align: middle;
+text-align: center;
+width: 50px;
+height: 20px;
+}
+.main_chart_adjustment {
+margin-left: 1.25%;
+margin-top: -2.5%;
+}
+#slider{
+width: 250px;
+height: 5px;
+margin-top: 1.5%;
+}
+#slider a {
+width: 15px;
+height: 15px;
+border-radius: 50%;
+}
+#prayers_per_week {
+margin-top: 2.5%;
+width: 500px;
+}
+#prayers_per_week p {
+font-size: 1.5em;
+margin-bottom: 1.5%;
+}
+#prayers_per_week table {
+height:100%;
+margin: 0;
+padding: 0;
+border: 0;
+}
+#prayers_per_week td {
+vertical-align: middle;
+text-align: center;
+width: 85px;
+}
+.circle {
+border-radius: 50%;
+display: table;
+position: absolute;
+}
+.size_75px {
+width: 75px;
+height: 75px;
+}
+.size_50px {
+width: 50px;
+height: 50px;
+}
+.size_25px {
+width: 25px;
+height: 25px;
+}
+.size_20px {
+width: 20px;
+height: 20px;
+}
+.circle p {
+display: table-cell;
+vertical-align: middle;
+text-align: center;
+word-wrap: break-word;
+color: white;
+}
+.fajr {
+background: #FD5737;
+}
+.duhr {
+background: #F6C546;
+}
+.asr {
+background: #2BA6AE;
+}
+.maghrib {
+background: #9C5193;
+}
+.isha {
+background: #1B2723;
+}
+.prayer_title {
+color: #CDCDCD;
+position: relative;
+margin-top: 85%;
+margin-left: -10px;
+font-size: 1.25em;
+}
+#overall_analytics {
+}
+#overall_analytics table {
+height:100%;
+margin-left: 2.5%;
+margin-right: 2.5%;
+}
+#overall_analytics td {
+}
+#analytics_per_day {
+position: fixed;
+float: left;
+left: 0.5%;
+}
+#analytics_weekly {
+position: relative;
+}
+#analytics_missed_prayers {
+position: fixed;
+float: right;
+right: 0.5%;
+}
+#prayer_per_day {
+text-align: center;
+}
+#prayer_per_day span {
+font-size: 1.5em;
+font-weight: bold;
+}
+#prayer_per_day p {
+font-size: 1.75em;
+}
+#prayer_per_day_average {
+margin-top: -6%;
+}
+#prayer_per_day_average_background {
+background: #CDCDCD;
+z-index: 5;
+width: 241px;
+height: 49px;
+margin-top: -53px;
+}
+#prayer_per_day_average_streak {
+background: #009FE6;
+z-index: 5;
+height: 49px;
+margin-top: -49px;
+}
+#prayer_per_day_average_image {
+}
+#longest_streak {
+margin-top: -6%;
+text-align: center;
+}
+#longest_streak p {
+color: #CDCDCD;
+font-size: 1.5em;
+}
+#best_day {
+text-align: center;
+margin-top: -2.5%;
+}
+#best_day span {
+font-size: 1.5em;
+font-weight: bold;
+}
+#best_day p {
+font-size: 1.75em;
+}
+#worst_day {
+text-align: center;
+margin-top: -5.5%;
+}
+#worst_day p {
+color: #CDCDCD;
+font-size: 1.5em;
+}
+#weekly_prayers {
+margin-top: -5%;
+}
+#weekly_prayers table {
+height:100%;
+margin: 0;
+padding: 0;
+border: 0;
+}
+#weekly_prayers td {
+vertical-align: middle;
+text-align: center;
+width: 48px;
+}
+#weekly_prayers p {
+font-size: 1.25em;
+margin-top: -75%;
+color: white;
+}
+#weekly_average_background {
+background: #CDCDCD;
+z-index: 5;
+width: 49px;
+height: 49px;
+margin-top: -53px;
+}
+.weekly_average_streak {
+background: #009FE6;
+z-index: 5;
+height: 49px;
+margin-top: -49px;
+}
+#total_missed_prayers {
+margin-bottom: -8%;
+}
+#total_missed_prayers p {
+text-align: center;
+font-size: 1.75em;
+}
+#total_missed_prayers span {
+font-size: 1.75em;
+font-weight: bold;
+}
+#missed_prayers {
+margin-top: 0%;
+}
+#missed_prayers table {
+height:100%;
+margin: 0;
+padding: 0;
+border: 0;
+}
+#missed_prayers td {
+width: 48px;
+}
+#missed_prayers p {
+font-size: 1.25em;
+}
+#most_missed {
+margin-top: 20%;
+text-align: center;
+}
+#most_missed p {
+color: #CDCDCD;
+font-size: 1.5em;
+}
+
+
+/*
+#contact {
+position: absolute;
+width: 100px;
+height: 25px;
+top: 25%;
+right: 0;
+margin-right: 2.5%;
+}
+*/
+#contact p {
+margin-top: 2.5%;
+text-align: center;
+}
+.display_0 {
+	background-color: white;
+}
