@@ -111,7 +111,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   def submitDayData
     params.each do |key, param|
-      params[key] = nil if param == nil
+      params[key] = 0 if param == nil
     end
     totalPrayed = (params[:fajr] + params[:zuhr] + params[:asr] + params[:maghrib] + params[:isha])/2
     data = OutgoingDayPrayer.find_by_url(params[:url])
