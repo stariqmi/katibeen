@@ -1,23 +1,369 @@
 <!DOCTYPE html>
 <body>
 
+<style>
 
-<form action="http://localhost:3000/katibeen/submitDayData" method="post" target="_blank">
+	input[type=checkbox]
+	{
+	  	display:none;
+	}
 
-	<input name="fajr" type="checkbox" value="2">
-	<br>
-	<input name="zuhr" type="checkbox" value="2">
-	<br>
-	<input name="asr" type="checkbox" value="2">
-	<br>
-	<input name="maghrib" type="checkbox" value="2">
-	<br>
-	<input name="isha" type="checkbox" value="2">
-	<br>
+	input[type=checkbox] + label
+	{
+	    background: #999;
+	    height: 16px;
+	    width: 16px;
+	    display:inline-block;
+	    padding: 0 0 0 0px;
+	 }
+
+	input[type=checkbox]:checked + label
+	{
+	    background: #0080FF;
+	    height: 16px;
+	    width: 16px;
+	    display:inline-block;
+	    padding: 0 0 0 0px;
+	}
 
 
+body { margin:0; border:0;}
+a:link { text-decoration:underline; color: #000; }
+
+.prayer_title {
+		color: #CDCDCD;
+		font-size: 1em;
+		}
+
+#hadith {
+	color: #2BA5AE;
+	font-size: 1.25em;
+	text-align: center;
+	position: relative;
+	margin-top: 5%;
+    left: 25%;
+	width: 50%;
+	}
+	#hadith img {
+		vertical-align: middle;
+		}
+
+.prayers {
+	text-align: center;
+	position: relative;
+	margin-top: 5%;
+    left: 17%;
+	width: 75%;
+	}
+
+#complete {
+	text-align: center;
+	position: relative;
+	margin-top: 15%;
+	left: 25%;
+	width: 50%;
+	}
+
+#footer {
+	color:#000000;
+	text-align: center;
+	position: relative;
+	margin-top: 5%;
+	left: 25%;
+	width: 50%;
+	}
+
+.submitbutton{
+    background: url(./../assets/submit_exit.png) 0px 0px no-repeat;
+    width: 56px;
+    height: 56px;
+    border: 0px;
+}
+.submitbutton:hover{
+      background: url(./../assets/submit_pressed.png) 0px 0px no-repeat;
+}
+
+.holder{ margin-left:1%; width:80px; float:left; position:relative;}
+
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+/* FAJR */
+.fajr {
+	position:relative;
+	width: 75px;
+	height: 75px;
+	background: #cdcdcd url(./../assets/icon_uncheck.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+
+.fajr label {
+	position:relative;
+	cursor: pointer;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	left: 0px;
+	top: 0px;
+}
+
+.fajr label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background: #f85a2a url(./../assets/icon_check.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+
+	left: 0px;
+	top: 0px;
+}
+
+.fajr label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.fajr input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+/* Duhr */
+.duhr {
+	position:relative;
+	width: 75px;
+	height: 75px;
+	background: #cdcdcd url(./../assets/icon_uncheck.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+
+.duhr label {
+	position:relative;
+	cursor: pointer;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	left: 0px;
+	top: 0px;
+}
+
+.duhr label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background: #f4c712 url(./../assets/icon_check.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+
+	left: 0px;
+	top: 0px;
+}
+
+.duhr label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.duhr input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+/* asr */
+.asr {
+	position:relative;
+	width: 75px;
+	height: 75px;
+	background: #cdcdcd url(./../assets/icon_uncheck.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+
+.asr label {
+	position:relative;
+	cursor: pointer;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	left: 0px;
+	top: 0px;
+}
+
+.asr label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background: #38a5af url(./../assets/icon_check.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+
+	left: 0px;
+	top: 0px;
+}
+
+.asr label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.asr input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+/* .mag */
+.mag {
+	position:relative;
+	width: 75px;
+	height: 75px;
+	background: #cdcdcd url(./../assets/icon_uncheck.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+
+.mag label {
+	position:relative;
+	cursor: pointer;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	left: 0px;
+	top: 0px;
+}
+
+.mag label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background: #9a5097 url(./../assets/icon_check.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+
+	left: 0px;
+	top: 0px;
+}
+
+.mag label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.mag input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+/* .isha */
+.isha {
+	position:relative;
+	width: 75px;
+	height: 75px;
+	background: #cdcdcd url(./../assets/icon_uncheck.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+
+.isha label {
+	position:relative;
+	cursor: pointer;
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	left: 0px;
+	top: 0px;
+}
+
+.isha label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 75px;
+	height: 75px;
+	background: #1c2623 url(./../assets/icon_check.png) center no-repeat;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+
+	left: 0px;
+	top: 0px;
+}
+
+.isha label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.isha input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+</style>
+<% url = root_url() + 'katibeen/submitDayData' %>
+<form action= <%= url %> method="post" target="_blank">
+
+<div class="prayers">
+	<div class="holder">
+		<div class="fajr">
+			<input name="fajr" type="checkbox" value="2" id = "fajr"/><label for="fajr"> Fajr </label>
+		</div>
+	</div>
+
+	<input name="zuhr" type="checkbox" value="2" id = "zuhr"/><label style = "font-size: 100px;" for="zuhr"> Zuhr </label>
+	<br>
+	<input name="asr" type="checkbox" value="2" id = "asr"/><label for="asr"> Asr </label>
+	<br>
+	<input name="maghrib" type="checkbox" value="2" id = "maghrib"><label for="maghrib"> Maghrib </label>
+	<br>
+	<input name="isha" type="checkbox" value="2" id = "isha"><label for="isha"> Isha </label>
+	<br>
+
+	<!-- Hidden Inputs for ID and URL of user and day -->
 	<input name="prayer_day_id" type="hidden" value= <%=@dayData.id%> >
 	<input name="url" type="hidden" value= <%=@dayData.url%> >
+
+
 	<input type="submit" value="Submit" />&nbsp;</form>
 
 </form>

@@ -110,19 +110,27 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
+    logger.debug "---------------------"
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
     prayer.each do |p|
+    logger.debug "---------------------"
+    logger.debug counter
       if params[p].nil?
         prayerData[p] = 0
-      elsif params[p].class == Fixnum
+      elsif params[p].to_s == "2"
         prayerData[p] = 2
         counter += 1
       else
         nil
       end
     end
+    logger.debug "---------------------"
+    logger.debug counter
+    logger.debug '-------------------'
+    logger.debug prayerData.inspect
+    logger.debug '----------------------'
     data = OutgoingDayPrayer.where(:url => params[:url])
     dataCount = data.count
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
@@ -131,7 +139,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       redirect_to :action => "home"
     else
       if dataCount <= 15
-        
+
       else
       end
 

@@ -10,6 +10,6 @@ class UserMailer < ActionMailer::Base
   def daily_check_email(user, dayData)
   	@user = user
     @dayData = dayData
-  	mail(:to => user.email, :subject => "Check your prayers")
+  	mail(:to => user.email, :subject => "Salat Check: " + Time.now.in_time_zone(user.timezone).to_s)
   end
 end

@@ -6,7 +6,7 @@ gem 'pg', '~>0.13.2'
 gem "mail"
 gem 'mailman'
 gem 'better_errors'
-
+gem "binding_of_caller"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
