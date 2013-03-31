@@ -75,7 +75,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                         avgWeekdayData: prayersData[:weekdayAvgPrayersData]
                     }
       @mainWidgetData = performance.mainWidgetData
-      @lineGraphPath = performance.lineGraphPath
+      lineGraphData = performance.lineGraphData
+      @lineGraphPath = lineGraphData[:lineGraphPath]
+      @lineWidth = lineGraphData[:lineWidth]
     end
   end
 

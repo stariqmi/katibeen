@@ -219,8 +219,9 @@ module UserPerformanceDataHelper
 			data
 		end
 
-		def lineGraphPath
+		def lineGraphData
 			horizon_distance = 900 / 15
+			lineWidth = horizon_distance * @timesRequestSent
 			factor = 30
 			
 			if @timesRequestSent < 15
@@ -235,7 +236,7 @@ module UserPerformanceDataHelper
 				d += "L0 #{150 - @rawData[0].average*factor + 5} Z"
 			else
 			end
-			d
+			{lineWidth: lineWidth, lineGraphPath: d}
 		end
 
 	end	# -------------------------------------END OF CLASS -------------------------------------
