@@ -116,14 +116,17 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     prayer.each do |p|
       if params[p].nil?
         prayerData[p] = 0
-      else
+      elsif params[p].integer?
         prayerData[p] = 2
+        counter += 1
+      else
+        nil
       end
     end
     data = OutgoingDayPrayer.find_by_url(params[:url])
     dataCount = data.count
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: totalPrayed)
+    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter)
     if dayData == nil
       redirect_to :action => "home"
     else
