@@ -116,7 +116,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     prayer.each do |p|
       if params[p].nil?
         prayerData[p] = 0
-      elsif params[p].integer?
+      elsif params[p].class == Fixnum
         prayerData[p] = 2
         counter += 1
       else
