@@ -75,7 +75,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                         avgWeekdayData: prayersData[:weekdayAvgPrayersData]
                     }
       @mainWidgetData = performance.mainWidgetData
-      @lineGraphData = "hello"
+      @lineGraphPath = performance.lineGraphPath
     end
   end
 
@@ -110,13 +110,10 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
-    logger.debug "---------------------"
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
     prayer.each do |p|
-    logger.debug "---------------------"
-    logger.debug counter
       if params[p].nil?
         prayerData[p] = 0
       elsif params[p].to_s == "2"
@@ -126,23 +123,25 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         nil
       end
     end
-    logger.debug "---------------------"
-    logger.debug counter
-    logger.debug '-------------------'
-    logger.debug prayerData.inspect
-    logger.debug '----------------------'
     data = OutgoingDayPrayer.where(:url => params[:url])
     dataCount = data.count
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter)
+    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
     if dayData == nil
       redirect_to :action => "home"
     else
-      if dataCount <= 15
-
+      if dataCount == 1
+        avg = (counter / dataCount.to_f).round(2)
+        dayData.update_attribute(:average, avg)
+      elsif dataCount < 15
+        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f       
+        dayData.update_attribute(:average, avg.round(2))
       else
+        to_subtract = dayData[counter - 16].total_prayed / 15.to_f
+        to_add = total_prayed / 15.to_f
+        avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
+        dayData.update_attribute(:average, avg)
       end
-
     end
     respond_to do |format|
       format.js
