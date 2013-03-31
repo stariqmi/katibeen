@@ -3,12 +3,14 @@
 }
 
 .main_chart {
-	border: 1px solid black;
 	width: 950px;
-	overflow: hidden;
-	overflow-y: hidden;
 	padding-top: 2%;
 	padding-bottom: 2%;
+}
+
+.main_chart table {
+	max-width: 900px;
+	overflow:scroll;
 }
 
 .prayer_dot {
@@ -16,7 +18,7 @@
  	height: 20px;
  	border-radius: 50% 50% 50% 50%;
  	margin-top: 5px;
- 	margin-left: 25px;
+ 	margin-right: 25px;
 }
 .prev_average, .current_average {
 	color: black;

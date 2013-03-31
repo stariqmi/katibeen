@@ -75,7 +75,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                         avgWeekdayData: prayersData[:weekdayAvgPrayersData]
                     }
       @mainWidgetData = performance.mainWidgetData
-      @lineGraphData = "hello"
+      @lineGraphPath = performance.lineGraphPath
     end
   end
 
@@ -126,7 +126,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     data = OutgoingDayPrayer.where(:url => params[:url])
     dataCount = data.count
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter)
+    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
     if dayData == nil
       redirect_to :action => "home"
     else

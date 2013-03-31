@@ -219,6 +219,25 @@ module UserPerformanceDataHelper
 			data
 		end
 
+		def lineGraphPath
+			horizon_distance = 900 / 15
+			factor = 30
+			
+			if @timesRequestSent < 15
+				d = "M0 #{150 - @rawData[0].average*factor} "
+				(1..(@timesRequestSent-1)).each do |i|
+					d += "L#{horizon_distance*i} #{150 - @rawData[i].average*factor} "
+				end
+				@data = Hash[@rawData.to_a.reverse]
+				(1..(@timesRequestSent - 1)).each do |i|
+					d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - @rawData[(@timesRequestSent-i)].average*factor + 5} "
+				end
+				d += "L0 #{150 - @rawData[0].average*factor + 5} Z"
+			else
+			end
+			d
+		end
+
 	end	# -------------------------------------END OF CLASS -------------------------------------
 
 end
