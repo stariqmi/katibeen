@@ -24,60 +24,61 @@ body {
 
 #email {
 	position:relative;
-    width: 413px;
-    height: 70px;
-    margin-top: -2%;
-    border-radius: 12px;
-    background-color: #FD5737;
-	}
-	#email_input {
-		font-size: 1.7em;
-		text-align: center;
-		width: 379px;
-		height: 50px;
-		border-radius: 12px;
-		font-style: bold;
-		border-collapse: collapse;
-		}
-			#emailContainer {
+	width: 413px;
+	height: 70px;
+	margin-top: -2%;
+	border-radius: 12px;
 	background-color: #FD5737;
-		width: 120px;
-		height: 50px;
-    	margin-top: 3%;
-    	border: none;
-    	color: #FFFFFF;
-		font-size: 1.5em;
-		margin-top: 0%; /*Remove this to get old big button */
-    	border-bottom-left-radius: 12px;
-    	border-bottom-right-radius: 12px;
-		}
-		#emailContainer p {
-			display: inline-block;
-			margin-top: 0%;
-		}
-		#emailContainer:active{
-			background-color: #FD421E;
-		}
-	#add_email {
-		background-color: #FD5737;
-		width: 120px;
-		height: 50px;
-    	margin-top: 3%;
-    	border: none;
-    	color: #FFFFFF;
-		font-size: 1.5em;
-		margin-top: 0%; /*Remove this to get old big button */
-    	border-bottom-left-radius: 12px;
-    	border-bottom-right-radius: 12px;
-    	padding-top: 10px;
-		}
-		#add_email p {
-			display: inline-block;
-			margin-top: 0%;
-		}
-		#add_email:active{
-			background-color: #FD421E;
-		}
+}
+#email_input {
+	font-size: 1.7em;
+	text-align: center;
+	width: 379px;
+	height: 50px;
+	border-radius: 12px;
+	font-style: bold;
+	border-collapse: collapse;
+}
+
+#emailContainer {
+	background-color: #FD5737;
+	width: 120px;
+	height: 50px;
+	margin-top: 3%;
+	border: none;
+	color: #FFFFFF;
+	font-size: 1.5em;
+	margin-top: 0%; /*Remove this to get old big button */
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+#emailContainer p {
+	display: inline-block;
+	margin-top: 0%;
+}
+#emailContainer:active{
+	background-color: #FD421E;
+}
+#add_email {
+	background-color: #FD5737;
+	width: 120px;
+	height: 50px;
+	margin-top: 3%;
+	border: none;
+	color: #FFFFFF;
+	font-size: 1.5em;
+	margin-top: 0%; /*Remove this to get old big button */
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+	padding-top: 10px;
+}
+#add_email p {
+	display: inline-block;
+	margin-top: 0%;
+}
+#add_email:active{
+	background-color: #FD421E;
+}
 
 #hadith {
 	color: #2BA5AE;

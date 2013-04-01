@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<p>Welcome to Katibeen...</p>
-	<p>Your key is <%= @puser.url %></p>
-	<p>Visit this link to confirm your registeration : <%= welcome_url()%>/<%=@puser.url %><p>
+	<p>Welcome to Katibeen</p>
+	<p>Your unique access key is <%= @puser.url %></p>
+	<p>Subscribe to Katibeen by clicking <a href = <%= welcome_url()%>/<%=@puser.url %> > here </a> <p>
 </html>

@@ -1,5 +1,32 @@
+
+
+<script>
+
+disableButton = function() {
+	$('#emailContainer').show();
+	$('#add_email').hide();
+	$('#loading').fadeIn();
+	if (document.getElementById("email_input").value == ''){
+		alert("Email can't be blank");
+		enableButton();
+	}
+
+
+}
+
+enableButton = function() {
+
+	$('#emailContainer').hide();
+	$('#add_email').show();
+	$('#loading').hide();
+	document.getElementById("email_input").value = '';
+
+
+}
+</script>
+
 <form method="post" data-remote="true" class="signupForm" action="/katibeen/signup"
-accept-charset="UTF-8">
+accept-charset="UTF-8" id = "signupForm">
 	<div style="margin:0;padding:0;display:inline">
 	<input type="hidden" value="✓" name="utf8"><input type="hidden" value="vZ88JZ8/UaxCXOioJOT3WD23Avuj/f5X5nBErv6N38k=" name="authenticity_token"></div>
 	<div id="email">
@@ -10,7 +37,7 @@ accept-charset="UTF-8">
 	<div id = "emailContainer" style = "display: none;">
 
 <!-- TAG TO CATCH RESULT OF INPUT, THE AJAX JS IS EXECUTED IN signup.js.erb -->
-<p class="result" id = "result"></p>
+<!-- <p class="result" id = "result"></p> -->
 
 	<div class="loader" id = "loading">
     <span></span>

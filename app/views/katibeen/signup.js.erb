@@ -1,18 +1,7 @@
 //Responds to the AJAX call upon a signup form submit
+//$(".result").text("<%= @result %>").slideDown(300).delay(2000).slideUp(300);
 
-$(document).on('ajax:success', '.delete', function(e) {
-    $(".loader").	text("<%= @result %>").slideDown(300).delay(2000).slideUp(300);
-});
+alert('<%= @result %>');
+enableButton();
 
 
-$(document).on('ajax:before', '.delete', function(e) {
-	$('#emailContainer').show();
-	$('#add_email').hide();
-	$('#loading').fadeIn();
-});
-
-$(document).on('ajax:failure', '.delete', function(e) {
-	$('#emailContainer').show();
-	$('#add_email').hide();
-	$('#loading').fadeIn();
-});

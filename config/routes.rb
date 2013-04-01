@@ -4,6 +4,7 @@ KatApp::Application.routes.draw do
 
   match "/welcome" => "katibeen#home"
   match "/welcome/:url" => "katibeen#welcome"
+  match "/unsubscribe/:url" => "katibeen#unsubscribe"
 
   match "/:url" => "katibeen#performance"
   match "widgetData/:url" => "katibeen#widgetData"

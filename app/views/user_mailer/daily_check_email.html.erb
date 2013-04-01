@@ -5,32 +5,67 @@
 
 <form action= <%= post_url %> method="post" target="_blank">
 
+
+<center>
+	<em style = " width: 80%; margin: auto; color: #2BA5AE; font-size: 1em; text-align: center;">“The first thing one will be held accountable for on the Day of Judgement is prayer.”</em>
+</center>
+
 <div class="prayers">
 
+	<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed today </h3>
 
-	<input name="fajr" type="checkbox" value="2" id = "fajr"/><label for="fajr"> Fajr </label>
-	<br>
-	<input name="zuhr" type="checkbox" value="2" id = "zuhr"/><label for="zuhr"> Zuhr </label>
-	<br>
-	<input name="asr" type="checkbox" value="2" id = "asr"/><label for="asr"> Asr </label>
-	<br>
-	<input name="maghrib" type="checkbox" value="2" id = "maghrib"><label for="maghrib"> Maghrib </label>
-	<br>
-	<input name="isha" type="checkbox" value="2" id = "isha"><label for="isha"> Isha </label>
-	<br>
+<table style = "margin: auto;">
+	<td>
+		<label for="fajr">
+			<div style = "border-radius: 50%; background: #f85a2a; padding: 25px 21px; color: #fff;">Fajr</div>
+			<input  style = "margin-left: 26px;" name="fajr" type="checkbox" value="2" id = "fajr">
+		</label>
+	</td>
+	<td>
+		<label for="zuhr">
+			<div style = "border-radius: 50%; background: #f4c712; padding: 25px 20px; color: #fff;">Duhr</div>
+			<input  style = "margin-left: 27px;" name="zuhr" type="checkbox" value="2" id = "zuhr"/>
+		</label>
+	</td>
+	<td>
+		<label for="asr">
+			<div style = "border-radius: 50%; background: #38a5af; padding: 25px 22px; color: #fff;">Asr</div> <input  style = "margin-left: 25px; margin-top: -5px;" name="asr" type="checkbox" value="2" id = "asr"/>
+		</label>
+		<br>
+
+	</td>
+	<td>
+		<label for="maghrib">
+		<div style = "border-radius: 50%; background: #9a5097; padding: 25px 10px; color: #fff;">Maghrib</div>
+		<input style = "margin-left: 26px;" name="maghrib" type="checkbox" value="2" id = "maghrib">
+		</label>
+	</td>
+	<td>
+		<label for="isha">
+			<div style = "border-radius: 50%; background: #1c2623; padding: 25px 20px; color: #fff;">Isha</div>
+
+		<input  style = "margin-left: 25px;" name="isha" type="checkbox" value="2" id = "isha">
+		</label>
+	</td>
+
+</table>
 
 	<!-- Hidden Inputs for ID and URL of user and day -->
 	<input name="prayer_day_id" type="hidden" value= <%=@dayData.id%> >
 	<input name="url" type="hidden" value= <%=@dayData.url%> >
 
 
-	<input type="submit" value="Submit" />&nbsp;</form>
-
+	<!--<label for = "submitForm" >
+		<div style = " border: 1px solid #ddd; padding: 20px 30px; background: #ddd; color: #333;" >Submit</div>-->
+		<center><input style = "margin-top: 5px;" type = "submit" value="Submit" id = "submitForm"/></center>
 </form>
 
+<center>
+	<br>
+	<a style = "font-size: 10px; color: #999;" href = <%= root_url()%>day_data/<%=@user.url%>/<%=@dayData.id%>>
+		Can't see a form? Click here!
+	</a>
+</center>
 
-<a href = <%= root_url()%>day_data/<%=@user.url%>/<%=@dayData.id%>>
-	Can't see a form? Click here!
-</a>
-<!--<![endif]-->
+<p>Unsubscribe <a href = <%= unsubscribe_url()%>/<%=@user.url %> > here </a> <p>
 </body>

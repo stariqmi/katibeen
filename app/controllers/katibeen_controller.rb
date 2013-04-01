@@ -33,14 +33,17 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     if check_users.nil?
 
     #If the new PotentialUser is valid and can be saved
-      if user.save!
+      if user.save
+        user.sendWelcomeEmail
         #Result instance variable for confirmation in the view
         @result = "Thank you, a confirmation email has been sent to you " + @url
+        puts "=========================================="
 
       #If the new PotentialUser is not valid
       else
        #Set @result as the error message
        @result = "Email #{user.errors[:email][0]}.".html_safe
+       puts "-------------------------------------------"
       end
     #User by this email already exists
     else
@@ -136,7 +139,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         avg = (counter / dataCount.to_f).round(2)
         dayData.update_attribute(:average, avg)
       elsif dataCount < 15
-        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f       
+        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
         dayData.update_attribute(:average, avg.round(2))
       else
         to_subtract = dayData[counter - 16].total_prayed / 15.to_f
@@ -149,5 +152,22 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       format.js
     end
   end
+
+  # Deals with the request to the katibeen/unsubscribe/key url
+  def unsubscribe
+    url = params[:url] # Extract the url key from the parameters
+    @user = User.find_by_url(url)
+
+    if @user == nil
+      redirect_to :action => "home" # Redirect to the home page
+
+    # If such a user exists
+    else
+      @user.sendUnsubscribe
+      @user.registered = false
+      @user.save!
+    end
+  end
+
 
 end
