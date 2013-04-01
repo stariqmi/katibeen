@@ -220,20 +220,18 @@ module UserPerformanceDataHelper
 		end
 
 		def lineGraphData
-			horizon_distance = 900 / (@timesRequestSent - 1)
 			lowest = 5
 			highest = 0
 			if @timesRequestSent < 15
+				horizon_distance = 900 / (@timesRequestSent - 1)
 				@rawData.each do |data|
+					puts "average is ------------------ #{data.average}"
 					lowest = data.average if data.average < lowest
 					highest = data.average if data.average > highest
 				end
 				high_low_diff = highest - lowest
-				puts highest
-				puts lowest
 				if highest == lowest
 					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"						
-					puts d
 				else	
 					unit = (150 / high_low_diff.to_f).round(2)
 					d = "M0 #{150 - (@rawData[0].average - lowest)*unit} "
@@ -247,6 +245,24 @@ module UserPerformanceDataHelper
 					d += "L0 #{150 - (@rawData[0].average - lowest)*unit + 5} Z"
 				end
 			else
+				requiredData = @rawData[@timesRequestSent - 16, @timesRequestSent]
+				horizon_distance = (900 / 15.to_f).round(2)
+				requiredData.each do |data|
+					puts "average is ------------------ #{data.average}"
+					lowest = data.average if data.average < lowest
+					highest = data.average if data.average > highest
+				end
+				high_low_diff = highest - lowest
+				unit = (150 / high_low_diff.to_f).round(2)
+				d = "M0 #{150 - (requiredData[0].average - lowest)*unit} "
+					(1..14).each do |i|
+						d += "L#{horizon_distance*i} #{150 - (requiredData[i].average - lowest)*unit} "
+					end
+					@data = Hash[requiredData.to_a.reverse]
+					(1..14).each do |i|
+						d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)].average - lowest)*unit + 5} "
+					end
+					d += "L0 #{150 - (requiredData[0].average - lowest)*unit + 5} Z"
 			end
 			{lineGraphPath: d}
 		end
