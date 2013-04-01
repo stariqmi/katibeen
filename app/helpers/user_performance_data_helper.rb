@@ -129,7 +129,7 @@ module UserPerformanceDataHelper
 				avg = value/@timesRequestSent.to_f
 				avg = (avg.round(2) * 100).to_i
 				puts "#{value} / #{@timesRequestSent} = #{avg}"
-				performedData[key] = "#{avg}%"
+				performedData[key] = avg
 			end
 
 			# Convert weekdayData to averages
@@ -218,7 +218,7 @@ module UserPerformanceDataHelper
 			end
 			path = "M0 50 "
 			(0..(@timesRequestSent-1)).each do |i|
-				path += "L#{35 + 45*i} #{50 - (data[i][0][0]/5.to_f)*50} "
+				path += "L#{40 + 45*i} #{50 - (data[i][0][0]/5.to_f)*50} "
 				puts "PATH -----> #{path}"
 			end
 			path += "L#{35 + 45*@timesRequestSent} 50 Z"
@@ -228,6 +228,10 @@ module UserPerformanceDataHelper
 		def lineGraphData
 			lowest = 5
 			highest = 0
+			start_height = 0
+			end_height = 0
+			start_avg = 0
+			end_avg = 0
 			if @timesRequestSent < 15
 				horizon_distance = 750 / (@timesRequestSent - 1)
 				@rawData.each do |data|
@@ -238,6 +242,10 @@ module UserPerformanceDataHelper
 				high_low_diff = highest - lowest
 				if highest == lowest
 					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"						
+					start_height = 150 - (lowest/5.to_f)*150
+					end_height = 150 - (lowest/5.to_f)*150
+					start_avg = lowest
+					end_avg = lowest
 				else	
 					unit = (150 / high_low_diff.to_f).round(2)
 					d = "M0 #{150 - (@rawData[0].average - lowest)*unit} "
@@ -249,6 +257,10 @@ module UserPerformanceDataHelper
 						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (@rawData[(@timesRequestSent-i)].average - lowest)*unit + 5} "
 					end
 					d += "L0 #{150 - (@rawData[0].average - lowest)*unit + 5} Z"
+					start_height = 150 - ((@rawData[0].average - lowest)*unit).round(1)
+					end_height = 150 - ((@rawData[@timesRequestSent - 1].average - lowest)*unit).round(1)
+					start_avg = @rawData[0].average
+					end_avg = @rawData[@timesRequestSent-1].average
 				end
 			else
 				requiredData = @rawData[@timesRequestSent - 16, @timesRequestSent]
@@ -261,16 +273,23 @@ module UserPerformanceDataHelper
 				high_low_diff = highest - lowest
 				unit = (150 / high_low_diff.to_f).round(2)
 				d = "M0 #{150 - (requiredData[0].average - lowest)*unit} "
-					(1..14).each do |i|
-						d += "L#{horizon_distance*i} #{150 - (requiredData[i].average - lowest)*unit} "
-					end
-					@data = Hash[requiredData.to_a.reverse]
-					(1..14).each do |i|
-						d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)].average - lowest)*unit + 5} "
-					end
-					d += "L0 #{150 - (requiredData[0].average - lowest)*unit + 5} Z"
+				(1..14).each do |i|
+					d += "L#{horizon_distance*i} #{150 - (requiredData[i].average - lowest)*unit} "
+				end
+				@data = Hash[requiredData.to_a.reverse]
+				(1..14).each do |i|
+					d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)].average - lowest)*unit + 5} "
+				end
+				d += "L0 #{150 - (requiredData[0].average - lowest)*unit + 5} Z"
+				start_height = 150 - (requiredData[0].average - lowest)*unit
+				end_height = 150 - (requiredData[14].average - lowest)*unit
+				start_avg = @rawData[@timesRequestSent - 16].average
+				end_avg = requiredData[14].average
 			end
-			{lineGraphPath: d}
+			start_height = 1 if start_height < 1
+			end_height = 1 if end_height < 1
+			improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
+			{lineGraphPath: d, startHeight: start_height, endHeight: end_height, startAvg: start_avg, endAvg: end_avg, improvement: improvement}
 		end
 
 	end	# -------------------------------------END OF CLASS -------------------------------------

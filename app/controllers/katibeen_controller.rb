@@ -83,7 +83,16 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       puts @dotSVG
       lineGraphData = performance.lineGraphData
       @lineGraphPath = lineGraphData[:lineGraphPath]
-      @lineWidth = lineGraphData[:lineWidth]
+      @startHeight = lineGraphData[:startHeight]
+      @endHeight = lineGraphData[:endHeight]
+      @startAvg = lineGraphData[:startAvg]
+      @endAvg = lineGraphData[:endAvg]
+      @improvement = lineGraphData[:improvement]
+      @improvement_prefix = if @improvement > 0 
+        "im"
+      else
+        "de"
+      end
     end
   end
 

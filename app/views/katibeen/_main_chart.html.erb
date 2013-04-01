@@ -21,6 +21,12 @@
                 <% @mainWidgetData.each do |data| %>
                     <td><div class="prayer_dot <%= data[i][1] %> <%= "display_#{data[i][0]}" %>"></div></td>
                 <% end %>
+                <% if @mainWidgetData.count < 15 %>
+                    <% remaining = 15 - @mainWidgetData.count %>
+                    <% (1..remaining).each do  |i| %>
+                        <td><div class="prayer_dot display_0"></div></td>    
+                    <% end %>
+                <% end %>
             </tr>                 
         <% end %>
     </tbody>

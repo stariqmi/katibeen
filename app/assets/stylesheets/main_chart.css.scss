@@ -4,12 +4,14 @@
 
 .main_chart {
 	text-align: left;
-	width: 950px;
+	width: 750px;
 	padding-bottom: 2%;
+	margin-top: 5%;
+	position: relative;
 }
 
 .main_chart table {
-	max-width: 900px;
+	max-width: 750px;
 	overflow:scroll;
 }
 
@@ -35,8 +37,6 @@
 	background-color: #EEEEEE;
 	padding-left: 25px;
 	padding-bottom: 10px;
-	position: relative;
-	top: -5%;
 }
 
 
@@ -47,4 +47,10 @@
 	margin-top: 10px;
 	margin-bottom: 0px;
 	margin-right: 25px;
+}
+
+.dotSVG {
+	display:block;
+	position: absolute;
+	top: -23%;
 }
