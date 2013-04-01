@@ -2,12 +2,21 @@
 <svg height="60px" width="380px">
 <path fill="#606060" fill-opacity="0.1" stroke-width="0" stroke="none" d="M0 60 L0 50 L100 20 L160 50 L230 20 L300 20 L360 50 L420 20 L450 20 L450 60Z"/>
 </svg>
--->
-        
+-->     
 <div class="main_chart">
+
+<svg height="60" class="dotSVG">
+    <path id="graph_averages" stroke-width="1" stroke="none" fill-opacity="1" fill="#EEEEEE" d="<%= @dotSVG %>">
+</svg>
+    
 <table class="main_chart_table">
     <tbody>
-        <% (0..4).each do |i| %>
+    	<tr class="totals_row">
+    		<% @mainWidgetData.each do |data| %>
+    			<td><p class="offered_count"><%= data[0][0] %></p></td>
+    		<% end %>
+    	</tr>
+        <% (1..5).each do |i| %>
             <tr class="prayer_row">
                 <% @mainWidgetData.each do |data| %>
                     <td><div class="prayer_dot <%= data[i][1] %> <%= "display_#{data[i][0]}" %>"></div></td>

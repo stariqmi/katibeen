@@ -3,8 +3,8 @@
 }
 
 .main_chart {
+	text-align: left;
 	width: 950px;
-	padding-top: 2%;
 	padding-bottom: 2%;
 }
 
@@ -32,5 +32,19 @@
 }
 
 .main_chart_table {
-	text-align:left !important;
+	background-color: #EEEEEE;
+	padding-left: 25px;
+	padding-bottom: 10px;
+	position: relative;
+	top: -5%;
+}
+
+
+.offered_count{
+	text-align: center;
+	width:20px;
+	height:20px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-right: 25px;
 }

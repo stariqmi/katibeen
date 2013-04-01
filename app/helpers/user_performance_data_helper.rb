@@ -207,7 +207,7 @@ module UserPerformanceDataHelper
 			data = []
 			@rawData.each do |day|
 				dayHash = []
-
+				dayHash << [day[:total_prayed], "total"]
 				dayHash << [day[:fajr], "fajr"]
 				dayHash << [day[:zuhr], "duhr"]
 				dayHash << [day[:asr], "asr"]
@@ -216,14 +216,20 @@ module UserPerformanceDataHelper
 
 				data <<	dayHash
 			end
-			data
+			path = "M0 50 "
+			(0..(@timesRequestSent-1)).each do |i|
+				path += "L#{35 + 45*i} #{50 - (data[i][0][0]/5.to_f)*50} "
+				puts "PATH -----> #{path}"
+			end
+			path += "L#{35 + 45*@timesRequestSent} 50 Z"
+			{ data: data, path: path }
 		end
 
 		def lineGraphData
 			lowest = 5
 			highest = 0
 			if @timesRequestSent < 15
-				horizon_distance = 900 / (@timesRequestSent - 1)
+				horizon_distance = 750 / (@timesRequestSent - 1)
 				@rawData.each do |data|
 					puts "average is ------------------ #{data.average}"
 					lowest = data.average if data.average < lowest
@@ -246,7 +252,7 @@ module UserPerformanceDataHelper
 				end
 			else
 				requiredData = @rawData[@timesRequestSent - 16, @timesRequestSent]
-				horizon_distance = (900 / 15.to_f).round(2)
+				horizon_distance = (750 / 15.to_f).round(2)
 				requiredData.each do |data|
 					puts "average is ------------------ #{data.average}"
 					lowest = data.average if data.average < lowest
