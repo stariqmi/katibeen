@@ -39,17 +39,37 @@ body {
 		font-style: bold;
 		border-collapse: collapse;
 		}
-	#add_email {
-		background-color: #FD5737;
-		width: 100px;
-		height: 35px;
+			#emailContainer {
+	background-color: #FD5737;
+		width: 120px;
+		height: 50px;
     	margin-top: 3%;
     	border: none;
     	color: #FFFFFF;
 		font-size: 1.5em;
-		margin-top: 0%; /*Remove this to get old big button */	
+		margin-top: 0%; /*Remove this to get old big button */
     	border-bottom-left-radius: 12px;
     	border-bottom-right-radius: 12px;
+		}
+		#emailContainer p {
+			display: inline-block;
+			margin-top: 0%;
+		}
+		#emailContainer:active{
+			background-color: #FD421E;
+		}
+	#add_email {
+		background-color: #FD5737;
+		width: 120px;
+		height: 50px;
+    	margin-top: 3%;
+    	border: none;
+    	color: #FFFFFF;
+		font-size: 1.5em;
+		margin-top: 0%; /*Remove this to get old big button */
+    	border-bottom-left-radius: 12px;
+    	border-bottom-right-radius: 12px;
+    	padding-top: 10px;
 		}
 		#add_email p {
 			display: inline-block;
@@ -110,7 +130,7 @@ body {
 	#footer span {
 		position: absolute;
 		left: 2.5%;
-		top: 30%; 
+		top: 30%;
 		}
 	.footer_button:active {
 		border-radius: 7.5px;
@@ -124,7 +144,7 @@ body {
 		right: 0;
 		margin-right: 10%;
 		}
-		
+
 		#about a{
 			color:#FFFFFF;
 			text-decoration:none;
@@ -137,4 +157,3 @@ body {
 		right: 0;
 		margin-right: 2.5%;
 		}
-		
