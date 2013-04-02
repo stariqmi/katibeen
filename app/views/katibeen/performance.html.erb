@@ -1,12 +1,20 @@
 <body>
     <%= render "dash_banner" %>
     <center>
+        <div id="welcome_msg">
+            <h2>Welcome Back!</h2>
+        </div>
         <div id="prayers_per_week">
             <%= render "overall_data" %>
         </div>
-        <%= render "performance_summary" %>
         <%= render "line_graph" %>
+        
+        <%= render "performance_summary" %>
+        <div class="chart_data_container">
+        <%= render "back_graph" %>
         <%= render "main_chart" %>
+        </div>
+
         <div id="overall_analytics">
             <table id="table_of_analytics">
                 <tbody>
@@ -24,6 +32,6 @@
                 </tbody>
             </table>
         </div>
-    <center>
-    <%= render "footer" %>
-</center></center></body>
+        <%= render "footer" %>
+    </center>
+</body>

@@ -77,10 +77,22 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                         weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
                         avgWeekdayData: prayersData[:weekdayAvgPrayersData]
                     }
-      @mainWidgetData = performance.mainWidgetData
+      mainWidgetData = performance.mainWidgetData
+      @mainWidgetData = mainWidgetData[:data]
+      @dotSVG = mainWidgetData[:path]
+      puts @dotSVG
       lineGraphData = performance.lineGraphData
       @lineGraphPath = lineGraphData[:lineGraphPath]
-      @lineWidth = lineGraphData[:lineWidth]
+      @startHeight = lineGraphData[:startHeight]
+      @endHeight = lineGraphData[:endHeight]
+      @startAvg = lineGraphData[:startAvg]
+      @endAvg = lineGraphData[:endAvg]
+      @improvement = lineGraphData[:improvement].to_i
+      @improvement_prefix = if @improvement > 0 
+        "improved"
+      else
+        "reduced"
+      end
     end
   end
 

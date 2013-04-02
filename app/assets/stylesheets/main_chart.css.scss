@@ -3,9 +3,10 @@
 }
 
 .main_chart {
-	width: 950px;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	text-align: left;
+	width: 900px;
+	position:relative;
+	top: -290px;
 }
 
 .main_chart table {
@@ -13,12 +14,19 @@
 	overflow:scroll;
 }
 
+
+.main_chart_table td {
+	padding: 0px;
+	margin: 0px;
+	width: 60px;
+	height: 40px;
+}
+
 .prayer_dot {
  	width: 20px;
  	height: 20px;
  	border-radius: 50% 50% 50% 50%;
- 	margin-top: 5px;
- 	margin-right: 25px;
+ 	
 }
 .prev_average, .current_average {
 	color: black;
@@ -32,5 +40,37 @@
 }
 
 .main_chart_table {
-	text-align:left !important;
+	background-color: #EEEEEE;
+	
+}
+
+
+.offered_count{
+	text-align: center;
+	width:20px;
+	height:20px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	margin-right: 25px;
+}
+
+.dotSVG {
+	display:block;
+	position:relative;
+}
+
+
+td.dotChart_bottom_td {
+	height: 10px;
+	background-color: #D4D4D4;
+}
+
+td.dotChart_top_td {
+	height: 50px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.dotChart_top_td {
+	color: #D4D4D4;
 }
