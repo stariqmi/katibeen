@@ -1,10 +1,10 @@
 //Responds to the AJAX call upon a signup form submit
-//$(".result").text("<%= @result %>").slideDown(300).delay(2000).slideUp(300);
 $("#modal").modal('show');
+
 <% if @result2.nil? %>
-document.getElementById('modal-body').innerHTML = "<%= @result %>";
+	document.getElementById('modal-body').innerHTML = "<%= @result %>";
 <% else %>
-document.getElementById('modal-body').innerHTML = "<%= @result %> <br> <%= @result2 %>";
+	document.getElementById('modal-body').innerHTML = "<%= @result %> <br> <%= @result2 %>";
 <% end %>
 
 document.getElementById('modal-title').innerHTML = "<%= @title%>";

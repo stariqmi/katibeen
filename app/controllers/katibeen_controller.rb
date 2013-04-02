@@ -129,6 +129,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def requestData
     @prayer_day_id = params[:prayer_day_id]
     @url = params[:url]
+    @dash = root_url() + @url
+    @dash = @dash[7..-1]
   end
 
   def submitDayData
@@ -150,6 +152,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
     dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
     if dayData == nil
+      @title = 'Oops!'
+      @result = "Something went wrong"
       redirect_to :action => "home"
     else
       if dataCount == 1
@@ -163,6 +167,19 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         to_add = total_prayed / 15.to_f
         avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
         dayData.update_attribute(:average, avg)
+      end
+      puts params[:submitButton]
+      @redirect = nil
+      if params[:submitButton]
+        @redirect = root_url() + params[:url]
+        @title = "Success!"
+        @result = "You have successfully added your salat data"
+        @result2 = "Wait to be redirected"
+        puts @redirect
+      else
+        @title = "Success!"
+        @result = "You have successfully added your salat data"
+        @result2 = "This page will close"
       end
     end
     respond_to do |format|

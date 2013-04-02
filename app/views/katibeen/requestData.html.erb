@@ -1,5 +1,6 @@
 <%= render "dash_banner" %>
 
+	<%= render "modal" %>
 <br>
 <body>
 <div style="width:670px; border-radius: 6px; border:1px solid #EEE; margin:auto;">
@@ -12,7 +13,7 @@
 
 <% post_url = root_url() + 'katibeen/submitDayData' %>
 
-<form action= <%= post_url %> method="post" target="_blank">
+<form data-remote="true" action= <%= post_url %> method="post" >
 
 
 <div class="prayers">
@@ -36,21 +37,36 @@
 <input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
 <input name="url" type="hidden" value= <%=@url%> >
 
-<div id="complete" class="prayer_title">
-<input type="submit" value = "" class="submitbutton"/><br>
-Submit
-</div>
+	<table id = "complete" class = "prayer_title">
+		<td style = "border-right: 2px solid #dedede;">
+			<input type="submit" value = "" class="submitbutton"/><br>
+			<br>
+			Submit
+		</td>
+		<td>
+
+
+		<input type="submit" value = "" name = "submitButton" class="submitdashbutton"/><br>
+
+		<br>
+		Submit & View Dash
+		</td>
+	</table>
 
 <% unsub = root_url() + "unsubscribe/" + @url %>
 <br>
 
 <center>
-	<a href=<%= root_url()%><%=@url%>><%= root_url()%><%=@url%></a><br>
-<a href = <%= unsub %> style = "color: #CDCDCD;
-font-size: 1em; text-decoration: none;">Unsubscribe?</a>
+<a href=<%= root_url()%><%=@url%>> <%= @dash %> </a><br>
+<a href = <%= unsub %> style = "color: #CDCDCD; font-size: 1em; text-decoration: none;">Unsubscribe?</a>
 
 </div>
 </center>
+
+<br>
+<br>
+<br>
+<br>
 
 <%= render "footer" %>
 

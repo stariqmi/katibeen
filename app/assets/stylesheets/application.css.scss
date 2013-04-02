@@ -67,20 +67,41 @@ a:link { text-decoration:underline; color: #000; }
 
 #complete {
 	text-align: center;
-	position: relative;
+	font-size: 10px;
+	width: auto;
+	width: 300px;
+	margin: auto;
 	margin-top: 15%;
-	left: 25%;
-	width: 50%;
-	}
+	padding-right: 2%;
 
+	}
+#complete td {
+	padding: 15px;
+	width: 100px;
+}
 .submitbutton{
+
     background: url(/assets/submit_exit.png) 0px 0px no-repeat;
     width: 56px;
     height: 56px;
     border: 0px;
 }
 .submitbutton:hover{
+
       background: url(/assets/submit_pressed.png) 0px 0px no-repeat;
+}
+
+
+.submitdashbutton{
+
+    background: url(/assets/submit_view.png) 0px 0px no-repeat;
+    width: 56px;
+    height: 56px;
+    border: 0px;
+}
+.submitdashbutton:hover{
+
+      background: url(/assets/submit_viewPressed.png) 0px 0px no-repeat;
 }
 
 .holder{ margin-left:1%; width:80px; float:left; position:relative;}
