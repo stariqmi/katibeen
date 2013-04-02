@@ -6,8 +6,7 @@
 	text-align: left;
 	width: 900px;
 	position:relative;
-	z-index: 2;
-	top: -162px;
+	top: -290px;
 }
 
 .main_chart table {
@@ -15,11 +14,12 @@
 	overflow:scroll;
 }
 
+
 .main_chart_table td {
 	padding: 0px;
 	margin: 0px;
-	width: 57.7px;
-	height: 30px;
+	width: 60px;
+	height: 40px;
 }
 
 .prayer_dot {
@@ -56,4 +56,21 @@
 
 .dotSVG {
 	display:block;
+	position:relative;
+}
+
+
+td.dotChart_bottom_td {
+	height: 10px;
+	background-color: #D4D4D4;
+}
+
+td.dotChart_top_td {
+	height: 50px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.dotChart_top_td {
+	color: #D4D4D4;
 }

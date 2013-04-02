@@ -1,5 +1,5 @@
 <div class="main_chart">
-<table class="main_chart_table">
+<table class="main_chart_table" style="border-collapse: collapse;">
     <tbody>
         <!--
     	<tr class="totals_row">
@@ -8,6 +8,14 @@
     		<% end %>
     	</tr>
         -->
+        <svg height="30" class="dotSVG">
+            <path id="graph_averages" stroke-width="1" stroke="none" fill-opacity="1" fill="#EEEEEE" d="<%= @dotSVG %>">
+        </svg>
+        <tr>
+            <% @mainWidgetData.each do |data| %>
+                <td class="dotChart_top_td"><p><%= data[0][0] %></p></td>
+            <% end %>
+        </tr>
         <% (1..5).each do |i| %>
             <tr class="prayer_row">
                 <% @mainWidgetData.each do |data| %>
@@ -15,6 +23,11 @@
                 <% end %>
             </tr>                 
         <% end %>
+        <tr>
+            <% @mainWidgetData.each do |data| %>
+                <td class="dotChart_bottom_td"></td>
+            <% end %>
+        </tr>
     </tbody>
 </table>
 </div>

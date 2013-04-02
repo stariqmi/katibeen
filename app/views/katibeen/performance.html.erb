@@ -7,13 +7,9 @@
         <div id="prayers_per_week">
             <%= render "overall_data" %>
         </div>
-        <%= render "performance_summary" %>
         <%= render "line_graph" %>
         
-        <svg height="60" class="dotSVG">
-            <path id="graph_averages" stroke-width="1" stroke="none" fill-opacity="1" fill="#EEEEEE" d="<%= @dotSVG %>">
-        </svg>
-        
+        <%= render "performance_summary" %>
         <div class="chart_data_container">
         <%= render "back_graph" %>
         <%= render "main_chart" %>
@@ -36,5 +32,6 @@
                 </tbody>
             </table>
         </div>
+        <%= render "footer" %>
     </center>
 </body>

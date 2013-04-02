@@ -87,11 +87,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @endHeight = lineGraphData[:endHeight]
       @startAvg = lineGraphData[:startAvg]
       @endAvg = lineGraphData[:endAvg]
-      @improvement = lineGraphData[:improvement]
+      @improvement = lineGraphData[:improvement].to_i
       @improvement_prefix = if @improvement > 0 
-        "im"
+        "improved"
       else
-        "de"
+        "reduced"
       end
     end
   end
