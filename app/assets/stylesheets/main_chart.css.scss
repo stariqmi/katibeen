@@ -4,23 +4,29 @@
 
 .main_chart {
 	text-align: left;
-	width: 750px;
-	padding-bottom: 2%;
-	margin-top: 5%;
-	position: relative;
+	width: 900px;
+	position:relative;
+	z-index: 2;
+	top: -162px;
 }
 
 .main_chart table {
-	max-width: 750px;
+	max-width: 900px;
 	overflow:scroll;
+}
+
+.main_chart_table td {
+	padding: 0px;
+	margin: 0px;
+	width: 57.7px;
+	height: 30px;
 }
 
 .prayer_dot {
  	width: 20px;
  	height: 20px;
  	border-radius: 50% 50% 50% 50%;
- 	margin-top: 5px;
- 	margin-right: 25px;
+ 	
 }
 .prev_average, .current_average {
 	color: black;
@@ -35,8 +41,7 @@
 
 .main_chart_table {
 	background-color: #EEEEEE;
-	padding-left: 25px;
-	padding-bottom: 10px;
+	
 }
 
 
@@ -51,6 +56,4 @@
 
 .dotSVG {
 	display:block;
-	position: absolute;
-	top: -23%;
 }

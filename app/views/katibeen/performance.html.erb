@@ -10,7 +10,15 @@
         <%= render "performance_summary" %>
         <%= render "line_graph" %>
         
+        <svg height="60" class="dotSVG">
+            <path id="graph_averages" stroke-width="1" stroke="none" fill-opacity="1" fill="#EEEEEE" d="<%= @dotSVG %>">
+        </svg>
+        
+        <div class="chart_data_container">
+        <%= render "back_graph" %>
         <%= render "main_chart" %>
+        </div>
+
         <div id="overall_analytics">
             <table id="table_of_analytics">
                 <tbody>
