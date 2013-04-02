@@ -124,6 +124,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   def requestData
     @prayer_day_id = params[:prayer_day_id]
+    @url = params[:url]
   end
 
   def submitDayData
