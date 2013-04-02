@@ -1,28 +1,56 @@
-<table>
-	<tbody>
-		<%= form_tag '/katibeen/submitDayData', method: "post", remote: true, class: "submitDayDataForm" do %>
-			<tr>
-			<td><%= label_tag :label, "Fajr", :class => "checkbox_label" %></td>
-			<td><%= check_box_tag :fajr, 2, false, :class => 'fajr_checkbox' %></td>
-			</tr>
-			<div>
-			<td><%= label_tag :label, "Duhr", :class => "checkbox_label" %></td>
-			<td><%= check_box_tag :zuhr, 2,false, :class => 'duhr_checkbox' %></td>
-			</tr>
-			<tr>
-			<td><%= label_tag :label, "Asr", :class => "checkbox_label" %></td>
-			<td><%= check_box_tag :asr, 2, false, :class => 'asr_checkbox' %></td>
-			</tr>
-			<tr>
-			<td><%= label_tag :label, "Maghrib", :class => "checkbox_label" %></td>
-			<td><%= check_box_tag :maghrib, 2, false, :class => 'maghrib_checkbox' %></td>
-			</tr>
-			<tr>
-			<td><%= label_tag :label, "Isha", :class => "checkbox_label" %></td>
-			<td><%= check_box_tag :isha, 2, false, :class => 'isha_checkbox' %></td>
-			</tr>
-	</tbody>
-</table>
-		<%= hidden_field_tag :prayer_day_id, @prayer_day_id, :class => 'prayer_day_id_tag' %>
-		<%= submit_tag "Submit", class: "submitButton" %>
-		<% end %>
+<%= render "dash_banner" %>
+
+<br>
+<body>
+<div style="width:670px; border-radius: 6px; border:1px solid #EEE; margin:auto;">
+    <div id="hadith">
+                <em>&#8220The thing that Allah (SWT) loves most
+    is when his people pray Salah on time.&#8221 </em>
+                <img id="pbuhArabic" src='/assets/Muhammad_saw.png' />
+    </div>
+
+
+<% post_url = root_url() + 'katibeen/submitDayData' %>
+
+<form action= <%= post_url %> method="post" target="_blank">
+
+
+<div class="prayers">
+<div class="holder">
+	<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>
+</div> .
+<div class="holder">
+	<div class="zuhr"style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr" name="zuhr" /><label for="zuhr"></label></div>
+</div>
+<div class="holder">
+	<div class="asr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr" name="asr" /><label for="asr"></label></div>
+</div>
+<div class="holder">
+	<div class="mag" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="maghrib" name="maghrib" /><label for="maghrib"></label></div>
+</div>
+<div class="holder">
+	<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
+</div>
+</div>
+
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
+<input name="url" type="hidden" value= <%=@url%> >
+
+<div id="complete" class="prayer_title">
+<input type="submit" value = "" class="submitbutton"/><br>
+Submit
+</div>
+
+<% unsub = root_url() + "unsubscribe/" + @url %>
+<br>
+
+<center>
+	<a href=<%= root_url()%><%=@url%>><%= root_url()%><%=@url%></a><br>
+<a href = <%= unsub %> style = "color: #CDCDCD;
+font-size: 1em; text-decoration: none;">Unsubscribe?</a>
+
+</div>
+</center>
+
+<%= render "footer" %>
+
