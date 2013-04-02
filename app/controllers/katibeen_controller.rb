@@ -36,18 +36,22 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       if user.save
         user.sendWelcomeEmail
         #Result instance variable for confirmation in the view
-        @result = "Thank you, a confirmation email has been sent to you " + @url
+        @title = "Thank you for signing up"
+        @result = "A confirmation email with instructions has been sent to you"
+        @result2 = "Your unique access key is: " + @url
         puts "=========================================="
 
       #If the new PotentialUser is not valid
       else
        #Set @result as the error message
+       @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
        puts "-------------------------------------------"
       end
     #User by this email already exists
     else
       # Result instance variable for the view
+      @title = "Looks like something went wrong ..."
       @result = "User by this email already exists"
     end
 
@@ -88,7 +92,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @startAvg = lineGraphData[:startAvg]
       @endAvg = lineGraphData[:endAvg]
       @improvement = lineGraphData[:improvement].to_i
-      @improvement_prefix = if @improvement > 0 
+      @improvement_prefix = if @improvement > 0
         "improved"
       else
         "reduced"
