@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
-
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-</body>
+    <head>
+        <!--meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"-->
+        <title>Katibean</title>
+        <script type="text/javascript" src="./javascript/javascript.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/404_500.css" /> 
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+        </style>
+    </head>
+    <body onload="">
+      <div id="mainBanner">
+        <table id="mainBanner_table" >
+        <tr>
+          <td><a href="./index.html"><img src="./images/logo_header.png" /></a></td>
+        </tr>
+        </table>
+      </div>
+            <table id="error">
+                <tr>
+                    <td>
+                        <div id="error_circle">
+                            <div id="error_circle_message">
+                                Oops!
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="error_circle_message_line1">
+                            404
+                        </div>
+                        <div id="error_circle_message_line2">
+                            Are you trying to access a broken link?
+                        </div>
+                    </td>
+                </tr>
+            </table>
+      <div id="footer">
+        <span>For the self-directed, motivated Muslim.</span>
+        <div class="footer_button" id="about" onclick="window.location.href = 'about.html'" ontouchend="window.location.href = 'about.html'"><p>About</p></div>
+            <div class="footer_button" id="contact"><p>info@katibean.com</p></div>
+      </div>
+    </body>
 </html>

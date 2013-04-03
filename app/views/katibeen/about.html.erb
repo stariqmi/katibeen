@@ -1,1 +1,188 @@
-About Page
+<style type="text/css">
+	body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9em;
+	}
+
+#mainBanner {
+	background-color: #009fe6;
+	width: 100%;
+	height: 75px;
+	}
+	#mainBanner_table {
+		height:100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		}
+		#mainBanner_table td {
+			vertical-align: middle;
+			padding-left: 5%;
+			}
+
+#introduction {
+	padding-top: 3%;
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-bottom: 2.5%;
+}
+	#definition {
+		padding-bottom: 3%;
+	}
+	#description {
+		font-size: 1.25em;
+	}
+
+#about_info {
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-bottom: 5%;
+	font-weight: bold;
+	font-size: 1.75em;
+	}
+	.titles {
+		font-weight: bold;
+		font-size: 1em;
+		text-align: center;
+		color: #FD5737;
+	}
+	#info_table {
+		height:100%;
+		margin: 0;
+		padding-top: 2.5%;
+		padding-right: 10%;
+		border: 0;
+		}
+		#info_table td {
+			padding-bottom: 5%;
+		}
+		.about_name {
+			font-weight: normal;
+			margin-left: 7%;
+		}
+		.about_socials {
+			margin-top: 2%;
+			margin-left: 7%;
+		}
+			.about_socials img {
+				padding-left: 0%;
+				padding-right: 2.5%;
+			}
+		.about_text {
+			font-weight: normal;
+			font-size: 0.7em;
+			margin-top: 1%;
+			margin-left: 7%;
+		}
+
+.black_overlay{
+	display: visible;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	-moz-opacity: 0.6;
+	opacity:.60;
+	filter: alpha(opacity=60);
+}
+
+	#dialog {
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin-top: 7%;
+		margin-left: 20%;
+		margin-right: 20%;
+		background-color: #2BA6AE;
+		border:1px solid #000;
+		text-align:center;
+		border-radius: 2px;
+	}
+		#dialog_header {
+			color: #FFFFFF;
+			margin-top: 5%;
+			font-size: 4em;
+		}
+		#dialog_subheader {
+			color: #FFFFFF;
+			margin-top: 2.5%;
+			font-size: 1.25em;	
+		}
+		#email_input {
+			margin-top: 3%;
+			font-size: 1.7em;
+			text-align: center;
+			border-radius: 12px;
+			font-style: bold;
+			border-collapse: collapse;
+		}
+		#subject {
+			margin-top: 3%;
+			font-size: 1.7em;
+			text-align: center;
+			border-radius: 12px;
+			font-style: bold;
+			border-collapse: collapse;
+		}
+		#message_input {
+			margin-top: 3%;
+			font-size: 1.7em;
+			border-radius: 12px;
+			font-style: bold;
+			border-collapse: collapse;
+		}
+
+		.contactBtn {
+			margin-top: 3.5%;
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fd5837), color-stop(1, #fd5837) );
+			background:-moz-linear-gradient( center top, #fd5837 5%, #fd5837 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd5837', endColorstr='#fd5837');
+			background-color:#fd5837;
+			-moz-border-radius:6px;
+			-webkit-border-radius:6px;
+			border-radius:6px;
+			border:1px solid #fd5837;
+			display:inline-block;
+			color:#ffffff;
+			font-family: 'Open Sans', sans-serif;
+			font-size:1.5em;
+			font-weight:normal;
+			padding:13px 40px;
+			text-decoration:none;
+		}.contactBtn:hover {
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fd5837), color-stop(1, #fd5837) );
+			background:-moz-linear-gradient( center top, #fd5837 5%, #fd5837 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd5837', endColorstr='#fd5837');
+			background-color:#fd5837;
+		}.contactBtn:active {
+			position:relative;
+			top:1px;
+		}
+
+</style>
+<%= render "dash_banner" %>
+<div id="introduction">
+<div id="definition">
+    <%= image_tag "Katibean_meaning.png" %>
+</div>
+<div id="description">
+    Arabic word for Scribes. Project Katibean was named after "Kiram-ul-Katibean" the two angels scribes that rest on a person's shoulder and record all their good and bad deeds.<br /><br />
+    Project Katibean hopes to provide visible data to individuals helping them better their religion in a proactive manner. Prayer, is the key to paradise...<br /><br />
+    Some more text...<br/>
+</div>
+</div>
+<div id="about_info">
+            <span>Meet the Team</span>
+            <table id="info_table">
+                <%= render "about_huzaifa" %>
+                <%= render "about_shafkat" %>
+                <%= render "about_salman" %>
+                <%= render "about_farhan" %>
+            </table>
+    	</div>
+<%= render "footer" %>

@@ -5,16 +5,13 @@ KatApp::Application.routes.draw do
   match "/welcome" => "katibeen#home"
   match "/welcome/:url" => "katibeen#welcome"
   match "/unsubscribe/:url" => "katibeen#unsubscribe"
-
-  match "/:url" => "katibeen#performance"
+  match "/about" => "katibeen#about", :as => "about"
   match "widgetData/:url" => "katibeen#widgetData"
   match "/day_data/:url/:prayer_day_id" => "katibeen#requestData"
   get "katibeen/home"
-
-  match "/about" => "katibeen#about", :as => "about"
-
   post "katibeen/signup"
   post "/katibeen/submitDayData"
+  match "/:url" => "katibeen#performance"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
