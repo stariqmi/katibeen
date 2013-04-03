@@ -122,24 +122,35 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
       time = Time.now.in_time_zone(@user.timezone).strftime("%H")
       time = time.to_i
+      data = OutgoingDayPrayer.where(:url => params[:url])
+      if data.nil?
 
-      if time >= 22
+        if time >= 22
 
-        #Creates prayer data based on today since 10PM has passed
-        @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
-                                            user_id: @user.id, status: "pending", average: 0)
+          #Creates prayer data based on today since 10PM has passed
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
+                                              user_id: @user.id, status: "pending", average: 0)
 
-        @prayer_day_id = @dayData.id
+          @prayer_day_id = @dayData.id
+
+        else
+          #If it is less than 10PM we use yesterday for the prayer data
+          #Chronic.now = Time.now.in_time_zone(@user.timezone)
+          date = Chronic.parse('yesterday')
+          weekday = date.strftime("%A")
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
+                                              user_id: @user.id, status: "pending", average: 0)
+          @prayer_day_id = @dayData.id
+        end
 
       else
-        #If it is less than 10PM we use yesterday for the prayer data
-        #Chronic.now = Time.now.in_time_zone(@user.timezone)
-        date = Chronic.parse('yesterday')
-        weekday = date.strftime("%A")
-        @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
-                                            user_id: @user.id, status: "pending", average: 0)
+        puts '----------------------------------'
+        @dayData = data[0]
+        puts @dayData
         @prayer_day_id = @dayData.id
+
       end
+
       @user.registered = true
       @user.save!
 
