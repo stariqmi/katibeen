@@ -66,10 +66,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     if @user == nil
       redirect_to :action => "home" # Redirect to the home page
     else
+      puts @user.outgoing_day_prayers.count
       if @user.registered == false
         redirect_to :action => "home"
       elsif @user.outgoing_day_prayers.count < 3
-        redirect_to :action => "welcome"
+        redirect_to :action => "temporary"
       else
       performance = PerformanceData.new @user # New PerformanceData object
       @data = performance.rawData # Raw Data from the object
@@ -121,24 +122,35 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
       time = Time.now.in_time_zone(@user.timezone).strftime("%H")
       time = time.to_i
+      data = OutgoingDayPrayer.where(:url => params[:url])
+      if data.nil?
 
-      if time >= 22
+        if time >= 22
 
-        #Creates prayer data based on today since 10PM has passed
-        @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
-                                            user_id: @user.id, status: "pending", average: 0)
+          #Creates prayer data based on today since 10PM has passed
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
+                                              user_id: @user.id, status: "pending", average: 0)
 
-        @prayer_day_id = @dayData.id
+          @prayer_day_id = @dayData.id
+
+        else
+          #If it is less than 10PM we use yesterday for the prayer data
+          #Chronic.now = Time.now.in_time_zone(@user.timezone)
+          date = Chronic.parse('yesterday')
+          weekday = date.strftime("%A")
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
+                                              user_id: @user.id, status: "pending", average: 0)
+          @prayer_day_id = @dayData.id
+        end
 
       else
-        #If it is less than 10PM we use yesterday for the prayer data
-        #Chronic.now = Time.now.in_time_zone(@user.timezone)
-        date = Chronic.parse('yesterday')
-        weekday = date.strftime("%A")
-        @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
-                                            user_id: @user.id, status: "pending", average: 0)
+        puts '----------------------------------'
+        @dayData = data[0]
+        puts @dayData
         @prayer_day_id = @dayData.id
+
       end
+
       @user.registered = true
       @user.save!
 
@@ -179,11 +191,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
     puts params[:url]
     data = OutgoingDayPrayer.where(:url => params[:url])
-    puts data
     dataCount = data.count
-    puts dataCount
     dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    puts dayData
+    puts dayData.average
     dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
     if dayData == nil
       @title = 'Oops!'
@@ -235,6 +245,21 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @user.registered = false
       @user.save!
     end
+  end
+
+  def temporary
+    url = params[:url] # Extract the url key from the parameters
+    @user = User.find_by_url(url)
+
+    if @user == nil
+      redirect_to :action => "home" # Redirect to the home page
+
+    elsif @user.outgoing_day_prayers.count > 3
+        redirect_to :action => "performance"
+    else
+      @days_left = 3 - @user.outgoing_day_prayers.count
+    end
+
   end
 
 

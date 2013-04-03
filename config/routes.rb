@@ -3,6 +3,7 @@ KatApp::Application.routes.draw do
   root :to => "katibeen#home"
 
   match "/welcome" => "katibeen#home"
+  match "/dash/:url"   =>  "katibeen#temporary"
   match "/welcome/:url" => "katibeen#welcome"
   match "/unsubscribe/:url" => "katibeen#unsubscribe"
   match "/about" => "katibeen#about", :as => "about"

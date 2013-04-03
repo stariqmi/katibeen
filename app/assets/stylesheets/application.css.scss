@@ -364,3 +364,32 @@ input[type=checkbox] {
 	height: 280px;
 	padding-top: 70px;
 }
+
+#tempDash {
+	background: #DDD url(/assets/dash_wait.jpg) center no-repeat;
+	text-align: center;
+	background-opacity: 0.5;
+	position: fixed;
+	top: 0%;
+	background-size:cover;
+	height: 100%;
+	width: 100%;
+	background-repeat:no-repeat;
+}
+
+.tempText {
+	text-align: center;
+	color: #000;
+	font-size: 2em;
+	padding: 0;
+	margin: 0;
+}
+
+.daysLeft {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	color: #f15737;
+	font-size: 5em;
+
+}

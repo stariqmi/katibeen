@@ -1,10 +1,10 @@
 <% post_url = root_url() + 'katibeen/submitDayData' %>
 <br>
 
-<div id="welcomeModal" class="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="welcomeModal" class="welcomeModal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 	<div class="modal-header">
-	  <h3 id="modal-title">Salah Check</h3>
+	  <h3 style = "font-size: 2em;" id="modal-title">Salah Check</h3>
 	</div>
 
   <div id = "modal-body" class="modal-body">
@@ -31,18 +31,20 @@
 	</div>
 	<div class="holder">
 		<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
+
 	</div>
 </div>
 
 <input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
 <input name="url" type="hidden" value= <%=@url%> >
-
-		<div class = "center">
-			<input type="submit" value = "" class="submitbutton"/><br>
-			<br>
-			Submit
-		</div>
   </div>
+  	<div style = "margin-top: 5px; padding-top: 0px;" class = "pull-left;">
+
+			<input type="submit" style = "border: 0;" value = "Submit" class=" next_step"/>
+
+		</div>
+		<br>
+		<br>
   <div class="modal-footer">
   &nbsp;
   </div>
