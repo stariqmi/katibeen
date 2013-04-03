@@ -1,61 +1,182 @@
+<!--
+<style>
+
+    .weekly_circle.monday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Monday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+
+    .weekly_circle.tuesday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Tuesday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }    
+
+    .weekly_circle.wednesday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Wednesday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+
+    .weekly_circle.thursday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Thursday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+
+    .weekly_circle.friday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Friday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+
+    .weekly_circle.saturday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Saturday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+
+    .weekly_circle.sunday {
+        <%
+            avg = (@filteredData[:avgWeekdayData]["Sunday"] / 5.to_f)*100
+            puts avg
+        %>
+        margin-left: 1%;
+        background: #CDCDCD;
+        width:45px;
+        height: 45px;
+        border-radius: 50%;
+        background: #009fe6; 
+        background: -moz-linear-gradient(left,  #009fe6 0%, #009fe6 <%=avg%>%, #cdcdcd <%=avg%>%, #cdcdcd 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#009fe6), color-stop(<%=avg%>%,#009fe6), color-stop(<%=avg%>%,#cdcdcd), color-stop(100%,#cdcdcd)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* IE10+ */
+        background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
+    }
+</style>
+-->
 <div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"] %></span> best day</p></div>
 <div style="margin-left: 9%;" id="weekly_prayers">
 <table>
     <tbody><tr>
         <td>
-            <span>Mon</span>
-            
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_mon" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Monday"] %>"></div>
-            <p></p>
+            <span>M</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
         </td>
         <td>
-            <span>Tues</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_tues" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Tuesday"] %>"></div>
-            <p></p>
+            <span>T</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Tuesday"]%></p></div>
         </td>
         <td>
-            <span>Wed</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_wed" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Wednesday"] %>"></div>
-            <p></p>
+            <span>W</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Wednesday"]%></p></div>
         </td>
         <td>
-            <span>Thurs</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_thurs" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Thursday"] %>"></div><p></p>
+            <span>T</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Thursday"]%></p></div>
         </td>
         <td>
-            <span>Fri</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_fri" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Friday"] %>"></div><p></p>
+            <span>F</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Friday"]%></p></div>
         </td>
         <td>
-            <span>Sat</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_sat" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Saturday"] %>"></div><p></p>
+            <span>S</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Saturday"]%></p></div>
         </td>
         <td>
-            <span>Sun</span>
-            <%= image_tag "cutout_circlesmall.png", :id => "weekly_average_image" %>
-            <div id="weekly_average_background"></div>
-            <div class="weekly_average_streak" id="weekly_average_streak_sun" 
-            data-average="<%= @filteredData[:avgWeekdayData]["Sunday"] %>"></div><p></p>
+            <span>S</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Sunday"]%></p></div>
         </td>
     </tr>
+    <!--<tr>
+        <td><center><%= @filteredData[:avgWeekdayData]["Monday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Tuesday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Wednesday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Thursday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Friday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Saturday"]%></center></td>
+        <td><center><%= @filteredData[:avgWeekdayData]["Sunday"]%></center></td>
+    </tr>-->
 </tbody>
 </table>
 </div>
