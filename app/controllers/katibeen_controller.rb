@@ -39,14 +39,12 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @title = "Thank you for signing up"
         @result = "A confirmation email with instructions has been sent to you"
         @result2 = "Your unique access key is: " + @url
-        puts "=========================================="
 
       #If the new PotentialUser is not valid
       else
        #Set @result as the error message
        @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
-       puts "-------------------------------------------"
       end
     #User by this email already exists
     else
@@ -90,7 +88,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       mainWidgetData = performance.mainWidgetData
       @mainWidgetData = mainWidgetData[:data]
       @dotSVG = mainWidgetData[:path]
-      puts @dotSVG
       lineGraphData = performance.lineGraphData
       @lineGraphPath = lineGraphData[:lineGraphPath]
       @startHeight = lineGraphData[:startHeight]
