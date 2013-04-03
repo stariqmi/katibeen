@@ -56,14 +56,12 @@ div .katibean_aim {
 }
 
 .step3_complete {
-	background-color: #009FE6;
-    color: white;
-    font-size: 1.5em;
-    font-weight: bold;
-    height: 90px;
-    line-height: 45px;
-    width: 170px;
-    text-decoration: none;
+	width: 360px !important;
+}
+
+.step3_complete a{
+	color: white;
+    text-decoration: none !important;
 }
 
 .email_send_instructions {
