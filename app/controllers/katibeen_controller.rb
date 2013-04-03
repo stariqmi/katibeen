@@ -71,6 +71,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     else
       performance = PerformanceData.new @user # New PerformanceData object
       @data = performance.rawData # Raw Data from the object
+      redirect_to :action => "welcome" if @data.count < 3
       @weeks = performance.weeks # Weeks passed since joined katibeen.com
       prayersData = performance.prayersData
       @average = performance.userAvgCalculator
