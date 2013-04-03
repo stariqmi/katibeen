@@ -1,7 +1,7 @@
 .welcome_slider {
 	width: 900px;
 	height: 540px;
-	overflow:scroll;
+	overflow:hidden;
 }
 
 .slider_wrapper {
