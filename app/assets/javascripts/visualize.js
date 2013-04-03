@@ -1,11 +1,6 @@
 $(document).ready( function() {
 	console.log("average is " + $("#prayer_per_day_average_streak").data("average"));
-	streak = document.getElementById( 'prayer_per_day_average_streak' );
-	if (streak === null){
 
-	}
-
-	else {
 	longest_streak_width = function( value ) {
 		var streak = document.getElementById( 'prayer_per_day_average_streak' );
 		streak.style.width = ( 241/5 ) * value + 'px';
@@ -26,7 +21,5 @@ $(document).ready( function() {
 	weekly_prayer_average_streak( $("#weekly_average_streak_fri").data("average"), 'weekly_average_streak_fri' );
 	weekly_prayer_average_streak( $("#weekly_average_streak_sat").data("average"), 'weekly_average_streak_sat' );
 	weekly_prayer_average_streak( $("#weekly_average_streak_sun").data("average"), 'weekly_average_streak_sun' );
-
-}
 	
 });
