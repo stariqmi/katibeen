@@ -1,5 +1,8 @@
 $("#modal").modal('show');
 
+
+$("#welcomeModal").modal('hide');
+
 <% if @result2.nil? %>
 	document.getElementById('modal-body').innerHTML = "<%= @result %>";
 <% else %>
