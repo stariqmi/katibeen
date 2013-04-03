@@ -186,3 +186,29 @@
             </table>
     	</div>
 <%= render "footer" %>
+<script>
+            var hover = function( id, src ) {
+                var el = document.getElementById( id );
+                el.src = src;
+            }
+
+            function overlay() {
+                el = document.getElementById("overlay");
+                el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+                el.style.width = (document.body.offsetWidth).toString() + 'px';
+                el.style.height = document.body.offsetHeight.toString() + 'px';
+
+                var dialog = document.getElementById( 'dialog' );
+                dialog.style.width = ((document.body.offsetWidth/100)*60).toString() + 'px';
+                dialog.style.height = ((document.body.offsetHeight/100)*75).toString() + 'px';
+
+                var email_input = document.getElementById( 'email_input' );
+                email_input.style.width = ((document.body.offsetWidth/100)*35).toString() + 'px';
+                email_input.style.height = ((document.body.offsetHeight/100)*7).toString() + 'px';
+
+                var message_input = document.getElementById( 'message_input' );
+                message_input.style.width = ((document.body.offsetWidth/100)*35).toString() + 'px';
+                message_input.style.height = ((document.body.offsetHeight/100)*20).toString() + 'px';
+
+            }
+        </script>
