@@ -16,8 +16,9 @@
 		<br/>
 		<p class="unique">Your unique dashboard url is</p>
 
-		<p class="unique url_display">katibeen.com/ahWhd</p>
+		<p class="unique url_display">katibeen.com/<%= @url %></p>
 		<br/>
 		<p><span>Remember:</span> Your dash will only show your data on the <strong>3rd day of usage.</strong> Make sure you have a good average to begin with.</p>
 	</div>
 </div>
+<%= link_to "Finish Intro and Go to Dash" , performance_path(@url), :class => "step3_complete next_step" %>

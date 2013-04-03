@@ -12,7 +12,7 @@ KatApp::Application.routes.draw do
   get "katibeen/home"
   post "katibeen/signup"
   post "/katibeen/submitDayData"
-  match "/:url" => "katibeen#performance"
+  match "/:url" => "katibeen#performance", :as => "performance"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
