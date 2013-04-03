@@ -1,8 +1,7 @@
 .welcome_slider {
 	width: 900px;
 	height: 540px;
-	overflow-x:scroll;
-	overflow-y:hidden;
+	overflow:scroll;
 }
 
 .slider_wrapper {
@@ -114,7 +113,7 @@ div .katibean_aim {
 }
 
 .dash_instruction {
-	width:100%;
+	width:95%;
 	height: 500px;
 	margin-top: 20px;
 }
@@ -125,7 +124,7 @@ div .katibean_aim {
 
 .main_ins {
 	height: 500px;
-	width: 350px;
+	width: 300px;
 	margin-left: 30px;
 	text-align: left;
 }

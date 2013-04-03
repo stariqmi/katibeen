@@ -7,3 +7,8 @@
 </div>
 <%= image_tag "step1.png", :class => "step1_email_img" %>
 <div class="step1_complete next_step">Step2</div>
+<script type="text/javascript">
+	$(".step1_complete").on("click", function() {
+		$(".slider_wrapper").animate({right: "1780"}, 1000);
+	});
+</script>
