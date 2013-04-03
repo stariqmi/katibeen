@@ -1,0 +1,24 @@
+.welcome_slider {
+	width: 900px;
+	height: 540px;
+	overflow:scroll;
+	overflow-y:hidden;
+}
+
+.slider_wrapper {
+	width:3600px;
+	height: 98%;
+	position:relative;
+}
+
+.welcome {
+	width: 890px;
+	height: 100%;
+	display:table-row;
+	float:left;
+}
+
+.step1 {
+	background-color: #D4D4D4;
+
+}

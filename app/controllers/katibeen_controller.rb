@@ -69,7 +69,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     else
       if @user.registered == false 
         redirect_to :action => "home"
-      elsif @user.outgoing_day_prayers.count < 3
+      elsif @user.outgoing_day_prayers.count < 2
         redirect_to :action => "welcome" 
       else
       performance = PerformanceData.new @user # New PerformanceData object
