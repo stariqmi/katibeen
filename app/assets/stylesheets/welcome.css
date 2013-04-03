@@ -1,7 +1,7 @@
 .welcome_slider {
 	width: 900px;
 	height: 540px;
-	overflow:scroll;
+	overflow-x:scroll;
 	overflow-y:hidden;
 }
 
@@ -68,6 +68,10 @@ div .katibean_aim {
 	width: 58%;
 }
 
+.step3_instructions {
+	width: 76%;
+}
+
 .ins_wrapper {
 	width: 110%;
 	height: 100%;
@@ -107,4 +111,36 @@ div .katibean_aim {
 	color: #FD5737;
 	font-weight: bold;
 	font-size: 1em;
+}
+
+.dash_instruction {
+	width:100%;
+	height: 500px;
+	margin-top: 20px;
+}
+
+.final_ins {
+	float:left;
+}
+
+.main_ins {
+	height: 500px;
+	width: 350px;
+	margin-left: 30px;
+	text-align: left;
+}
+
+.main_ins span {
+	color: #FD5737;
+	font-weight: bold;
+}
+
+.unique {
+	text-align: center;
+}
+
+.url_display {
+	color: #009FE6;
+	font-weight: bold;
+	font-size: 1.75em;
 }
