@@ -24,7 +24,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @url = uniqueUrlKeyGenerator # Generate a unique url key
 
     #create a new PotentialUser object with the extarcted email, timezone and url key
-    user = User.new(email: email, url: @url, timezone: timezone, day: 1)
+    user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
 
     # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
@@ -69,9 +69,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     if @user == nil
       redirect_to :action => "home" # Redirect to the home page
     else
+      if @user.registered == false 
+        redirect_to :action => "home"
+      elsif @user.outgoing_day_prayers.count < 3
+        redirect_to :action => "welcome" 
+      else
       performance = PerformanceData.new @user # New PerformanceData object
       @data = performance.rawData # Raw Data from the object
-      redirect_to :action => "welcome" if @data.count < 3
+      
       @weeks = performance.weeks # Weeks passed since joined katibeen.com
       prayersData = performance.prayersData
       @average = performance.userAvgCalculator
@@ -93,10 +98,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @startAvg = lineGraphData[:startAvg]
       @endAvg = lineGraphData[:endAvg]
       @improvement = lineGraphData[:improvement].to_i
-      @improvement_prefix = if @improvement > 0
-        "improved"
-      else
-        "reduced"
+        @improvement_prefix = if @improvement > 0
+          "improved"
+        else
+          "reduced"
+        end
       end
     end
   end
