@@ -1,3 +1,4 @@
+<!--
 <style>
 
     .weekly_circle.monday {
@@ -133,37 +134,38 @@
         background: linear-gradient(to right,  #009fe6 0%,#009fe6 <%=avg%>%,#cdcdcd <%=avg%>%,#cdcdcd 100%); /* W3C */    
     }
 </style>
+-->
 <div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"] %></span> best day</p></div>
 <div style="margin-left: 9%;" id="weekly_prayers">
 <table>
     <tbody><tr>
         <td>
-            <span>Mon</span>
+            <span>M</span>
             <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
         </td>
         <td>
-            <span>Tues</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>T</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Tuesday"]%></p></div>
         </td>
         <td>
-            <span>Wed</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>W</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Wednesday"]%></p></div>
         </td>
         <td>
-            <span>Thurs</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>T</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Thursday"]%></p></div>
         </td>
         <td>
-            <span>Fri</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>F</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Friday"]%></p></div>
         </td>
         <td>
-            <span>Sat</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>S</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Saturday"]%></p></div>
         </td>
         <td>
-            <span>Sun</span>
-            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Monday"]%></p></div>
+            <span>S</span>
+            <div class="weekly_circle circle"><p><%= @filteredData[:avgWeekdayData]["Sunday"]%></p></div>
         </td>
     </tr>
     <!--<tr>

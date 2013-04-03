@@ -216,12 +216,12 @@ module UserPerformanceDataHelper
 
 				data <<	dayHash
 			end
-			path = "M10 30 "
+			path = "M10 20 "
 			(0..(@timesRequestSent-1)).each do |i|
-				path += "L#{30+ 60*i} #{30 - (data[i][0][0]/5.to_f)*30} "
+				path += "L#{30+ 60*i} #{20 - (data[i][0][0]/5.to_f)*20} "
 				puts "PATH -----> #{path}"
 			end
-			path += "L#{60*@timesRequestSent - 10} 30 Z"
+			path += "L#{60*@timesRequestSent - 10} 20 Z"
 			{ data: data, path: path }
 		end
 

@@ -1,107 +1,90 @@
 <style>
+    
+
     .circle.overall_fajr {
         <%
             avg = @filteredData[:weeklyPerformedAvgData][:fajr]
-            stop1 = 100 - avg
-            stop2 = stop1
         %>
         margin-left: 1%;
         background: #009fe6;
         width: 75px;
         height: 75px;
         border-radius: 50%;
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        -moz-transform: rotate(90deg);
-        background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee <%=stop1%>%, #FD5737 <%=stop2%>%, #FD5737 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(<%=stop1%>%,#eeeeee), color-stop(<%=stop2%>%,#FD5737), color-stop(100%,#FD5737)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#FD5737 <%=stop2%>%,#FD5737 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#FD5737 <%=stop2%>%,#FD5737 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#FD5737 <%=stop2%>%,#FD5737 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee <%=stop1%>%,#FD5737 <%=stop2%>%,#FD5737 100%); /* W3C */
+        background: -moz-linear-gradient(left,  #FD5737 0%, #FD5737 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#FD5737), color-stop(<%=avg%>%,#FD5737), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
     }
+
     .circle.overall_duhr {
         <%
             avg = @filteredData[:weeklyPerformedAvgData][:zuhr]
-            stop1 = 100 - avg
-            stop2 = stop1
         %>
         margin-left: 1%;
         background: #009fe6;
         width: 75px;
         height: 75px;
         border-radius: 50%;
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        -moz-transform: rotate(90deg);
-        background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee <%=stop1%>%, #F6C546 <%=stop2%>%, #FD5737 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(<%=stop1%>%,#eeeeee), color-stop(<%=stop2%>%,#F6C546), color-stop(100%,#F6C546)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#F6C546 <%=stop2%>%,#F6C546 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#F6C546 <%=stop2%>%,#F6C546 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#F6C546 <%=stop2%>%,#F6C546 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee <%=stop1%>%,#F6C546 <%=stop2%>%,#F6C546 100%); /* W3C */
+        background: -moz-linear-gradient(left,  #F6C546 0%, #F6C546 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F6C546), color-stop(<%=avg%>%,#F6C546), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
     }
+
     .circle.overall_asr {
         <%
             avg = @filteredData[:weeklyPerformedAvgData][:asr]
-            stop1 = 100 - avg
-            stop2 = stop1
         %>
         margin-left: 1%;
         background: #009fe6;
         width: 75px;
         height: 75px;
         border-radius: 50%;
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        -moz-transform: rotate(90deg);
-        background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee <%=stop1%>%, #2BA6AE <%=stop2%>%, #FD5737 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(<%=stop1%>%,#eeeeee), color-stop(<%=stop2%>%,#2BA6AE), color-stop(100%,#2BA6AE)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#2BA6AE <%=stop2%>%,#2BA6AE 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#2BA6AE <%=stop2%>%,#2BA6AE 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#2BA6AE <%=stop2%>%,#2BA6AE 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee <%=stop1%>%,#2BA6AE <%=stop2%>%,#2BA6AE 100%); /* W3C */
+        background: -moz-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#2BA6AE), color-stop(<%=avg%>%,#2BA6AE), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
     }
-    .circle.overall_maghrib {
-        <%
-            avg = @filteredData[:weeklyPerformedAvgData][:maghrib]
-            stop1 = 100 - avg
-            stop2 = stop1
-        %>
-        margin-left: 1%;
-        background: #009fe6;
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        -moz-transform: rotate(90deg);
-        background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee <%=stop1%>%, #9C5193 <%=stop2%>%, #FD5737 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(<%=stop1%>%,#eeeeee), color-stop(<%=stop2%>%,#9C5193), color-stop(100%,#9C5193)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#9C5193 <%=stop2%>%,#9C5193 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#9C5193 <%=stop2%>%,#9C5193 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#9C5193 <%=stop2%>%,#9C5193 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee <%=stop1%>%,#9C5193 <%=stop2%>%,#9C5193 100%); /* W3C */
-    }
-
 
     .circle.overall_isha {
         <%
             avg = @filteredData[:weeklyPerformedAvgData][:isha]
-            stop1 = 100 - avg
-            stop2 = stop1
         %>
         margin-left: 1%;
         background: #009fe6;
         width: 75px;
         height: 75px;
         border-radius: 50%;
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-        -moz-transform: rotate(90deg);
-        background: -moz-linear-gradient(top,  #eeeeee 0%, #eeeeee <%=stop1%>%, #1B2723 <%=stop2%>%, #FD5737 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(<%=stop1%>%,#eeeeee), color-stop(<%=stop2%>%,#1B2723), color-stop(100%,#1B2723)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#1B2723 <%=stop2%>%,#1B2723 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#1B2723 <%=stop2%>%,#1B2723 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  #eeeeee 0%,#eeeeee <%=stop1%>%,#1B2723 <%=stop2%>%,#1B2723 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  #eeeeee 0%,#eeeeee <%=stop1%>%,#1B2723 <%=stop2%>%,#1B2723 100%); /* W3C */
+        background: -moz-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1B2723), color-stop(<%=avg%>%,#1B2723), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
     }
 
+    .circle.overall_maghrib {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:maghrib]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#9C5193), color-stop(<%=avg%>%,#9C5193), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
 </style>
 <p class="salah_adherence">Salah Adherence</p>
 <table>
