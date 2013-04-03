@@ -1,0 +1,50 @@
+<% post_url = root_url() + 'katibeen/submitDayData' %>
+<br>
+
+<div id="welcomeModal" class="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<div class="modal-header">
+	  <h3 id="modal-title">Salah Check</h3>
+	</div>
+
+  <div id = "modal-body" class="modal-body">
+<form data-remote="true" action= <%= post_url %> method="post" >
+
+<center>
+<em style="width:80%;margin:auto;color:#2ba5ae;font-size:1.8em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
+</center>
+
+	<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed today </h3>
+
+<div style = "width: 50%; margin: auto; padding-left: 5%;">
+	<div class="holder">
+		<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>
+	</div> .
+	<div class="holder">
+		<div class="zuhr"style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr" name="zuhr" /><label for="zuhr"></label></div>
+	</div>
+	<div class="holder">
+		<div class="asr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr" name="asr" /><label for="asr"></label></div>
+	</div>
+	<div class="holder">
+		<div class="mag" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="maghrib" name="maghrib" /><label for="maghrib"></label></div>
+	</div>
+	<div class="holder">
+		<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
+	</div>
+</div>
+
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
+<input name="url" type="hidden" value= <%=@url%> >
+
+		<div class = "center">
+			<input type="submit" value = "" class="submitbutton"/><br>
+			<br>
+			Submit
+		</div>
+  </div>
+  <div class="modal-footer">
+  &nbsp;
+  </div>
+</div>
+
