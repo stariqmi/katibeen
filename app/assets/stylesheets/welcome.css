@@ -18,7 +18,93 @@
 	float:left;
 }
 
-.step1 {
-	background-color: #D4D4D4;
+h1 {
+	color: #FD5737;
+	font-size: 3.5em;
+	margin-top: 35px;
+}
 
+.welcome p {
+	font-size: 1.25em;
+}
+
+div .katibean_aim {
+	width: 60%;
+	height: 40px;
+	background-color: #676767;
+	font-size: 1.5em;
+	color: white;
+	line-height: 35px;
+	font-style: italic;
+}
+
+.next_step {
+	height: 50px;
+	width: 135px;
+	background-color: #009FE6;
+	color: white;
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 45px;
+}
+
+.start_complete {
+	margin-top: 50px;
+}
+
+.step1_complete {
+	margin-top: 25px;
+}
+
+.email_send_instructions {
+	height: 40px;
+}
+
+.step1_instructions{
+	width: 50%;
+}
+
+.step2_instructions {
+	width: 58%;
+}
+
+.ins_wrapper {
+	width: 110%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.email_ins {
+	float:left;
+	font-size: 1.2em;
+	line-height: 37px;
+}
+
+.step_number {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #676767;
+	margin-right: 25px;
+	color:white;
+	font-weight: bold;
+}
+
+.step1_num{
+	margin-right: 25px;
+}
+
+.step2_num {
+	
+}
+
+
+.step1_email_img {
+	margin-left: 30px;
+}
+
+.click_email_instruction {
+	color: #FD5737;
+	font-weight: bold;
+	font-size: 1em;
 }
