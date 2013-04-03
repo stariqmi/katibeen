@@ -3,21 +3,10 @@ KatApp::Application.configure do
 
 
 
-#MAIL CATCHER
 
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => "localhost",
-    :port => 1025,
-    :domain => "katibeen.com" }
-
-
-
-
-    
-
-
-
+  config.action_mailer.default_url_options = {
+  :host => "localhost3000"
+}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
