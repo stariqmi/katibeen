@@ -123,7 +123,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       time = Time.now.in_time_zone(@user.timezone).strftime("%H")
       time = time.to_i
       data = OutgoingDayPrayer.where(:url => params[:url])
-      if data.nil?
+      if data[0].nil?
 
         if time >= 22
 
