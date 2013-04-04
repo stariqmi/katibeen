@@ -1,5 +1,5 @@
-<div class="click_form">
-<h1 style = "padding-top: 0;">Salah Check</h1>
+
+<h1>Salah Check</h1>
 <div class="email_send_instructions step2_instructions">
 	<div class="ins_wrapper">
 		<div class="step_number email_ins step2_num">2</div>
@@ -8,11 +8,13 @@
 </div>
 
 <p class="click_email_instruction">Click the email icon below</p>
-<%= image_tag "Welcome_10.png", :class => "step2_complete"  %></div>
+
+<div class="click_form"><%= image_tag "Welcome_10.png", :class => "step2_complete"  %></div>
 
 <script type="text/javascript">
 		$(".click_form").on("click", function() {
-		$(".slider_wrapper").animate({right: "2670"}, 1000, function() {
+			$(".welcome_slider").css("height", 790);
+			$(".slider_wrapper").animate({right: "2670"}, 1000, function() {
 			$("#welcomeModal").modal('show');
 		});
 
