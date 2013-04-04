@@ -11,10 +11,10 @@
 <%= image_tag "Welcome_10.png", :class => "step2_complete"  %></div>
 
 <script type="text/javascript">
-		$(".click_form").on("click", function() {
+	$(".click_form").on("click", function() {
+		$(".welcome_slider").css("height", 790);
 		$(".slider_wrapper").animate({right: "2670"}, 1000, function() {
 			$("#welcomeModal").modal('show');
 		});
-
 	});
 </script>
