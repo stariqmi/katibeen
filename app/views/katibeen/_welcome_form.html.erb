@@ -11,11 +11,14 @@
 <form data-remote="true" action= <%= post_url %> method="post" >
 
 <center>
-<em style="width:80%;margin:auto;color:#2ba5ae;font-size:1.8em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
+<em style="width:100%;margin:auto;color:#2ba5ae;font-size:1em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
 </center>
 
+<% if @today %>
 	<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed today </h3>
-
+<% else %>
+		<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed yesterday </h3>
+<% end %>
 <div style = "width: 50%; margin: auto; padding-left: 5%;">
 	<div class="holder">
 		<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>

@@ -126,7 +126,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       if data[0].nil?
 
         if time >= 22
-
+          @today = true
           #Creates prayer data based on today since 10PM has passed
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
