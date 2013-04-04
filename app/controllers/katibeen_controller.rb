@@ -21,7 +21,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     email = params[:email] # Extract the email from the params of the signup form
     timezone = params[:timezone] # Extract the timezone from the params of the signup form
     @url = uniqueUrlKeyGenerator # Generate a unique url key
+    old_user = User.find_by_email(email)
 
+    if !old_user.nil?
+      if !old_user.registered?
+        old_user.sendWelcomeEmail
+        old_user.save
+      end
+    end
     #create a new PotentialUser object with the extarcted email, timezone and url key
     user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
 
@@ -44,6 +51,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
        #Set @result as the error message
        @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
+         if @result == "User by this email already exists"
+            @result = @result + ", but we sent another confirmation email just in case"
+         end
       end
     #User by this email already exists
     else
