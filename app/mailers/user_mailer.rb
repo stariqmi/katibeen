@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "katibeantest@gmail.com"
+  default from: "salah@katibean.com"
 
   # To send mail to a potential user upon sign up
   def confirmation_email(puser)
