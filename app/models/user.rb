@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  require 'net/smtp'
+
   attr_accessible :email, :timezone, :url, :average, :day, :registered
   before_save { |user| user.email = email.downcase }
   #after_save :sendWelcomeEmail
