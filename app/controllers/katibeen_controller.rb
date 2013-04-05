@@ -235,6 +235,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @result = "You have successfully added your salat data"
         @result2 = "This page will close"
       end
+      dayData.save
+      puts dayData.average
     end
     respond_to do |format|
       format.js
