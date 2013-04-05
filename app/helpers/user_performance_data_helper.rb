@@ -263,7 +263,11 @@ module UserPerformanceDataHelper
 					end_avg = @rawData[@timesRequestSent-1].average
 				end
 			else
-				requiredData = @rawData[@timesRequestSent - 16, @timesRequestSent]
+				num = @timesRequestSent - 15
+				if num < 0
+					num = 0
+				end
+				requiredData = @rawData[num, @timesRequestSent]
 				horizon_distance = (750 / 15.to_f).round(2)
 				requiredData.each do |data|
 					puts "average is ------------------ #{data.average}"

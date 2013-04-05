@@ -7,10 +7,11 @@ task :populate => :environment do
 		user.url = "test" + n.to_s
 		user.timezone = Time.zone
 		user.registered = true
-		user.days
+		user.day = 2
 		user.save
 
 		(1..15).each do |d|
+			user.day += 1
 			prayer = OutgoingDayPrayer.new
 			prayer.url =  user.url
 			prayer.weekday = d.days.from_now.strftime("%A")
@@ -27,7 +28,7 @@ task :populate => :environment do
 			prayer.save
 		end
 
-
+		user.save
 
 	end
 

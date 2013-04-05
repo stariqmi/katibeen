@@ -20,6 +20,6 @@ class UserMailer < ActionMailer::Base
 
   def error(user)
     @user = user
-    mail(:to => user.email, :subject => "Experiencing some technical diff")
+    mail(:to => user.email, :subject => "Email Issues")
   end
 end
