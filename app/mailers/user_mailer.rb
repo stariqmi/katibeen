@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "salah@katibean.com"
+  default from: "katibeantest@gmail.com"
 
   # To send mail to a potential user upon sign up
   def confirmation_email(puser)
@@ -20,6 +20,6 @@ class UserMailer < ActionMailer::Base
 
   def error(user)
     @user = user
-    mail(:to => user.email, :subject => "Difficulties")
+    mail(:to => user.email, :subject => "Experiencing some technical diff")
   end
 end
