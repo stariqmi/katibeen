@@ -17,4 +17,9 @@ class UserMailer < ActionMailer::Base
     @dayData = dayData
   	mail(:to => user.email, :subject => "Salat Check: " + Time.now.in_time_zone(user.timezone).strftime("%B %d, %Y"))
   end
+
+  def error(user)
+    @user = user
+    mail(:to => user.email, :subject => "Difficulties")
+  end
 end

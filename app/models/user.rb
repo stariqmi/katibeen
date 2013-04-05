@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
   def sendUnsubscribe
     UserMailer.unsubscribe(self).deliver
   end
+
+  def sendError
+    UserMailer.error(self).deliver
+  end
 end

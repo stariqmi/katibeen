@@ -241,12 +241,12 @@ module UserPerformanceDataHelper
 				end
 				high_low_diff = highest - lowest
 				if highest == lowest
-					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"						
+					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"
 					start_height = 150 - (lowest/5.to_f)*150
 					end_height = 150 - (lowest/5.to_f)*150
 					start_avg = lowest
 					end_avg = lowest
-				else	
+				else
 					unit = (150 / high_low_diff.to_f).round(2)
 					d = "M0 #{150 - (@rawData[0].average - lowest)*unit} "
 					(1..(@timesRequestSent-1)).each do |i|

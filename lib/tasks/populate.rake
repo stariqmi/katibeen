@@ -7,6 +7,7 @@ task :populate => :environment do
 		user.url = "test" + n.to_s
 		user.timezone = Time.zone
 		user.registered = true
+		user.days
 		user.save
 
 		(1..15).each do |d|
