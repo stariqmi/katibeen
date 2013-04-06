@@ -28,7 +28,7 @@ module UserPerformanceDataHelper
 			# Initial hash for weekday, th
 			weekdayData = 	{ "Monday"		=>	{ count: 0, prayerCount: 0 },
 							  "Tuesday"		=>	{ count: 0, prayerCount: 0 },
-							  "Wednesday" 	=>	{ count: 0, prayerCount: 0 },
+							  "Wednesday" =>  { count: 0, prayerCount: 0 },
 						 	  "Thursday" 	=> 	{ count: 0, prayerCount: 0 },
 							  "Friday" 		=> 	{ count: 0, prayerCount: 0 },
 							  "Saturday" 	=>	{ count: 0, prayerCount: 0 },
