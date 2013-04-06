@@ -7,17 +7,16 @@ include UrlKeyGeneratorHelper # To generate a unique url key
 include UserPerformanceDataHelper # To generate missed prayers data for a user
 #Helper Code ------------------------ END ----------------------------------
 
-
   #Deals with the request to the root & katibeen/home url
   def home
   end
 
+  # Controller for the about page
   def about
   end
 
-  #Deals with the post request to the /katibeen/signup url
+  # Deals with the post request to the /katibeen/signup url
   def signup
-
     email = params[:email] # Extract the email from the params of the signup form
     timezone = params[:timezone] # Extract the timezone from the params of the signup form
     @url = uniqueUrlKeyGenerator # Generate a unique url key
