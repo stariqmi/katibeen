@@ -34,7 +34,6 @@ module UserPerformanceDataHelper
 			# Initial hashes of prayer types and the number missed/performed for each type
 			missedData = 	{ fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0 }
 			performedData = { fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0 }
-			
 			# Initial hash for weekday data, count represents the # of times a 
 			# particular weekday has passed.
 			weekdayData = 	{ 
@@ -45,6 +44,7 @@ module UserPerformanceDataHelper
 							  	"Friday" 		=> 	{ count: 0, prayerCount: 0 },
 							  	"Saturday" 		=>	{ count: 0, prayerCount: 0 },
 							  	"Sunday" 		=>	{ count: 0, prayerCount: 0 }
+
 							}
 
 
@@ -314,11 +314,12 @@ module UserPerformanceDataHelper
 				
 				# If the highest and the lowest 
 				if highest == lowest
-					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"						
+					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"
 					start_height = 150 - (lowest/5.to_f)*150
 					end_height = 150 - (lowest/5.to_f)*150
 					start_avg = lowest
 					end_avg = lowest
+
 				else	
 					# Calculate the unit height for each unit of average
 					unit = (150 / high_low_diff.to_f).round(2)

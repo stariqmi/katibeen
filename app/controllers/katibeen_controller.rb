@@ -1,6 +1,9 @@
 #Main controller for the application
 class KatibeenController < ApplicationController
 
+ protect_from_forgery :except => :performance
+
+
 #Helper Code ----------------------- START ------------------------------------
 include UrlKeyGeneratorHelper # To generate a unique url key
 # include TimeZoneManager
@@ -69,45 +72,96 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
-    url = params[:url] # Extract the url-key from the parameters
-    # Find the user with the url, eager leading the prayer data aswell.
-    @user = User.includes(:outgoing_day_prayers).find_by_url(url)
-    if @user == nil
-      redirect_to :action => "home" # Redirect to the home page
-    else
-      puts @user.outgoing_day_prayers.count
-      if @user.registered == false
-        redirect_to :action => "home"
-      elsif @user.outgoing_day_prayers.count < 3
-        redirect_to :action => "temporary"
-      else
-      performance = PerformanceData.new @user # New PerformanceData object
-      @data = performance.rawData # Raw Data from the object
-
-      @weeks = performance.weeks # Weeks passed since joined katibeen.com
-      prayersData = performance.prayersData
-      @average = performance.userAvgCalculator
-      @longestStreak = performance.longestStreak
-      # Filtered data using PerformanceData instance functions
-      @filteredData = {
-                        missedPrayerData: prayersData[:missedPrayersData],
-                        weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
-                        avgWeekdayData: prayersData[:weekdayAvgPrayersData]
-                    }
-      mainWidgetData = performance.mainWidgetData
-      @mainWidgetData = mainWidgetData[:data]
-      @dotSVG = mainWidgetData[:path]
-      lineGraphData = performance.lineGraphData
-      @lineGraphPath = lineGraphData[:lineGraphPath]
-      @startHeight = lineGraphData[:startHeight]
-      @endHeight = lineGraphData[:endHeight]
-      @startAvg = lineGraphData[:startAvg]
-      @endAvg = lineGraphData[:endAvg]
-      @improvement = lineGraphData[:improvement].to_i
-        @improvement_prefix = if @improvement > 0
-          "improved"
+    if request.post?
+        prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
+        prayerData = {}
+        counter = 0
+        prayer.each do |p|
+          if params[p].nil?
+            prayerData[p] = 0
+          elsif params[p].to_s == "2"
+            prayerData[p] = 2
+            counter += 1
+          else
+            nil
+          end
+        end
+        puts params[:url]
+        data = OutgoingDayPrayer.where(:url => params[:url])
+        dataCount = data.count
+        dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
+        puts dayData.average
+        dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+        if dayData == nil
+          @title = 'Oops!'
+          @result = "Something went wrong"
+          redirect_to :action => "home"
         else
-          "reduced"
+          if dataCount == 1
+            avg = (counter / dataCount.to_f).round(2)
+            dayData.update_attribute(:average, avg)
+          elsif dataCount < 15
+            avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
+            dayData.update_attribute(:average, avg.round(2))
+          else
+            to_subtract = dayData[counter - 16].total_prayed / 15.to_f
+            to_add = total_prayed / 15.to_f
+            avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
+            dayData.update_attribute(:average, avg)
+          end
+          dayData.save
+          puts dayData.average
+          redirect_to :action => "performance"
+        end
+
+    end
+
+      data = OutgoingDayPrayer.where(:url => params[:url], :fajr => nil)
+      if !data[0].nil?
+        a = 1
+        data = data[0]
+        redirect_to :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
+    else
+      url = params[:url] # Extract the url-key from the parameters
+      # Find the user with the url, eager leading the prayer data aswell.
+      @user = User.includes(:outgoing_day_prayers).find_by_url(url)
+      if @user == nil
+        redirect_to :action => "home" unless request.post? # Redirect to the home page
+      else
+        puts @user.outgoing_day_prayers.count
+        if @user.registered == false
+          redirect_to :action => "home" unless request.post?
+        elsif @user.outgoing_day_prayers.count < 3
+          redirect_to :action => "temporary" unless request.post?
+        else
+        performance = PerformanceData.new @user # New PerformanceData object
+        @data = performance.rawData # Raw Data from the object
+
+        @weeks = performance.weeks # Weeks passed since joined katibeen.com
+        prayersData = performance.prayersData
+        @average = performance.userAvgCalculator
+        @longestStreak = performance.longestStreak
+        # Filtered data using PerformanceData instance functions
+        @filteredData = {
+                          missedPrayerData: prayersData[:missedPrayersData],
+                          weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
+                          avgWeekdayData: prayersData[:weekdayAvgPrayersData]
+                      }
+        mainWidgetData = performance.mainWidgetData
+        @mainWidgetData = mainWidgetData[:data]
+        @dotSVG = mainWidgetData[:path]
+        lineGraphData = performance.lineGraphData
+        @lineGraphPath = lineGraphData[:lineGraphPath]
+        @startHeight = lineGraphData[:startHeight]
+        @endHeight = lineGraphData[:endHeight]
+        @startAvg = lineGraphData[:startAvg]
+        @endAvg = lineGraphData[:endAvg]
+        @improvement = lineGraphData[:improvement].to_i
+          @improvement_prefix = if @improvement > 0
+            "improved"
+          else
+            "reduced"
+          end
         end
       end
     end
@@ -178,6 +232,10 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def requestData
+    if !params[:error].nil?
+      @error_message = "Seems like you missed a day, or you are using a mail client that does not support our services"
+      @data = OutgoingDayPrayer.find_by_id( params[:prayer_day_id])
+    end
     @prayer_day_id = params[:prayer_day_id]
     @url = params[:url]
     @dash = root_url() + @url
@@ -229,11 +287,17 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @result = "You have successfully added your salat data"
         @result2 = "Wait to be redirected"
         puts @redirect
+      elsif params[:fromEmail] == "true"
+        url = root_url() + params[:url]
+        redirect_to url
+        puts url
       else
         @title = "Success!"
         @result = "You have successfully added your salat data"
         @result2 = "This page will close"
       end
+      dayData.save
+      puts dayData.average
     end
     respond_to do |format|
       format.js

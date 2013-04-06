@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "salah@katibean.com"
+  default from: "katibean"
 
   # To send mail to a potential user upon sign up
   def confirmation_email(puser)
@@ -16,5 +16,19 @@ class UserMailer < ActionMailer::Base
   	@user = user
     @dayData = dayData
   	mail(:to => user.email, :subject => "Salat Check: " + Time.now.in_time_zone(user.timezone).strftime("%B %d, %Y"))
+  end
+
+  def error(user)
+
+ActionMailer::Base.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => "katibean.com",
+  :user_name            => "salah@katibean.com",
+  :password             => ENV['PASSWORD'],
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
+    mail(:to => user.email, :subject => "Email Issues")
   end
 end

@@ -3,7 +3,17 @@
 	<%= render "modal" %>
 <br>
 <body>
+
+
 <div style="width:670px; border-radius: 6px; border:1px solid #EEE; margin:auto;">
+<% if !@error_message.nil? %>
+
+<div style="color: #f85a2a; font-size: 1.em; text-align: center;" >	It looks like you missed <%= @data.weekday %>'s salah check <br>
+	Or you are using a mail client that does not support Katibean's form submission (Ex. Apple Mail)
+</div>
+<% end %>
+
+
     <div id="hadith">
                 <em>&#8220The thing that Allah (SWT) loves most
     is when his people pray Salah on time.&#8221 </em>
@@ -15,6 +25,7 @@
 
 <form data-remote="true" action= <%= post_url %> method="post" >
 
+	<%= csrf_meta_tag %>
 
 <div class="prayers">
 <div class="holder">
