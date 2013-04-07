@@ -322,7 +322,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       puts dayData.average
     end
     respond_to do |format|
-      format.js
+      format.js {render :nothing => true}
     end
   end
 
