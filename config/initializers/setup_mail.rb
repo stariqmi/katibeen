@@ -1,11 +1,11 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mandrillapp.com",
   :port                 => 587,
-	:domain               => "katibean.com",
-	:user_name            => "salah@katibean.com",
-	:password             => ENV["PASSWORD"],
-  :authentication       => "plain",
-  :enable_starttls_auto => true
+	:enable_starttls_auto => true, # detects and uses STARTTLS
+	:user_name            => "farhanm995@gmail.com",
+	:password             => 'hqsZnuQmNHKqJSyaAuS2aw',
+	:domain 							=> 'gmail.com', # your domain to identify your server when connecting
+	:authentication 			=> 'login', # Mandrill supports 'plain' or 'login'
 }
 
-ActionMailer::Base.default_url_options[:host] = "katibean.com"
+ActionMailer::Base.default_url_options[:host] = "localhost:3000"

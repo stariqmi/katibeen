@@ -54,15 +54,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
        #Set @result as the error message
        @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
-         if @result == "User by this email already exists"
-            @result = @result + ", but we sent another confirmation email just in case"
-         end
       end
     #User by this email already exists
     else
+      if !check_users.registered?
       # Result instance variable for the view
       @title = "Looks like something went wrong ..."
-      @result = "User by this email already exists"
+      @result = "User by this email already exists, but we sent another confirmation email just in case"
+      end
     end
 
     # Respond to only javascript, set for AJAX
