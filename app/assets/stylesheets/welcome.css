@@ -432,3 +432,9 @@ div .katibean_aim {
 	opacity: 1;
 
 }
+
+.holder label {
+	font-size: 1em;
+	font-weight: bold;
+	color: #bbbbbb;
+}
