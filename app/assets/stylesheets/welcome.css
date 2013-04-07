@@ -181,3 +181,9 @@ div .katibean_aim {
 .go_to_dash {
 	width: 300px;
 }
+
+input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
