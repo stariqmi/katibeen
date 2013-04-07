@@ -137,11 +137,29 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
           redirect_to :action => "temporary" unless request.post?
         else
+          
 
-          # Check if the user is viewing his dashboard for the first time
-          welcome_entry = @user.outgoing_day_prayers[1].updated_at
+          # Check of the user is visiting after the welcome page  
+          time = @user.outgoing_day_prayers[1].updated_at.in_time_zone("America/New_York")
+          puts "Time = #{time}"
+          year = time.strftime("%Y").to_i
+          month = time.strftime("%m").to_i
+          day = time.strftime("%d").to_i
+          hour = time.strftime("%H").to_i
+          minutes = time.strftime("%M").to_i
+          now = Time.now.in_time_zone("America/New_York")
+          year_now = now.strftime("%Y").to_i
+          month_now = now.strftime("%m").to_i
+          day_now = now.strftime("%d").to_i
+          hour_now = now.strftime("%H").to_i
+          minutes_now = now.strftime("%M").to_i
+          @show_intro = ""
+          min_diff = minutes_now - minutes
+          if year == year_now && month == month && day == day_now && hour == hour_now && min_diff < 1 ? @show_intro = true : @show_intro = false
+          end
+          # Check ends here
 
-
+          @url = params[:url]
           performance = PerformanceData.new @user # New PerformanceData object
           @data = performance.rawData # Raw Data from the object
 
@@ -232,6 +250,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @prayer_day_id = @dayData.id
         @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
         @dayData_prev = data[1]
+        puts @dayData_prev.inspect
         @prayer_day_id_prev = @dayData_prev.id
       end
       @user.registered = true
@@ -321,9 +340,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       dayData.save
       puts dayData.average
     end
-    respond_to do |format|
-      format.js {render :nothing => true}
-    end
+      respond_to do |format|
+        format.js {render :nothing => true}
+      end
+
+  
   end
 
   # Deals with the request to the katibeen/unsubscribe/key url

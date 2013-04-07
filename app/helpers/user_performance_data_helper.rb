@@ -384,8 +384,7 @@ module UserPerformanceDataHelper
 			else
 				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
 			end
-			# Calculate the improvement for the last 15 days
-			improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
+
 			# Return all the extracted data
 			{lineGraphPath: d, startHeight: start_height, endHeight: end_height, startAvg: start_avg, endAvg: end_avg, improvement: improvement}
 		end
