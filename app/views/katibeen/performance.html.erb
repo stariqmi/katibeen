@@ -1,10 +1,15 @@
 <body>
+    <%= render "welcome_form" %>
     <%= render "dash_banner" %>
+     <div class="intro_wrapper">
+        <div class="intro_button" onclick="javascript:introJs().start();" onclick="javascript:introJs().start();">?</div>
+    </div>
+
     <center>
         <div id="welcome_msg">
             <h2>Welcome Back!</h2>
         </div>
-        <div id="prayers_per_week">
+        <div id="prayers_per_week" data-intro="<p><strong>Salah Adherence:</strong><br/> Salah adherence measures the percentage of times you pray each salah. (e.g If you miss Maghrib every second day, you have a 50% adherence for Maghrib)</p>" data-step="1" data-position="top">
             <%= render "overall_data" %>
         </div>
         <%= render "line_graph" %>
@@ -19,13 +24,13 @@
             <table id="table_of_analytics">
                 <tbody>
                     <tr>
-                        <td class="analytics_cells">
+                        <td class="analytics_cells" data-intro="<p><strong>Current Average:</strong><br/> This graph visually shows your current daily average. Your daily averag uses the last 15 days (or less) of your Salah counts to get the average. <strong>Longest Streak</strong> shows the longest consecutive number of days you prayed all 5 Salahs</p>" data-step="3" data-position="top">
                             <%= render "user_average" %>
                         </td>
-                        <td width="450px" class="analytics_cells">
+                        <td width="450px" class="analytics_cells" data-intro="<p><strong>Day of the week Average:</strong><br/> This graph shows you a unique average for each day of the week. It measures your Salah count for each day over a 3 week period. It also highlights the days with the best and the worst average. Take a look at your worst day's schedule and try to find a way to incorporate Salah on that day. THis will help you improve your overall average.</p>" data-step="3" data-position="top">
                             <%= render "weekday_prayer_data" %>
                         </td>
-                        <td class="analytics_cells">
+                        <td class="analytics_cells" data-intro="<p><strong>Missed Salahs:</strong><br/> This graph shows you the total Salah you you've missed, broken down by each specific Salah. Fard Salah are obligatory to make-up. Use this counter to slowoly make-up for each of your missed Salah. THis won't improve your average, but it will help you a lot in answering the ultimate question on the Day of Judgement</p>" data-step="3" data-position="top">
                             <%= render "missed_prayers" %>
                         </td>
                     </tr>
@@ -35,3 +40,6 @@
     </center>
     <%= render "footer" %>
 </body>
+<script type="text/javascript">
+    console.log("<%=  @user.outgoing_day_prayers %>");
+</script>

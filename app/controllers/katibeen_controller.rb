@@ -117,7 +117,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           puts dayData.average
           redirect_to :action => "performance"
         end
-
     end
 
       data = OutgoingDayPrayer.where(:url => params[:url], :fajr => nil)
@@ -135,32 +134,37 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @user.outgoing_day_prayers.count
         if @user.registered == false
           redirect_to :action => "home" unless request.post?
-        elsif @user.outgoing_day_prayers.count < 3
+        elsif @user.outgoing_day_prayers.count < 1
           redirect_to :action => "temporary" unless request.post?
         else
-        performance = PerformanceData.new @user # New PerformanceData object
-        @data = performance.rawData # Raw Data from the object
 
-        @weeks = performance.weeks # Weeks passed since joined katibeen.com
-        prayersData = performance.prayersData
-        @average = performance.userAvgCalculator
-        @longestStreak = performance.longestStreak
-        # Filtered data using PerformanceData instance functions
-        @filteredData = {
-                          missedPrayerData: prayersData[:missedPrayersData],
-                          weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
-                          avgWeekdayData: prayersData[:weekdayAvgPrayersData]
-                      }
-        mainWidgetData = performance.mainWidgetData
-        @mainWidgetData = mainWidgetData[:data]
-        @dotSVG = mainWidgetData[:path]
-        lineGraphData = performance.lineGraphData
-        @lineGraphPath = lineGraphData[:lineGraphPath]
-        @startHeight = lineGraphData[:startHeight]
-        @endHeight = lineGraphData[:endHeight]
-        @startAvg = lineGraphData[:startAvg]
-        @endAvg = lineGraphData[:endAvg]
-        @improvement = lineGraphData[:improvement].to_i
+          # Check if the user is viewing his dashboard for the first time
+          welcome_entry = @user.outgoing_day_prayers[1].updated_at
+
+
+          performance = PerformanceData.new @user # New PerformanceData object
+          @data = performance.rawData # Raw Data from the object
+
+          @weeks = performance.weeks # Weeks passed since joined katibeen.com
+          prayersData = performance.prayersData
+          @average = performance.userAvgCalculator
+          @longestStreak = performance.longestStreak
+          # Filtered data using PerformanceData instance functions
+          @filteredData = {
+                            missedPrayerData: prayersData[:missedPrayersData],
+                            weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
+                            avgWeekdayData: prayersData[:weekdayAvgPrayersData]
+                        }
+          mainWidgetData = performance.mainWidgetData
+          @mainWidgetData = mainWidgetData[:data]
+          @dotSVG = mainWidgetData[:path]
+          lineGraphData = performance.lineGraphData
+          @lineGraphPath = lineGraphData[:lineGraphPath]
+          @startHeight = lineGraphData[:startHeight]
+          @endHeight = lineGraphData[:endHeight]
+          @startAvg = lineGraphData[:startAvg]
+          @endAvg = lineGraphData[:endAvg]
+          @improvement = lineGraphData[:improvement].to_i
           @improvement_prefix = if @improvement > 0
             "improved"
           else
@@ -175,7 +179,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def welcome
 
     require 'chronic'
-
     url = params[:url] # Extract the url key from the parameters
     @user = User.find_by_url(url)
     @url = url
@@ -228,9 +231,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @dayData
         @prayer_day_id = @dayData.id
         @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
-
-        @dayData = data[1]
-        @prayer_day_id
+        @dayData_prev = data[1]
+        @prayer_day_id_prev = @dayData_prev.id
       end
       @user.registered = true
       @user.save!
@@ -318,7 +320,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       puts dayData.average
     end
     respond_to do |format|
-      format.js
+      format.js {render :nothing => true}
     end
   end
 

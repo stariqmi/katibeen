@@ -8,7 +8,7 @@
 	</div>
 
   <div class="modal-body">
-<form data-remote="true" action= <%= post_url %> method="post" >
+<form id="welcomeForm" data-remote="true" action= <%= post_url %> method="post" >
 
 <center>
 <em style="width:100%;margin:auto;color:#2ba5ae;font-size:1em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
@@ -49,10 +49,15 @@
   &nbsp;
   </div>
 </div>
+</div>
 <script type="text/javascript">
 	$(".first_submit").on("click", function() {
 
 		$(".slider_wrapper").delay(1500).animate({right: "2670"}, 1000);
+	});
+
+	$("#welcomeForm").bind("ajax:success", function() {
+		$("#welcomeModal").modal('hide');		
 	});
 </script>
 

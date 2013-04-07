@@ -1,3 +1,4 @@
+<% post_url = root_url() + 'katibeen/submitDayData' %>
 <h1>Dashboard</h1>
 <div class="email_send_instructions step3_instructions">
 	<div class="ins_wrapper">
@@ -11,32 +12,37 @@
 </p>
 
 
-<form data-remote="true" action= method="post" >
+<form  name="last_form" id="last_form" data-remote="true" action=<%= post_url %> method="post" >
 
 	<table class="last_form">
 		<tbody>
 			<tr>
 				<td>
-					<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>
+					<div class="fajr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr_2" name="fajr" /><label for="fajr_2"></label></div>
 				</td> 
 				<td >
-					<div class="zuhr"style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr" name="zuhr" /><label for="zuhr"></label></div>
+					<div class="zuhr_2"style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr_2" name="zuhr" /><label for="zuhr_2"></label></div>
 				</td>
 				<td>
-					<div class="asr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr" name="asr" /><label for="asr"></label></div>
+					<div class="asr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr_2" name="asr" /><label for="asr_2"></label></div>
 				</td>
 				<td>
-					<div class="mag" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="maghrib" name="maghrib" /><label for="maghrib"></label></div>
+					<div class="mag_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="mag_2" name="maghrib" /><label for="mag_2"></label></div>
 				</td>
 				<td>
-					<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
+					<div class="isha_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha_2" name="isha" /><label for="isha_2"></label></div>
 				</td>
 			</tr>
 		</tbody>
 	</table>	
 
-<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id_prev%> >
 <input name="url" type="hidden" value= <%=@url%> >
 <input type="submit" style = "border: 0;" value = "Submit and go to Dash" class="next_step go_to_dash"/>
 </form>
+<script type="text/javascript">
+	$("#last_form").bind("ajax:success", function() {
+		location.href = "<%= root_url() + @url %>"
+	});
+</script>
 

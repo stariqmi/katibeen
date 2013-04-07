@@ -113,7 +113,7 @@ module UserPerformanceDataHelper
 
 
 				# Update maghrib and totalMissed count 			(Remaining inside comments are the same as above)
-				maghir_data = day[:maghrib]
+				maghrib_data = day[:maghrib]
 
 				if maghrib_data == 0
 					missedData[:maghrib] += 1
@@ -379,8 +379,11 @@ module UserPerformanceDataHelper
 			end_height = 1 if end_height < 1
 
 			# Calculate the improvement for the last 15 days 
-			improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
-			
+			if start_avg == 0
+				improvement = 0
+			else
+				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
+			end
 			# Return all the extracted data
 			{lineGraphPath: d, startHeight: start_height, endHeight: end_height, startAvg: start_avg, endAvg: end_avg, improvement: improvement}
 		end

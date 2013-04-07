@@ -1,6 +1,5 @@
 //Responds to the AJAX call upon a signup form submit
 $("#modal").modal('show');
-
 <% if @result2.nil? %>
 	document.getElementById('modal-body').innerHTML = "<%= @result %>";
 <% else %>
