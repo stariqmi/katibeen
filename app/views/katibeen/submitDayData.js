@@ -1,6 +1,7 @@
+
 $("#modal").modal('show');
 
-<% if @redirect_to_dash %>
+<% if !@redirect_to_dash.nil? %>
 window.location = '<%=@redirect_to_dash%>';
 <% end %>
 
@@ -14,7 +15,7 @@ $("#welcomeModal").modal('hide');
 
 document.getElementById('modal-title').innerHTML = "<%= @title%>";
 
-<% if @redirect %>
+<% if !@redirect.nil? %>
 	setTimeout(function(){window.location = '<%=@redirect%>';},3000);
 <% else %>
 	setTimeout(function(){ window.close(); },3000);
