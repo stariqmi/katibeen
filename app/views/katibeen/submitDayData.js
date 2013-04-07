@@ -1,5 +1,8 @@
 $("#modal").modal('show');
 
+<% if @redirect_to_dash %>
+window.location = '<%=@redirect_to_dash%>';
+<% end %>
 
 $("#welcomeModal").modal('hide');
 

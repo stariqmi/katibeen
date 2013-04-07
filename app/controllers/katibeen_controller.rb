@@ -134,7 +134,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @user.outgoing_day_prayers.count
         if @user.registered == false
           redirect_to :action => "home" unless request.post?
-        elsif @user.outgoing_day_prayers.count < 3
+        elsif @user.outgoing_day_prayers.count < 2
           redirect_to :action => "temporary" unless request.post?
         else
         performance = PerformanceData.new @user # New PerformanceData object
@@ -229,7 +229,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
 
         @dayData = data[1]
-        @prayer_day_id
+        @prayer_day_id_prev = @dayData.id
       end
       @user.registered = true
       @user.save!
@@ -273,12 +273,23 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         nil
       end
     end
-    puts params[:url]
-    data = OutgoingDayPrayer.where(:url => params[:url])
-    dataCount = data.count
-    dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    puts dayData.average
-    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+    if params[:url_prev].nil?
+      puts params[:url]
+      data = OutgoingDayPrayer.where(:url => params[:url])
+      dataCount = data.count
+      dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
+      puts dayData.average
+      dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+    else
+      puts params[:url_prev]
+      data = OutgoingDayPrayer.where(:url => params[:url_prev])
+      dataCount = data.count
+      dayData = OutgoingDayPrayer.find(params[:prayer_day_id_prev])
+      puts dayData.average
+      dayData.update_attributes(fajr: prayerData[:fajr2], zuhr: prayerData[:zuhr2], asr: prayerData[:asr2], maghrib: prayerData[:maghrib2], isha: prayerData[:isha2], total_prayed: counter, status: "responded")
+      @redirect_to_dash = root_url() + params[:url_prev]
+    end
+
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"
