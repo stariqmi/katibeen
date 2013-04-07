@@ -135,7 +135,7 @@
     }
 </style>
 -->
-<div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"] %></span> best day</p></div>
+<div id="best_day"><p><span><%= @filteredData[:avgWeekdayData]["best"].pluralize %></span> are the best</p></div>
 <div style="margin-left: 9%;" id="weekly_prayers">
 <table>
     <tbody><tr>
@@ -180,4 +180,4 @@
 </tbody>
 </table>
 </div>
-<div id="worst_day"><p>worst day - <%= @filteredData[:avgWeekdayData]["worst"] %></p></div>
+<div id="worst_day"><p><%= @filteredData[:avgWeekdayData]["worst"].pluralize %> are the worst</p></div>

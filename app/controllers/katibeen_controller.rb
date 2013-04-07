@@ -308,9 +308,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @result = "Something went wrong"
       redirect_to :action => "home"
     else
-      if dataCount == 1 or dataCount == 2
-        avg = (counter / dataCount.to_f).round(2)
-        dayData.update_attribute(:average, avg)
+      if dataCount == 1 
+        dayData.update_attribute(:average, counter)
       elsif dataCount < 15
         avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
         dayData.update_attribute(:average, avg.round(2))

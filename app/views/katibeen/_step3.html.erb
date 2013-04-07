@@ -20,7 +20,7 @@
 		<tbody>
 			<tr>
 				<td>
-					<div class="fajr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr_2" name="fajr" /><label for="fajr_2">Fajr</label></div>
+					<div class="fajr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr_2" name="fajr" /><label class = "labelTag labelPadding" for="fajr_2">Fajr</label></div>
 				</td>
 				<td >
 					<div class="zuhr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr_2" name="zuhr" /><label class = "labelTag labelPadding" for="zuhr_2">Zuhr</label></div>
@@ -40,6 +40,9 @@
 
 <input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id_prev%> >
 <input name="url" type="hidden" value= <%=@url%> >
+<br>
+<br>
+
 <input name="welcome" type="hidden" value="true">
 <input type="submit" style = "border: 0;" value = "Submit and go to Dash" class="next_step go_to_dash"/>
 </form>
