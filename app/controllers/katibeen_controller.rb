@@ -276,22 +276,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         nil
       end
     end
-    if params[:url_prev].nil?
+
       puts params[:url]
       data = OutgoingDayPrayer.where(:url => params[:url])
       dataCount = data.count
       dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
       puts dayData.average
       dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
-    else
-      puts params[:url_prev]
-      data = OutgoingDayPrayer.where(:url => params[:url_prev])
-      dataCount = data.count
-      dayData = OutgoingDayPrayer.find(params[:prayer_day_id_prev])
-      puts dayData.average
-      dayData.update_attributes(fajr: prayerData[:fajr2], zuhr: prayerData[:zuhr2], asr: prayerData[:asr2], maghrib: prayerData[:maghrib2], isha: prayerData[:isha2], total_prayed: counter, status: "responded")
-      @redirect_to_dash = root_url() + params[:url_prev]
-    end
 
     if dayData == nil
       @title = 'Oops!'
