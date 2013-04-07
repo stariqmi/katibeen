@@ -378,18 +378,14 @@ module UserPerformanceDataHelper
 			start_height = 1 if start_height < 1
 			end_height = 1 if end_height < 1
 
-<<<<<<< HEAD
-			# Calculate the improvement for the last 15 days 
+			# Calculate the improvement for the last 15 days
 			if start_avg == 0
 				improvement = 0
 			else
 				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
 			end
-=======
 			# Calculate the improvement for the last 15 days
 			improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
-
->>>>>>> cfe6eca8f19f48528b52d64f55f46735a3768a6b
 			# Return all the extracted data
 			{lineGraphPath: d, startHeight: start_height, endHeight: end_height, startAvg: start_avg, endAvg: end_avg, improvement: improvement}
 		end

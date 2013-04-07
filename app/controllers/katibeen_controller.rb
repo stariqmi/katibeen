@@ -231,14 +231,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @dayData
         @prayer_day_id = @dayData.id
         @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
-<<<<<<< HEAD
         @dayData_prev = data[1]
         @prayer_day_id_prev = @dayData_prev.id
-=======
-
-        @dayData = data[1]
-        @prayer_day_id_prev = @dayData.id
->>>>>>> cfe6eca8f19f48528b52d64f55f46735a3768a6b
       end
       @user.registered = true
       @user.save!
