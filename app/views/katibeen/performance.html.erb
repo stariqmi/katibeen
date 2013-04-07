@@ -16,7 +16,7 @@
         <%= render "line_graph" %>
 
         <%= render "performance_summary" %>
-        <div class="chart_data_container">
+        <div class="chart_data_container" data-intro="<p><strong>Salah history:</strong><br/> This table visually displays each Salah you prayed in the past 15 days. It also shows a graph of your daily Salah count. Reduce the number of gaps in your dot table and improve your daily Salah count to improve your overall average</p>" data-step="3" data-position="top">
         <%= render "back_graph" %>
         <%= render "main_chart" %>
         </div>
@@ -47,8 +47,9 @@
 <script type="text/javascript">
     if(<%= @show_intro %>) {   
         $("#welcomeDashModal").modal("show");
+        $(".view_dash_welcome").on("click", function() {
+            $("#welcomeDashModal").modal("hide");
+        });
     }
-    $(".view_dash_welcome").on("click", function() {
-        $("#welcomeDashModal").modal("hide");
-    })
+    
 </script>

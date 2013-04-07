@@ -155,7 +155,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           minutes_now = now.strftime("%M").to_i
           @show_intro = ""
           min_diff = minutes_now - minutes
-          if year == year_now && month == month && day == day_now && hour == hour_now && min_diff < 1 ? @show_intro = true : @show_intro = false
+          if year == year_now && month == month && day == day_now && hour == hour_now && min_diff < 2 ? @show_intro = true : @show_intro = false
           end
           # Check ends here
 
@@ -183,7 +183,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           @startAvg = lineGraphData[:startAvg]
           @endAvg = lineGraphData[:endAvg]
           @improvement = lineGraphData[:improvement].to_i
-          @improvement_prefix = if @improvement > 0
+          @improvement_prefix = if @improvement >= 0
             "improved"
           else
             "reduced"
