@@ -137,9 +137,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
           redirect_to :action => "temporary" unless request.post?
         else
-          
 
-          # Check of the user is visiting after the welcome page  
+
+          # Check of the user is visiting after the welcome page
           time = @user.outgoing_day_prayers[1].updated_at.in_time_zone("America/New_York")
           puts "Time = #{time}"
           year = time.strftime("%Y").to_i
@@ -340,11 +340,16 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       dayData.save
       puts dayData.average
     end
+
+    if params[:welcome].nil?
+      respond_to do |format|
+        format.js
+      end
+    else
       respond_to do |format|
         format.js {render :nothing => true}
       end
-
-  
+    end
   end
 
   # Deals with the request to the katibeen/unsubscribe/key url
