@@ -1,11 +1,12 @@
-<% post_url = root_url() + 'katibeen/submitDayData' %>
-<br>
+
 
 <div id="welcomeModal" class="welcomeModal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 	<div class="modal-header">
 	  <h3 style = "font-size: 2em;" id="modal-title">Salah Check</h3>
 	</div>
+
+<% post_url = root_url() + 'katibeen/submitDayData' %>
 
   <div class="modal-body">
 <form id="welcomeForm" data-remote="true" action= <%= post_url %> method="post" >
@@ -58,7 +59,7 @@
 	});
 
 	$("#welcomeForm").bind("ajax:success", function() {
-		$("#welcomeModal").modal('hide');		
+		$("#welcomeModal").modal('hide');
 	});
 </script>
 
