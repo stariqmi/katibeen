@@ -14,11 +14,8 @@
 <em style="width:100%;margin:auto;color:#2ba5ae;font-size:1em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
 </center>
 
-<% if @today %>
-	<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed today </h3>
-<% else %>
-		<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed yesterday </h3>
-<% end %>
+<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed <%= @modul_title %></h3>
+
 <div style = "width: 50%; margin: auto; padding-left: 5%;">
 	<div class="holder">
 		<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>
@@ -34,7 +31,6 @@
 	</div>
 	<div class="holder">
 		<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
-
 	</div>
 </div>
 
@@ -43,13 +39,20 @@
   </div>
   	<div style = "margin-top: 5px; padding-top: 0px;" class = "pull-left;">
 
-			<input type="submit" style = "border: 0;" value = "Submit" class=" next_step"/>
+			<input type="submit" style = "border: 0;" value = "Submit" class=" next_step first_submit"/>
 
 		</div>
 		<br>
 		<br>
+	</form>
   <div class="modal-footer">
   &nbsp;
   </div>
 </div>
+<script type="text/javascript">
+	$(".first_submit").on("click", function() {
+
+		$(".slider_wrapper").delay(1500).animate({right: "2670"}, 1000);
+	});
+</script>
 
