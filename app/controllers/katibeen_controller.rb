@@ -57,15 +57,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
        #Set @result as the error message
        @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
-         if @result == "User by this email already exists"
-            @result = @result + ", but we send another confirmation email just in case"
-         end
       end
     #User by this email already exists
     else
+      if !check_users.registered?
       # Result instance variable for the view
       @title = "Looks like something went wrong ..."
-      @result = "User by this email already exists"
+      @result = "User by this email already exists, but we sent another confirmation email just in case"
+      end
     end
 
     # Respond to only javascript, set for AJAX
@@ -134,7 +133,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @user.outgoing_day_prayers.count
         if @user.registered == false
           redirect_to :action => "home" unless request.post?
-        elsif @user.outgoing_day_prayers.count < 1
+        elsif @user.outgoing_day_prayers.count < 2
+
           redirect_to :action => "temporary" unless request.post?
         else
 
@@ -205,7 +205,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                                               user_id: @user.id, status: "pending", average: 0)
           @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
-          @prayer_day_id_prev = @dayData_prev.id 
+          @prayer_day_id_prev = @dayData_prev.id
           @modul_title = "today (#{today.strftime('%B, %d')})"
           @last_form_title = "yesterday (#{yesterday.strftime('%B, %d')})"
         else
@@ -222,7 +222,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           @prayer_day_id = @dayData.id
           @prayer_day_id_prev = @dayData_prev.id
           @modul_title = "yesterday (#{date.strftime('%B, %d')})"
-          @last_form_title = "day before yesterday (#{day_bfr_yesterday.strftime('%B, %d')})" 
+          @last_form_title = "day before yesterday (#{day_bfr_yesterday.strftime('%B, %d')})"
         end
 
       else
@@ -231,8 +231,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         puts @dayData
         @prayer_day_id = @dayData.id
         @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
+<<<<<<< HEAD
         @dayData_prev = data[1]
         @prayer_day_id_prev = @dayData_prev.id
+=======
+
+        @dayData = data[1]
+        @prayer_day_id_prev = @dayData.id
+>>>>>>> cfe6eca8f19f48528b52d64f55f46735a3768a6b
       end
       @user.registered = true
       @user.save!
@@ -276,12 +282,23 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         nil
       end
     end
-    puts params[:url]
-    data = OutgoingDayPrayer.where(:url => params[:url])
-    dataCount = data.count
-    dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-    puts dayData.average
-    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+    if params[:url_prev].nil?
+      puts params[:url]
+      data = OutgoingDayPrayer.where(:url => params[:url])
+      dataCount = data.count
+      dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
+      puts dayData.average
+      dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+    else
+      puts params[:url_prev]
+      data = OutgoingDayPrayer.where(:url => params[:url_prev])
+      dataCount = data.count
+      dayData = OutgoingDayPrayer.find(params[:prayer_day_id_prev])
+      puts dayData.average
+      dayData.update_attributes(fajr: prayerData[:fajr2], zuhr: prayerData[:zuhr2], asr: prayerData[:asr2], maghrib: prayerData[:maghrib2], isha: prayerData[:isha2], total_prayed: counter, status: "responded")
+      @redirect_to_dash = root_url() + params[:url_prev]
+    end
+
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"

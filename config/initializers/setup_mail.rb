@@ -1,11 +1,13 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mandrillapp.com",
   :port                 => 587,
-	:domain               => "katibean.com",
+  :domain 							=> 'katibean.com',
+	:enable_starttls_auto => true,
 	:user_name            => "salah@katibean.com",
-	:password             => ENV["PASSWORD"],
-  :authentication       => "plain",
-  :enable_starttls_auto => true
+	:password             => ENV["MANDRILL"],
+	:authentication 			=> 'login',
 }
 
-ActionMailer::Base.default_url_options[:host] = "katibean.com"
+ActionMailer::Base.delivery_method = :smtp
+
+ActionMailer::Base.default_url_options[:host] = "localhost:3000"

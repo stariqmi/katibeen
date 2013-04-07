@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "katibean"
+  default from: "salah@katibean.com"
 
   # To send mail to a potential user upon sign up
   def confirmation_email(puser)
@@ -19,16 +19,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def error(user)
-
-ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => "katibean.com",
-  :user_name            => "salah@katibean.com",
-  :password             => ENV['PASSWORD'],
-  :authentication       => "plain",
-  :enable_starttls_auto => true
-}
     mail(:to => user.email, :subject => "Email Issues")
   end
 end

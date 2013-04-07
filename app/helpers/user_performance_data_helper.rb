@@ -8,21 +8,21 @@ module UserPerformanceDataHelper
 
 		# Initializer for the class
 		def initialize user
-		
+
 			# Set the class user variable as the model user
-			@user = user 							
-			
-			# Extract all the prayer data, i.e those salah 
+			@user = user
+
+			# Extract all the prayer data, i.e those salah
 			# checks to which people have responded or has expired
-			@rawData = user.outgoing_day_prayers.where("status = ? OR status = ?", "responded", "deactivated")					
-			
-			# Count the number of times the salah check email has 
+			@rawData = user.outgoing_day_prayers.where("status = ? OR status = ?", "responded", "deactivated")
+
+			# Count the number of times the salah check email has
 			# been responded to or expired. Represents the data for dashboard.
 			@timesRequestSent = @rawData.count
-			
+
 			# Convert days to weeks
-			@weeks = (@timesRequestSent / 7.0) 		
-		
+			@weeks = (@timesRequestSent / 7.0)
+
 		end
 
 		# Calculates the data for display on the dashboard.
@@ -30,13 +30,13 @@ module UserPerformanceDataHelper
 			totalMissed = 0				# Initial value of totalMissed missed prayers
 			totalPerformed = 0			# Initial value of totalPerformed completed prayers
 			mostMissed = ""				# Initial value of type of most missed prayer
-			
+
 			# Initial hashes of prayer types and the number missed/performed for each type
 			missedData = 	{ fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0 }
 			performedData = { fajr: 0, zuhr: 0, asr: 0, maghrib: 0, isha: 0 }
-			# Initial hash for weekday data, count represents the # of times a 
+			# Initial hash for weekday data, count represents the # of times a
 			# particular weekday has passed.
-			weekdayData = 	{ 
+			weekdayData = 	{
 							  	"Monday"		=>	{ count: 0, prayerCount: 0 },
 							  	"Tuesday"		=>	{ count: 0, prayerCount: 0 },
 							  	"Wednesday" 	=>	{ count: 0, prayerCount: 0 },
@@ -51,31 +51,31 @@ module UserPerformanceDataHelper
 			# Loop through the rawData instance variable
 			@rawData.each do |day|
 				# Extract the weekday of the "day"
-				weekday = day[:weekday]	
-				# Add one to the "count" fot that particular weekday in the weeldayData	
-				weekdayData[weekday][:count] += 1 
+				weekday = day[:weekday]
+				# Add one to the "count" fot that particular weekday in the weeldayData
+				weekdayData[weekday][:count] += 1
 
 				# Update fajr and totalMissed count
 				# Extract the fajr data
 				fajr_data = day[:fajr]
 
-				# If fajr is not offered							
+				# If fajr is not offered
 				if fajr_data == 0
 					# Add one to missed fajr prayer
-					missedData[:fajr]  += 1 					
+					missedData[:fajr]  += 1
 					# Add one to total missed prayer
-					totalMissed += 1 				
+					totalMissed += 1
 
-				# If fajr is offered				
+				# If fajr is offered
 				elsif fajr_data == 2
 					# Add one to performed fajr prayer
-					performedData[:fajr] +=1 					
+					performedData[:fajr] +=1
 					# Add one to total performed prayers
-					totalPerformed += 1 						
+					totalPerformed += 1
 					# Add one to performed prayer for the weekday
-					weekdayData[weekday][:prayerCount] += 1		
+					weekdayData[weekday][:prayerCount] += 1
 
-				# Case for QAZA	
+				# Case for QAZA
 				else
 					nil
 				end
@@ -150,9 +150,9 @@ module UserPerformanceDataHelper
 				# If the value is higher than the 'initial'
 				if value > initial
 					# Update 'mostMissed' variable as key
-					mostMissed = key		
+					mostMissed = key
 					# Update the 'initial' value as value
-					initial  = value		
+					initial  = value
 				else
 					nil
 				end
@@ -178,11 +178,11 @@ module UserPerformanceDataHelper
 			# Sort the hash into an array
 			weekdayData = weekdayData.sort_by {|key, value| value}
 			# Extract the length of the sorted array
-			length = weekdayData.count 								
+			length = weekdayData.count
 			# Push in ["worst", weekday], where the value is the first key, value pair in the sorted array
-			weekdayData << ["worst", weekdayData[0][0]]				
+			weekdayData << ["worst", weekdayData[0][0]]
 			# Push in ["best", weekday], where the value is the last key, value pair in the sorted array
-			weekdayData << ["best", weekdayData[length - 1][0]]		
+			weekdayData << ["best", weekdayData[length - 1][0]]
 
 			# Convert the above sorted array into a hash
 			avgWeekdayData = {}
@@ -196,7 +196,7 @@ module UserPerformanceDataHelper
 			data = { missedPrayersData: missedData, weeklyPerformedAvgData: performedData, weekdayAvgPrayersData: avgWeekdayData }
 		end
 
-		# Converts a nested hash into a non-nested hash, used to convert the 
+		# Converts a nested hash into a non-nested hash, used to convert the
 		# nested hash of weekdayData
 		def weekdayAvgCalculator data
 			data.each do |key, value|
@@ -221,8 +221,8 @@ module UserPerformanceDataHelper
 				total += 1 if day[:maghrib] == 2		# Add one to total if prayer performed
 				total += 1 if day[:isha] == 2			# Add one to total if prayer performed
 			end
-			# Calculate how many days the user was requested for a response, 
-			# and the user responded and or the email was deactivated 
+			# Calculate how many days the user was requested for a response,
+			# and the user responded and or the email was deactivated
 			avg = (total / @timesRequestSent.to_f).round(2) # Calculate the average
 		end
 
@@ -270,29 +270,29 @@ module UserPerformanceDataHelper
 				dayHash = []
 				dayHash << [day[:total_prayed], "total"]	# Push in the key value pair [value, "total"]
 				dayHash << [day[:fajr], "fajr"]				# Push in the key value pair [value, "fajr"]
-				dayHash << [day[:zuhr], "duhr"]				# Same as above                
+				dayHash << [day[:zuhr], "duhr"]				# Same as above
 				dayHash << [day[:asr], "asr"]				# Same as above
 				dayHash << [day[:maghrib], "maghrib"]		# Same as above
 				dayHash << [day[:isha], "isha"]				# Same as above
 				data <<	dayHash								# Push in the dayHash into the main parent hash
 			end
 			# Generate a path for the dot chart svg
-			# Set the initial value of the path 
+			# Set the initial value of the path
 			path = "M10 20 "
 			# Loop through the entire data
 			(0..(@timesRequestSent-1)).each do |i|
 				# Add path based on the average per day prayer, using the "total" value
 				path += "L#{30+ 60*i} #{20 - (data[i][0][0]/5.to_f)*20} "
 			end
-			# End path 
+			# End path
 			path += "L#{60*@timesRequestSent - 10} 20 Z"
 			# Return both the path and the day array
 			{ data: data, path: path }
 		end
 
 		def lineGraphData
-			
-			# Set intial values for path calculation 
+
+			# Set intial values for path calculation
 			lowest = 5
 			highest = 0
 			start_height = 0		# Height for the initial prayer average
@@ -311,8 +311,8 @@ module UserPerformanceDataHelper
 				end
 				# Calculate the difference between the lowest, highest
 				high_low_diff = highest - lowest
-				
-				# If the highest and the lowest 
+
+				# If the highest and the lowest
 				if highest == lowest
 					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"
 					start_height = 150 - (lowest/5.to_f)*150
@@ -320,20 +320,20 @@ module UserPerformanceDataHelper
 					start_avg = lowest
 					end_avg = lowest
 
-				else	
+				else
 					# Calculate the unit height for each unit of average
 					unit = (150 / high_low_diff.to_f).round(2)
 					#Set the starting height using the first average
 					d = "M0 #{150 - (@rawData[0].average - lowest)*unit} "
-					
+
 					# Loop  through the rest of the data.
 					(1..(@timesRequestSent-1)).each do |i|
-						# Update the path of the svg, move to the right and set the height depending on the distance 
+						# Update the path of the svg, move to the right and set the height depending on the distance
 						# from  lowest
 						d += "L#{horizon_distance*i} #{150 - (@rawData[i].average - lowest)*unit} "
 					end
-					
-					# Apply the same process as above with the reverse of the hash, and an increased height of 5 
+
+					# Apply the same process as above with the reverse of the hash, and an increased height of 5
 					@data = Hash[@rawData.to_a.reverse]
 					(1..(@timesRequestSent - 1)).each do |i|
 						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (@rawData[(@timesRequestSent-i)].average - lowest)*unit + 5} "
@@ -347,7 +347,7 @@ module UserPerformanceDataHelper
 					end_avg = @rawData[@timesRequestSent-1].average
 				end
 
-			# If more than 15 days have passed	
+			# If more than 15 days have passed
 			else
 				# Extarct the lastest 15 days
 				# The remaining process is the same as for the previous less tahn 15 days condition
@@ -378,12 +378,18 @@ module UserPerformanceDataHelper
 			start_height = 1 if start_height < 1
 			end_height = 1 if end_height < 1
 
+<<<<<<< HEAD
 			# Calculate the improvement for the last 15 days 
 			if start_avg == 0
 				improvement = 0
 			else
 				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
 			end
+=======
+			# Calculate the improvement for the last 15 days
+			improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
+
+>>>>>>> cfe6eca8f19f48528b52d64f55f46735a3768a6b
 			# Return all the extracted data
 			{lineGraphPath: d, startHeight: start_height, endHeight: end_height, startAvg: start_avg, endAvg: end_avg, improvement: improvement}
 		end
