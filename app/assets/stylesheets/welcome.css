@@ -438,3 +438,13 @@ div .katibean_aim {
 	font-weight: bold;
 	color: #bbbbbb;
 }
+
+#last_form td {
+	text-align: center;
+}
+
+#last_form td label {
+	font-size: 1em;
+	font-weight: bold;
+	color: #bbbbbb;	
+}
