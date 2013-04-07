@@ -380,7 +380,7 @@ module UserPerformanceDataHelper
 
 			# Calculate the improvement for the last 15 days
 			if start_avg == 0
-				improvement = 0
+				improvement = (end_avg/1)*100
 			else
 				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
 			end
