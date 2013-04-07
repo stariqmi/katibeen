@@ -1,7 +1,7 @@
 .welcome_slider {
 	width: 900px;
-	height: 540px; /* set to 540 after testing */
-	overflow:hidden;
+	height: 520px; /* set to 540 after testing */
+	overflow:scroll;
 }
 
 .slider_wrapper {
@@ -159,4 +159,25 @@ div .katibean_aim {
 	color: #009FE6;
 	font-weight: bold;
 	font-size: 1.75em;
+}
+
+.dash_req {
+	color: #FD5737;
+	padding: 0 !important;
+	margin: 0 !important;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.last_form {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.last_form td {
+	padding-right: 10px;
+}
+
+.go_to_dash {
+	width: 300px;
 }

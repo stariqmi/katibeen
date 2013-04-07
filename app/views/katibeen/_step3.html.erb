@@ -5,22 +5,37 @@
 		<div class="instruction email_ins step3_ins">We will work the magic and create <strong>beautiful illustrations of your salah</strong> history. </div>
 	</div>
 </div>
-<div class="dash_instruction">
-	<div class="final_ins dash_ins">
-	<%=  image_tag "Welcome_07.png" %>
-	</div>
-	
-	<div class="final_ins main_ins">
-		<p>Use the graphs in your dashboard to understand your salah patterns.</p>
-		<p>This way your can know where and how you can improve your overall average.</p>
-		<br/>
-		<p class="unique">Your unique dashboard url is</p>
 
-		<p class="unique url_display">katibean.com/<%= @url %></p>
-		<br/>
-		<p><span>Remember:</span> Your dash will only show your data on the <strong>3rd day of usage.</strong> Make sure you have a good average to begin with.</p>
-	</div>
-</div>
-<div class ="step3_complete next_step">
-	<%= link_to "Finish Intro and Go to Dash" , performance_path(@url) %>
-</div>
+<p class="before_dash"><strong>But before we go to your Dash,</strong><br/>
+<span class="dash_req">we need one more day's data to make it work</span>
+</p>
+
+<form data-remote="true" action= method="post" >
+
+	<table class="last_form">
+		<tbody>
+			<tr>
+				<td>
+					<div class="fajr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr" name="fajr" /><label for="fajr"></label></div>
+				</td> 
+				<td >
+					<div class="zuhr"style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr" name="zuhr" /><label for="zuhr"></label></div>
+				</td>
+				<td>
+					<div class="asr" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr" name="asr" /><label for="asr"></label></div>
+				</td>
+				<td>
+					<div class="mag" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="maghrib" name="maghrib" /><label for="maghrib"></label></div>
+				</td>
+				<td>
+					<div class="isha" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha" name="isha" /><label for="isha"></label></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
+<input name="url" type="hidden" value= <%=@url%> >
+<input type="submit" style = "border: 0;" value = "Submit and go to Dash" class="next_step go_to_dash"/>
+</form>
+

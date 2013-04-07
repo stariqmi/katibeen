@@ -25,12 +25,16 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @url = uniqueUrlKeyGenerator # Generate a unique url key
     old_user = User.find_by_email(email)
 
+    # If user exists
     if !old_user.nil?
+      # If user is not registered
       if !old_user.registered?
+        # Send welcome email again and save him
         old_user.sendWelcomeEmail
         old_user.save
       end
     end
+
     #create a new PotentialUser object with the extarcted email, timezone and url key
     user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
 
@@ -54,7 +58,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
        @title = "Looks like something went wrong ..."
        @result = "Email #{user.errors[:email][0]}.".html_safe
          if @result == "User by this email already exists"
-            @result = @result + ", but we sent another confirmation email just in case"
+            @result = @result + ", but we send another confirmation email just in case"
          end
       end
     #User by this email already exists
@@ -176,7 +180,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @user = User.find_by_url(url)
     @url = url
 
-
+    @modul_title = ""
+    # If no such user exists
     if @user == nil
       redirect_to :action => "home" # Redirect to the home page
 
@@ -191,19 +196,30 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         if time >= 22
           @today = true
           #Creates prayer data based on today since 10PM has passed
-          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: Time.now.in_time_zone(@user.timezone).strftime("%A"),
+          today = Time.now.in_time_zone(@user.timezone)
+          yesterday = Chronic.parse('yesterday')
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: today.strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
-
+          @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
-
+          @prayer_day_id_prev = @dayData_prev.id 
+          @modul_title = "today (#{today.strftime('%B, %d')})"
+          @last_form_title = "yesterday (#{yesterday.strftime('%B, %d')})"
         else
           #If it is less than 10PM we use yesterday for the prayer data
           #Chronic.now = Time.now.in_time_zone(@user.timezone)
           date = Chronic.parse('yesterday')
+          day_bfr_yesterday = date.advance(:days => -1)
           weekday = date.strftime("%A")
+          day_bfr_yesterday_weekday = day_bfr_yesterday.strftime("%A")
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
                                               user_id: @user.id, status: "pending", average: 0)
+          @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: day_bfr_yesterday_weekday,
+                                              user_id: @user.id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
+          @prayer_day_id_prev = @dayData_prev.id
+          @modul_title = "yesterday (#{date.strftime('%B, %d')})"
+          @last_form_title = "day before yesterday (#{day_bfr_yesterday.strftime('%B, %d')})" 
         end
 
       else
@@ -211,9 +227,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @dayData = data[0]
         puts @dayData
         @prayer_day_id = @dayData.id
+        @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
 
+        @dayData = data[1]
+        @prayer_day_id
       end
-
       @user.registered = true
       @user.save!
 
