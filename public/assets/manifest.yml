@@ -85,9 +85,9 @@ submit_viewPressed.png: submit_viewPressed-3810ecf250f302e203c104e70e8afd92.png
 submit_viewPressed/index.png: submit_viewPressed-3810ecf250f302e203c104e70e8afd92.png
 ui.txt: ui-9db6c00790b176113c825cf3c9a91efb.txt
 ui/index.txt: ui-9db6c00790b176113c825cf3c9a91efb.txt
-application.js: application-7f8d2419a488d37cbb34ac08b447eac8.js
-application/index.js: application-7f8d2419a488d37cbb34ac08b447eac8.js
-application.css: application-cfbb018fe19a2da07f004756df9055d6.css
-application/index.css: application-cfbb018fe19a2da07f004756df9055d6.css
+application.js: application-085dc96bc30ccab8722bbffe6719b916.js
+application/index.js: application-085dc96bc30ccab8722bbffe6719b916.js
+application.css: application-18cea670695efc7982f228ca25f2e2f8.css
+application/index.css: application-18cea670695efc7982f228ca25f2e2f8.css
 jquery.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
 jquery/index.min.map: jquery.min-6c267bfd2b3f36e6edccb2e584934c1c.map
