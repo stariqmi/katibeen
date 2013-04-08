@@ -1,4 +1,4 @@
-task :test => :environment do
+task :testApp => :environment do
 
 	users = User.all
 	users.each do |user|
