@@ -60,13 +60,9 @@
 </div>
 </div>
 <script type="text/javascript">
-	$(".first_submit").on("click", function() {
-
-		$(".slider_wrapper").delay(1500).animate({right: "2670"}, 1000);
-	});
-
 	$("#welcomeForm").bind("ajax:success", function() {
 		$("#welcomeModal").modal('hide');
+		$(".slider_wrapper").animate({right: "2670"}, 1000);
 	});
 </script>
 
