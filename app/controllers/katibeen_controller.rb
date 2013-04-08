@@ -35,11 +35,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
 
-    #create a new PotentialUser object with the extarcted email, timezone and url key
-    user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
-
     # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
+
+    #create a new PotentialUser object with the extarcted email, timezone and url key
+    user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
 
     # If no such user exists
     if check_users.nil?
