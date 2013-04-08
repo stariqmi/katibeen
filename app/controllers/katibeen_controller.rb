@@ -326,12 +326,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       redirect_to :action => "home"
     else
       if dataCount == 2
-         if params[:prayer_day_id] == data[0].id
             dayData.update_attribute(:average, counter)
-         else
-            avg = (counter + data[0].total_prayed) / 2
-            dayData.update_attribute(:average, avg)
-         end
       elsif dataCount < 15
         puts "I am less than 15!!!"
         puts data[dataCount - 2].inspect
