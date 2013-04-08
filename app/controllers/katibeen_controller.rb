@@ -224,8 +224,10 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           today = Time.now.in_time_zone(@user.timezone)
           yesterday = Chronic.parse('yesterday')
           @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
+          puts @dayData_prev.id
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: today.strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
+          puts @dayData.id
           @prayer_day_id = @dayData.id
           @prayer_day_id_prev = @dayData_prev.id
           @last_form_title = "(today - #{today.strftime('%B, %d')})"
@@ -241,6 +243,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
                                               user_id: @user.id, status: "pending", average: 0)
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
                                               user_id: @user.id, status: "pending", average: 0)
+          puts @dayData_prev.id
+          puts @dayData.id
           @prayer_day_id = @dayData.id
           @prayer_day_id_prev = @dayData_prev.id
           @last_form_title = "(#{date.strftime('%B, %d')})"
@@ -316,18 +320,23 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
       # Update the row
       dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
-      puts ">>>>>>>>>>>" + dayData.inspect
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"
       redirect_to :action => "home"
     else
       if dataCount == 2
-         if params[:prayer_day_id] == data[0].id
+          puts data[0].inspect
+         puts ">>>>>>>>>>>>>>>>>> WE ARE IN FIRST 2 DAYS<<<<<<<<<<<<<<<<<<<"
+         if params[:first_day]
+            puts ">>>>>>>FIRST DAY<<<<<<<"
+            puts counter
             dayData.update_attribute(:average, counter)
          else
+            puts ">>>>>>>>>>>>>>SECOND DAY<<<<<<<<<<<<<<<"
             avg = (counter + data[0].total_prayed) / 2.to_f
             dayData.update_attribute(:average, avg)
+            puts dayData.average
          end
       elsif dataCount < 15
         puts "I am less than 15!!!"
