@@ -14,7 +14,7 @@ module UserPerformanceDataHelper
 
 			# Extract all the prayer data, i.e those salah
 			# checks to which people have responded or has expired
-			@rawData = user.outgoing_day_prayers.where("status = ? OR status = ?", "responded", "deactivated")
+			@rawData = OutgoingDayPrayer.where("url = ? AND status = ? OR status = ?", @user.url, "responded", "deactivated")
 
 			# Count the number of times the salah check email has
 			# been responded to or expired. Represents the data for dashboard.

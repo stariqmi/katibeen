@@ -10,7 +10,8 @@
 <% post_url = root_url() + 'katibeen/submitDayData' %>
 
 <p class="before_dash"><strong>But before we go to your Dash,</strong><br/>
-<span class="dash_req">we need one more day's data to make it work</span>
+<span class="dash_req">we need one more day's data <%= @last_form_title %> to make it work</span>
+
 </p>
 
 
@@ -38,7 +39,7 @@
 		</tbody>
 	</table>
 
-<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id_prev%> >
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
 <input name="url" type="hidden" value= <%=@url%> >
 <br>
 <br>

@@ -89,7 +89,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
             nil
           end
         end
-        puts params[:url]
         data = OutgoingDayPrayer.where(:url => params[:url])
         dataCount = data.count
         dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
@@ -100,9 +99,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           @result = "Something went wrong"
           redirect_to :action => "home"
         else
-          if dataCount == 1
-            avg = (counter / dataCount.to_f).round(2)
-            dayData.update_attribute(:average, avg)
+          if dataCount == 2
+             if params[:prayer_day_id] == data[0].id
+                dayData.update_attribute(:average, counter)
+             else
+                avg = (counter + data[0].total_prayed) / 2.to_f
+                dayData.update_attribute(:average, avg)
+             end
           elsif dataCount < 15
             avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
             dayData.update_attribute(:average, avg.round(2))
@@ -127,20 +130,20 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       url = params[:url] # Extract the url-key from the parameters
       # Find the user with the url, eager leading the prayer data aswell.
       @user = User.includes(:outgoing_day_prayers).find_by_url(url)
+      rows = OutgoingDayPrayer.where(:url => url)
       if @user == nil
         redirect_to :action => "home" unless request.post? # Redirect to the home page
+      elsif @user.outgoing_day_prayers.count == 0
+        redirect_to :action => "welcome", :url => params[:url]
       else
         puts @user.outgoing_day_prayers.count
         if @user.registered == false
           redirect_to :action => "home" unless request.post?
-        elsif @user.outgoing_day_prayers.count < 2
 
-          redirect_to :action => "temporary" unless request.post?
         else
 
-
           # Check of the user is visiting after the welcome page
-          time = @user.outgoing_day_prayers[1].updated_at.in_time_zone("America/New_York")
+          time = rows[1].updated_at.in_time_zone("America/New_York")
           puts "Time = #{time}"
           year = time.strftime("%Y").to_i
           month = time.strftime("%m").to_i
@@ -211,6 +214,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
       time = Time.now.in_time_zone(@user.timezone).strftime("%H")
       time = time.to_i
+      puts "--------TIME-------" + time.to_s + "-------------------"
       data = OutgoingDayPrayer.where(:url => params[:url])
       if data[0].nil?
 
@@ -219,13 +223,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           #Creates prayer data based on today since 10PM has passed
           today = Time.now.in_time_zone(@user.timezone)
           yesterday = Chronic.parse('yesterday')
+          @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: today.strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
-          @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
           @prayer_day_id_prev = @dayData_prev.id
-          @modul_title = "today (#{today.strftime('%B, %d')})"
-          @last_form_title = "yesterday (#{yesterday.strftime('%B, %d')})"
+          @last_form_title = "(today - #{today.strftime('%B, %d')})"
+          @modul_title = "(yesterday - #{yesterday.strftime('%B, %d')})"
         else
           #If it is less than 10PM we use yesterday for the prayer data
           #Chronic.now = Time.now.in_time_zone(@user.timezone)
@@ -233,23 +237,23 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           day_bfr_yesterday = date.advance(:days => -1)
           weekday = date.strftime("%A")
           day_bfr_yesterday_weekday = day_bfr_yesterday.strftime("%A")
-          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
-                                              user_id: @user.id, status: "pending", average: 0)
           @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: day_bfr_yesterday_weekday,
+                                              user_id: @user.id, status: "pending", average: 0)
+          @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: weekday,
                                               user_id: @user.id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
           @prayer_day_id_prev = @dayData_prev.id
-          @modul_title = "yesterday (#{date.strftime('%B, %d')})"
-          @last_form_title = "day before yesterday (#{day_bfr_yesterday.strftime('%B, %d')})"
+          @last_form_title = "(#{date.strftime('%B, %d')})"
+          @modul_title = "(#{day_bfr_yesterday.strftime('%B, %d')})"
         end
 
       else
-        puts '----------------------------------'
-        @dayData = data[0]
+        @dayData = data[1]
         puts @dayData
         @prayer_day_id = @dayData.id
-        @modul_title = "on #{@dayData.created_at.strftime('%B, %d')}"
-        @dayData_prev = data[1]
+        @dayData_prev = data[0]
+        @modul_title = "on #{@dayData_prev.created_at.strftime('%B, %d')}"
+        @last_form_title = "(#{@dayData.created_at.strftime('%B, %d')})"
         puts @dayData_prev.inspect
         @prayer_day_id_prev = @dayData_prev.id
       end
@@ -282,6 +286,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
+    puts ""
+    puts ""
+    puts ""
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts ""
+    puts ""
+    puts ""
+
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
@@ -296,21 +308,31 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
 
-      puts params[:url]
+      # Look for all the rows for that user
       data = OutgoingDayPrayer.where(:url => params[:url])
+      # Count them
       dataCount = data.count
+      # Find the specific row for which data is submitted
       dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-      puts dayData.average
+      # Update the row
       dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
-
+      puts ">>>>>>>>>>>" + dayData.inspect
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"
       redirect_to :action => "home"
     else
-      if dataCount == 1 or dataCount == 2
-        dayData.update_attribute(:average, counter)
+      if dataCount == 2
+         if params[:prayer_day_id] == data[0].id
+            dayData.update_attribute(:average, counter)
+         else
+            avg = (counter + data[0].total_prayed) / 2.to_f
+            dayData.update_attribute(:average, avg)
+         end
       elsif dataCount < 15
+        puts "I am less than 15!!!"
+        puts data[dataCount - 2].inspect
+        puts counter
         avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
         dayData.update_attribute(:average, avg.round(2))
       else
