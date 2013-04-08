@@ -64,6 +64,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       # Result instance variable for the view
       @title = "Looks like something went wrong ..."
       @result = "User by this email already exists, but we sent another confirmation email just in case"
+      else
+      @title = "Looks like something went wrong ..."
+      @result = "User by this email already exists"
       end
     end
 
