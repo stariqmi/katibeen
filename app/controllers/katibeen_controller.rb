@@ -35,11 +35,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
 
-    #create a new PotentialUser object with the extarcted email, timezone and url key
-    user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
-
     # Find the user in the user db with the same email as extracted in the params
     check_users = User.find_by_email(email)
+
+    #create a new PotentialUser object with the extarcted email, timezone and url key
+    user = User.new(email: email, url: @url, timezone: timezone, day: 1, registered: false)
 
     # If no such user exists
     if check_users.nil?
@@ -64,6 +64,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       # Result instance variable for the view
       @title = "Looks like something went wrong ..."
       @result = "User by this email already exists, but we sent another confirmation email just in case"
+      else
+      @title = "Looks like something went wrong ..."
+      @result = "User by this email already exists"
       end
     end
 
@@ -103,15 +106,15 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
              if params[:prayer_day_id] == data[0].id
                 dayData.update_attribute(:average, counter)
              else
-                avg = (counter + data[0].total_prayed) / 2.to_f
+                avg = (counter + data[0].total_prayed) / 2
                 dayData.update_attribute(:average, avg)
              end
           elsif dataCount < 15
             avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
             dayData.update_attribute(:average, avg.round(2))
           else
-            to_subtract = dayData[counter - 16].total_prayed / 15.to_f
-            to_add = total_prayed / 15.to_f
+            to_subtract = dayData[counter - 16].total_prayed / 15
+            to_add = total_prayed / 15
             avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
             dayData.update_attribute(:average, avg)
           end
@@ -338,6 +341,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
             dayData.update_attribute(:average, avg)
             puts dayData.average
          end
+
       elsif dataCount < 15
         puts "I am less than 15!!!"
         puts data[dataCount - 2].inspect
@@ -345,8 +349,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
         dayData.update_attribute(:average, avg.round(2))
       else
-        to_subtract = dayData[counter - 16].total_prayed / 15.to_f
-        to_add = total_prayed / 15.to_f
+        to_subtract = dayData[counter - 16].total_prayed / 15
+        to_add = total_prayed / 15
         avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
         dayData.update_attribute(:average, avg)
       end
