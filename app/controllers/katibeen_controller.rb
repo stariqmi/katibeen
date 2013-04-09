@@ -317,7 +317,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
             puts counter
             dayData.update_attribute(:average, counter)
          else
-          if data[0].nil?
+          if !data[0]
             avg = (counter + data[-1].total_prayed) / 2.to_f
             dayData.update_attribute(:average, avg)
           else
