@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
 
   def sendRelaunch(puser)
     @puser = puser # Instance variable passed into the view to be used
-    mail(:to => puser.email, :subject => "We are Back!")
+    mail(:to => puser.email, :subject => "We are back!")
   end
 
   def unsubscribe(user)
