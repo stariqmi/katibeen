@@ -121,7 +121,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           redirect_to :action => "performance"
         end
     end
+    user = User.find_by_url(params[:url])
+    if !user.registered
+      redirect_to :action => "welcome", :url => params[:url]
 
+    else
       data = OutgoingDayPrayer.where(:url => params[:url], :fajr => nil)
       if !data[0].nil?
         a = 1
@@ -194,6 +198,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
   end
+  end
 
   # Deals with the request to the katibeen/welcome/key url
   def welcome
@@ -254,8 +259,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @last_form_title = "(#{@dayData.created_at.strftime('%B, %d')})"
         @prayer_day_id_prev = @dayData_prev.id
       end
-      @user.registered = true
-      @user.save!
 
     end
   end
@@ -284,6 +287,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   def submitDayData
 
+    if !params[:welcome].nil?
+      user = User.find_by_url(params[:url])
+      user.registered = true
+      user.save
+    end
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
