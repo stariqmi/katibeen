@@ -123,9 +123,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
 
       data = OutgoingDayPrayer.where(:url => params[:url], :fajr => nil)
-      if !data[0].nil?
+      if !data[-1].nil?
         a = 1
-        data = data[0]
+        data = data[-1]
         redirect_to :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
     else
       url = params[:url] # Extract the url-key from the parameters
@@ -222,7 +222,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           today = Time.now.in_time_zone(@user.timezone)
           yesterday = Chronic.parse('yesterday')
           @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
-          
+
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: today.strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
@@ -283,7 +283,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
-   
+
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
