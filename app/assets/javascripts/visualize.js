@@ -1,5 +1,4 @@
 $(document).ready( function() {
-	console.log("average is " + $("#prayer_per_day_average_streak").data("average"));
 
 	var streak = document.getElementById( 'prayer_per_day_average_streak' );
 	if (streak){
