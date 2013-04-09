@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   	end
   end
 
+  def sendRelaunch
+    if !self.registered?
+      UserMailer.sendRelaunch(self).deliver
+    end
+  end
+
   def sendUnsubscribe
     UserMailer.unsubscribe(self).deliver
   end

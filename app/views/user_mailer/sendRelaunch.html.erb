@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<div style = "background-color: #F15737;
+width: 100%; height: 100px; padding: 10px;" id="mainBanner">
+	<table style = "height: 100%; width: 100%; margin: 0; padding: 0; border: 0;" id="mainBanner_table">
+		<tbody><tr>
+			<td><p style="
+    font-size: 5em; color: #FFF; font-weight: bold;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif; padding: 0; margin: 0;
+padding-top: 10px;"> Katibean </p>
+
+				<p style="color:#fff;font-style:italic; text-align: center; padding: 0; margin: 0; font-size: 1.3em; font-weight: 100;"> Your key to paradise </p>
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+
+	<p style = "color: #F15737; text-align: center; font-size: 1.5em;">Thank you for joining Katibean!</p>
+
+	<p style = " margin: 5px 10%; color: #333; text-align: center; font-size: 1.3em;" >Use the link below to confirm your account. You will be given a unique url and quick tutorial on how Katibean works!</p>
+
+
+	<p style = "color: #009FE6; text-decoration: none; text-align: center; font-size: 1.5em;" > <a style = " color: #009FE6; text-decoration: none; text-align: center; " href = <%= welcome_url()%>/<%=@puser.url %>  > Confirm Your Account  <p> </a>
+
+</html>

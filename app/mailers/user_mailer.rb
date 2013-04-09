@@ -7,6 +7,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => puser.email, :subject => "Confirm your Account")
   end
 
+  def sendRelaunch(puser)
+    @puser = puser # Instance variable passed into the view to be used
+    mail(:to => puser.email, :subject => "We are Back!")
+  end
+
   def unsubscribe(user)
     @user = user # Instance variable passed into the view to be used
     mail(:to => user.email, :subject => "You have unsubscribed")
