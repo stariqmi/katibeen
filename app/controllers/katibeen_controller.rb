@@ -283,7 +283,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
-   
+   # This section sets values to the performed/not-performed prayers.
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
     counter = 0
@@ -298,38 +298,19 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
 
-      # Look for all the rows for that user
-      data = OutgoingDayPrayer.where(:url => params[:url])
-      # Count them
-      dataCount = data.count
-      # Find the specific row for which data is submitted
-      dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-      # Update the row
-      dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
+    # Look for all the rows for that user
+    data = OutgoingDayPrayer.where(:url => params[:url])
+    # Count them
+    dataCount = data.count
+    # Find the specific row for which data is submitted
+    dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
+    # Update the row
+    dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"
       redirect_to :action => "home"
     else
-      if dataCount == 2
-         if params[:first_day]
-            puts ">>>>>>>FIRST DAY<<<<<<<"
-            puts counter
-            dayData.update_attribute(:average, counter)
-         else
-            avg = (counter + data[0].total_prayed) / 2.to_f
-            dayData.update_attribute(:average, avg)
-         end
-
-      elsif dataCount < 15
-        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
-        dayData.update_attribute(:average, avg.round(2))
-      else
-        to_subtract = dayData[counter - 16].total_prayed / 15
-        to_add = total_prayed / 15
-        avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
-        dayData.update_attribute(:average, avg)
-      end
       @redirect = nil
       if params[:submitButton]
         @redirect = root_url() + params[:url]
