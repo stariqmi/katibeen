@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   validates :timezone, presence: true
   validates :url, presence: true, uniqueness: true
   has_many :outgoing_day_prayers, :dependent => :destroy
-  has_many :incoming_day_prayers, :dependent => :destroy
 
   def sendWelcomeEmail
   	if !self.registered?

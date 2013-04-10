@@ -291,6 +291,31 @@ module UserPerformanceDataHelper
 		end
 
 		def lineGraphData
+			
+
+			#  !!!!!!!!!!!!  NEW CALCULATION !!!!!!!!!!!!!!!!!
+			total_prayed_array = []
+			@rawData.each do |row|
+				total = (row[:fajr] + row[:zuhr] + row[:asr] + row[:maghrib] + row[:isha]) / 2
+				total_prayed_array << total
+			end 			
+
+			average_array = []
+			divisor = 1
+			total_tracker = 0
+			total_prayed_array.each do |t|
+				total_tracker += t
+				average = total_tracker / divisor.to_f
+				average_array << average
+				divisor += 1
+			end
+
+			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			puts average_array.inspect
+			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			# !!!!!!!!!!!!!!!!!!!!!!! NEW CALCULATION ENDS !!!!!!!!!!!!!!
+			
+
 
 			# Set intial values for path calculation
 			lowest = 5
@@ -303,11 +328,11 @@ module UserPerformanceDataHelper
 			# If less than 15 days have passed
 			if @timesRequestSent < 15
 				horizon_distance = 750 / (@timesRequestSent - 1)
-				@rawData.each do |data|
+				average_array.each do |data|
 					# Update the lowest
-					lowest = data.average if data.average < lowest
+					lowest = data if data < lowest
 					# Update the highest
-					highest = data.average if data.average > highest
+					highest = data if data > highest
 				end
 				# Calculate the difference between the lowest, highest
 				high_low_diff = highest - lowest
@@ -324,54 +349,54 @@ module UserPerformanceDataHelper
 					# Calculate the unit height for each unit of average
 					unit = (150 / high_low_diff.to_f).round(2)
 					#Set the starting height using the first average
-					d = "M0 #{150 - (@rawData[0].average - lowest)*unit} "
+					d = "M0 #{150 - (average_array[0] - lowest)*unit} "
 
 					# Loop  through the rest of the data.
 					(1..(@timesRequestSent-1)).each do |i|
 						# Update the path of the svg, move to the right and set the height depending on the distance
 						# from  lowest
-						d += "L#{horizon_distance*i} #{150 - (@rawData[i].average - lowest)*unit} "
+						d += "L#{horizon_distance*i} #{150 - (average_array[i] - lowest)*unit} "
 					end
 
 					# Apply the same process as above with the reverse of the hash, and an increased height of 5
-					@data = Hash[@rawData.to_a.reverse]
+					@data = Hash[average_array.to_a.reverse]
 					(1..(@timesRequestSent - 1)).each do |i|
-						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (@rawData[(@timesRequestSent-i)].average - lowest)*unit + 5} "
+						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (average_array[(@timesRequestSent-i)] - lowest)*unit + 5} "
 					end
-					d += "L0 #{150 - (@rawData[0].average - lowest)*unit + 5} Z"
+					d += "L0 #{150 - (average_array[0] - lowest)*unit + 5} Z"
 
 					# Set the start height, end height, start avg and end avg
-					start_height = 150 - ((@rawData[0].average - lowest)*unit).round(1)
-					end_height = 150 - ((@rawData[@timesRequestSent - 1].average - lowest)*unit).round(1)
-					start_avg = @rawData[0].average
-					end_avg = @rawData[@timesRequestSent-1].average
+					start_height = 150 - ((average_array[0]- lowest)*unit).round(1)
+					end_height = 150 - ((average_array[@timesRequestSent - 1] - lowest)*unit).round(1)
+					start_avg = average_array[0]
+					end_avg = average_array[@timesRequestSent-1]
 				end
 
 			# If more than 15 days have passed
 			else
 				# Extarct the lastest 15 days
 				# The remaining process is the same as for the previous less tahn 15 days condition
-				requiredData = @rawData[@timesRequestSent - 16, @timesRequestSent]
+				requiredData = average_array[@timesRequestSent - 16, @timesRequestSent]
 				horizon_distance = (750 / 15.to_f).round(2)
 				requiredData.each do |data|
-					lowest = data.average if data.average < lowest
-					highest = data.average if data.average > highest
+					lowest = data if data < lowest
+					highest = data if data > highest
 				end
 				high_low_diff = highest - lowest
 				unit = (150 / high_low_diff.to_f).round(2)
-				d = "M0 #{150 - (requiredData[0].average - lowest)*unit} "
+				d = "M0 #{150 - (requiredData[0] - lowest)*unit} "
 				(1..14).each do |i|
-					d += "L#{horizon_distance*i} #{150 - (requiredData[i].average - lowest)*unit} "
+					d += "L#{horizon_distance*i} #{150 - (requiredData[i] - lowest)*unit} "
 				end
 				@data = Hash[requiredData.to_a.reverse]
 				(1..14).each do |i|
-					d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)].average - lowest)*unit + 5} "
+					d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)] - lowest)*unit + 5} "
 				end
-				d += "L0 #{150 - (requiredData[0].average - lowest)*unit + 5} Z"
-				start_height = 150 - (requiredData[0].average - lowest)*unit
-				end_height = 150 - (requiredData[14].average - lowest)*unit
-				start_avg = @rawData[@timesRequestSent - 16].average
-				end_avg = requiredData[14].average
+				d += "L0 #{150 - (requiredData[0] - lowest)*unit + 5} Z"
+				start_height = 150 - (requiredData[0] - lowest)*unit
+				end_height = 150 - (requiredData[14] - lowest)*unit
+				start_avg = @rawData[@timesRequestSent - 16]
+				end_avg = requiredData[14]
 			end
 
 			# Data for the extreme cases when the height is less than 1
