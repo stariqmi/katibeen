@@ -361,9 +361,9 @@ module UserPerformanceDataHelper
 					# Apply the same process as above with the reverse of the hash, and an increased height of 5
 					@data = Hash[average_array.to_a.reverse]
 					(1..(@timesRequestSent - 1)).each do |i|
-						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (average_array[(@timesRequestSent-i)] - lowest)*unit + 5} "
+						d += "L#{horizon_distance*(@timesRequestSent - i)} #{150 - (average_array[(@timesRequestSent-i)] - lowest)*unit + 2} "
 					end
-					d += "L0 #{150 - (average_array[0] - lowest)*unit + 5} Z"
+					d += "L0 #{150 - (average_array[0] - lowest)*unit + 2} Z"
 
 					# Set the start height, end height, start avg and end avg
 					start_height = 150 - ((average_array[0]- lowest)*unit).round(1)
