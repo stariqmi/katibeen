@@ -105,7 +105,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           redirect_to :action => "performance"
         end
     end
-
+    user = User.find_by_url(params[:url])
+    if !user.registered
+      redirect_to :action => "welcome", :url => params[:url]
       data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
         a = 1
@@ -179,6 +181,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       end
     end
   end
+  end
 
   # Deals with the request to the katibeen/welcome/key url
   def welcome
@@ -207,7 +210,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           today = Time.now.in_time_zone(@user.timezone)
           yesterday = Chronic.parse('yesterday')
           @dayData_prev = OutgoingDayPrayer.create(url: @user.url, weekday: yesterday.strftime("%A"), user_id: @user_id, status: "pending", average: 0)
-          
+
           @dayData = OutgoingDayPrayer.create(url: @user.url, weekday: today.strftime("%A"),
                                               user_id: @user.id, status: "pending", average: 0)
           @prayer_day_id = @dayData.id
@@ -239,8 +242,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         @last_form_title = "(#{@dayData.created_at.strftime('%B, %d')})"
         @prayer_day_id_prev = @dayData_prev.id
       end
-      @user.registered = true
-      @user.save!
 
     end
   end
@@ -268,6 +269,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   end
 
   def submitDayData
+
+    if !params[:welcome].nil?
+      user = User.find_by_url(params[:url])
+      user.registered = true
+      user.save
+    end
+
    # This section sets values to the performed/not-performed prayers.
     prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
     prayerData = {}
@@ -296,6 +304,30 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       @result = "Something went wrong"
       redirect_to :action => "home"
     else
+      if dataCount == 2
+         if params[:first_day]
+            puts ">>>>>>>FIRST DAY<<<<<<<"
+            puts counter
+            dayData.update_attribute(:average, counter)
+         else
+          if !data[0]
+            avg = (counter + data[-1].total_prayed) / 2.to_f
+            dayData.update_attribute(:average, avg)
+          else
+            avg = (counter + data[0].total_prayed) / 2.to_f
+            dayData.update_attribute(:average, avg)
+          end
+         end
+
+      elsif dataCount < 15
+        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
+        dayData.update_attribute(:average, avg.round(2))
+      else
+        to_subtract = dayData[counter - 16].total_prayed / 15
+        to_add = total_prayed / 15
+        avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
+        dayData.update_attribute(:average, avg)
+      end
       @redirect = nil
       if params[:submitButton]
         @redirect = root_url() + params[:url]
