@@ -108,7 +108,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     user = User.find_by_url(params[:url])
     if !user.registered
       redirect_to :action => "welcome", :url => params[:url]
-
     else
       data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
