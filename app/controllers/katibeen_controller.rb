@@ -110,11 +110,12 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
       redirect_to :action => "welcome", :url => params[:url]
 
     else
-      data = OutgoingDayPrayer.where(:url => params[:url], :fajr => nil)
+      data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
         a = 1
         data = data[0]
         redirect_to :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
+
     else
       url = params[:url] # Extract the url-key from the parameters
       # Find the user with the url, eager leading the prayer data aswell.
