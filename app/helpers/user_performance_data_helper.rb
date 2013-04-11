@@ -306,7 +306,7 @@ module UserPerformanceDataHelper
 			total_prayed_array.each do |t|
 				total_tracker += t
 				average = total_tracker / divisor.to_f
-				average_array << average
+				average_array << average.round(2)
 				divisor += 1
 			end
 
