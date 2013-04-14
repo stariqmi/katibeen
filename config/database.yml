@@ -5,21 +5,21 @@
 #   gem 'sqlite3'
 
 #COMMENT OUT THIS ONE IF YOU WANNA WORK ON SHIT
-development:
-  host: 198.199.68.202
-  adapter: postgresql
-  encoding: utf8
-  database: katibean
-  pool: 5
-  username: root
-  password: foobar
+#development:
+#  host: 198.199.68.202
+#  adapter: postgresql
+#  encoding: utf8
+#  database: katibean
+#  pool: 5
+#  username: root
+#  password: foobar
 
 #UNCOMMENT THIS IF YOU WANNA WORK ON SHIT
-#development:
-#  adapter: sqlite3
-#  database: db/development.sqlite3
-#  pool: 5
-#  timeout: 5000
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
 test: &TEST
   adapter: postgresql

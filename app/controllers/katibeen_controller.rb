@@ -1,8 +1,6 @@
 #Main controller for the application
 class KatibeenController < ApplicationController
 
- protect_from_forgery :except => :performance
-
 
 #Helper Code ----------------------- START ------------------------------------
 include UrlKeyGeneratorHelper # To generate a unique url key

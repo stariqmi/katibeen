@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<body>
+
+<% post_url = root_url() + 'katibeen/submitDayData' %>
+
+<% redirect = root_url() + @user.url%>
+
+
+<form accept-charset="UTF-8" action=<%=redirect%> method="post">
+
+<center>
+<em style="width:80%;margin:auto;color:#2ba5ae;font-size:1.8em;text-align:center;font-weight: bold;">"The thing that Allah (SWT) loves most <br/> is when his people pray Salah on time."</em>
+</center>
+
+<div class="prayers">
+
+	<h3 style = "text-align: center; font-weight: normal; font-style: italic; color: #999;"> Select the ones you prayed today </h3>
+
+<table style = "margin: auto;">
+	<td>
+		<label for="fajr">
+			<div style = "border-radius: 50%; background: #f85a2a;width: 65px; height: 65px; color: #fff; font-size: 12px; text-align:center;">
+				<div style="padding-top:26px; font-size: 12px; text-align:center;">Fajr</div></div>
+			<input  style = "margin-left: 26px;" name="fajr" type="checkbox" value="2" id = "fajr">
+		</label>
+	</td>
+	<td>
+		<label for="zuhr">
+			<div style = "border-radius: 50%; background: #f4c712; width: 65px; height: 65px; color: #fff; font-size: 12px; text-align:center;"><div style="padding-top:26px; font-size: 12px; text-align:center;">Duhr</div></div>
+			<input  style = "margin-left: 26px;" name="zuhr" type="checkbox" value="2" id = "zuhr"/>
+		</label>
+	</td>
+	<td>
+		<label for="asr">
+			<div style = "border-radius: 50%; background: #38a5af; width: 65px; height: 65px; color: #fff; font-size: 12px; text-align:center; font-size: 12px; text-align:center;">
+				<div style="padding-top:26px; font-size: 12px; text-align:center;">Asr</div></div> <input  style = "margin-left: 26px; margin-top: -5px;" name="asr" type="checkbox" value="2" id = "asr"/>
+		</label>
+		<br>
+
+	</td>
+	<td>
+		<label for="maghrib">
+		<div style = "border-radius: 50%; background: #9a5097; width: 65px; height: 65px; color: #fff; font-size: 12px; text-align:center;"><div style="padding-top:26px; font-size: 12px; text-align:center;">Maghrib</div></div>
+		<input style = "margin-left: 26px;" name="maghrib" type="checkbox" value="2" id = "maghrib">
+		</label>
+	</td>
+	<td>
+		<label for="isha">
+			<div style="line-height:30px;border-radius:50%;background:#1c2623;width:65px;min-height:65px;color:#fff; font-size: 12px; text-align:center;">
+			<div style="padding-top:17px; font-size: 12px; vertical-align: bottom;">Isha</div></div>
+
+		<input  style = "margin-left: 26px;" name="isha" type="checkbox" value="2" id = "isha">
+		</label>
+	</td>
+
+</table>
+
+	<!-- Hidden Inputs for ID and URL of user and day -->
+	<input name="prayer_day_id" type="hidden" value= <%=@dayData.id%> >
+
+	<input name="fromEmail" type="hidden" value= "true">
+
+	<input name="url" type="hidden" value= <%=@dayData.url%> >
+
+
+	<!--<label for = "submitForm" >
+		<div style = " border: 1px solid #ddd; padding: 20px 30px; background: #ddd; color: #333;" >Submit</div>-->
+		<center><input style="margin-top: 20px;background: #bbbbbb;border: 0;color: #fff;padding: 15px 40px 15px 40px;font-size: 18px;font-weight: bold;border-radius: 3%;" type="submit" value="Submit"></center>
+</form>
+
+<center>
+	<br>
+	<a style = "font-size: 10px; color: #999;" href = <%= root_url()%>day_data/<%=@user.url%>/<%=@dayData.id%>>
+		Can't see a form? Click here!
+	</a>
+</center>
+
+
+<% unsub = root_url() + "unsubscribe/" + @user.url %>
+<p style = "font-weight:bold;font-size: 12px; font-family: calibri; text-align:right;" ><a href = <%= root_url()%><%=@user.url%> style = "text-decoration: none; color:#009deb;"> <%= root_url()%><%=@user.url%> </a> <a href = <%= unsub %> style = "text-decoration: none; color: #f85a2a; " > | Unsubscribe </a> <p>
+</body>
+
