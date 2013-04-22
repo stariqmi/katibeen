@@ -318,14 +318,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
           end
          end
 
-      elsif dataCount < 15
-        avg = (counter + data[dataCount - 2].total_prayed) / dataCount.to_f
-        dayData.update_attribute(:average, avg.round(2))
-      else
-        to_subtract = dayData[counter - 16].total_prayed / 15
-        to_add = total_prayed / 15
-        avg = (dayData[counter - 2].average + to_add - to_subtract).round(2)
-        dayData.update_attribute(:average, avg)
+
       end
       @redirect = nil
       if params[:submitButton]

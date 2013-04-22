@@ -339,7 +339,7 @@ module UserPerformanceDataHelper
 
 				# If the highest and the lowest
 				if highest == lowest
-					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 5} L0 #{150 - (lowest/5.to_f)*150 + 5} Z"
+					d = "M0 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150} L950 #{150 - (lowest/5.to_f)*150 + 2} L0 #{150 - (lowest/5.to_f)*150 + 2} Z"
 					start_height = 150 - (lowest/5.to_f)*150
 					end_height = 150 - (lowest/5.to_f)*150
 					start_avg = lowest
@@ -376,7 +376,7 @@ module UserPerformanceDataHelper
 			else
 				# Extarct the lastest 15 days
 				# The remaining process is the same as for the previous less tahn 15 days condition
-				requiredData = average_array[@timesRequestSent - 16, @timesRequestSent]
+				requiredData = average_array[@timesRequestSent - 15, @timesRequestSent]
 				puts requiredData.inspect
 				horizon_distance = (750 / 15.to_f).round(2)
 				requiredData.each do |data|
@@ -391,7 +391,7 @@ module UserPerformanceDataHelper
 				end
 				@data = Hash[requiredData.to_a.reverse]
 				(1..14).each do |i|
-					d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)] - lowest)*unit + 5} "
+					d += "L#{horizon_distance*(15 - i)} #{150 - (requiredData[(15-i)] - lowest)*unit + 2} "
 				end
 				d += "L0 #{150 - (requiredData[0] - lowest)*unit + 5} Z"
 				start_height = 150 - (requiredData[0] - lowest)*unit

@@ -10,7 +10,7 @@ task :populate => :environment do
 		user.day = 2
 		user.save
 
-		(1..14).each do |d|
+		(1..15).each do |d|
 			user.day += 1
 			prayer = OutgoingDayPrayer.new
 			prayer.url =  user.url
