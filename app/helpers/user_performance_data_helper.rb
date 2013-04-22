@@ -377,6 +377,7 @@ module UserPerformanceDataHelper
 				# Extarct the lastest 15 days
 				# The remaining process is the same as for the previous less tahn 15 days condition
 				requiredData = average_array[@timesRequestSent - 16, @timesRequestSent]
+				puts requiredData.inspect
 				horizon_distance = (750 / 15.to_f).round(2)
 				requiredData.each do |data|
 					lowest = data if data < lowest
@@ -395,7 +396,7 @@ module UserPerformanceDataHelper
 				d += "L0 #{150 - (requiredData[0] - lowest)*unit + 5} Z"
 				start_height = 150 - (requiredData[0] - lowest)*unit
 				end_height = 150 - (requiredData[14] - lowest)*unit
-				start_avg = @rawData[@timesRequestSent - 16]
+				start_avg = requiredData[0]
 				end_avg = requiredData[14]
 			end
 
@@ -407,6 +408,8 @@ module UserPerformanceDataHelper
 			if start_avg == 0
 				improvement = (end_avg/1)*100
 			else
+				puts end_avg
+				puts start_avg
 				improvement = ((end_avg - start_avg) / start_avg).round(2) * 100
 			end
 
