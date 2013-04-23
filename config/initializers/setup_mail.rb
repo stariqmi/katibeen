@@ -10,4 +10,4 @@ ActionMailer::Base.smtp_settings = {
 
 ActionMailer::Base.delivery_method = :smtp
 
-ActionMailer::Base.default_url_options[:host] = "katibeen.com"
+ActionMailer::Base.default_url_options[:host] = "katibean.com"
