@@ -4,7 +4,7 @@ ActionMailer::Base.smtp_settings = {
   :domain 							=> 'katibean.com',
 	:enable_starttls_auto => true,
 	:user_name            => "salah@katibean.com",
-	:password             => ENV["MANDRILL"],
+	:password             => 'Ncwby9GTNOkK30io1WSOnA',
 	:authentication 			=> 'login',
 }
 

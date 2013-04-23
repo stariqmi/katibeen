@@ -8,7 +8,7 @@ require 'capistrano'
 #	Application
 #############################################################
 
-set :application, "katibeen"
+set :application, "katibean"
 set :deploy_to, "/var/www/#{application}/"
 
 #############################################################
