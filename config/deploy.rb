@@ -1,7 +1,6 @@
 require 'capistrano'
 require 'capistrano/maintenance'
 
-require 'capistrano'
 
 
 #############################################################
