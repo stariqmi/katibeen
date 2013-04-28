@@ -12,12 +12,16 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   	require 'chronic'
 
   	users = User.where(:registered => true)
+  	missed = 0
+
   	averages = []
   	fajrs = []
   	zuhrs = []
   	asrs = []
   	maghribs = []
   	ishas = []
+
+  	active_users = []
 
   	users.each do |user|
   		begin
@@ -30,19 +34,24 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 		            weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
 		            avgWeekdayData: prayersData[:weekdayAvgPrayersData]
 				}
+			def is_active?(user)
+				data = OutgoingDayPrayer.where(:url => user.url, :status => "pending")
+				if data[0]
+					return true
+				else
+					return false
+				end
+			end
+			if is_active?(user)
+				active_users.push(user)
+			end
+			missed = missed + @filteredData[:missedPrayerData][:totalMissed]
 
 			fajr = @filteredData[:weeklyPerformedAvgData][:fajr]
 			zuhr = @filteredData[:weeklyPerformedAvgData][:zuhr]
 			asr = @filteredData[:weeklyPerformedAvgData][:asr]
 			maghrib = @filteredData[:weeklyPerformedAvgData][:maghrib]
 			isha = @filteredData[:weeklyPerformedAvgData][:isha]
-			puts '------------------------------'
-			puts fajr
-			puts zuhr
-			puts asr
-			puts maghrib
-			puts isha
-			puts '-------------------------------'
 
 			fajrs.push(fajr)
 			zuhrs.push(zuhr)
@@ -56,13 +65,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         	puts e
         end
     end
-    puts '+++++++++++++++++++++++++++'
-	puts fajrs
-	puts zuhrs
-	puts asrs
-	puts maghribs
-	puts ishas
-	puts '+++++++++++++++++++++++++++'
+
 
     @average = 0.0
     averages.each do |a|
@@ -100,8 +103,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
     @isha = @isha/ishas.count
 
+    @total_prayers = fajrs.count + zuhrs.count + asrs.count + maghribs.count + ishas.count
+    @total_missed = missed
+    @total_prayed = @total_prayers - @total_missed
+
     @total_users = User.all.count
     @registered = User.where(:registered => true).count
+    @active = active_users.count
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ? AND created_at <= ?", Chronic.parse('last month'), Chronic.parse('last week')]).count
   end
