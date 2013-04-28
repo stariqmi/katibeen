@@ -21,6 +21,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   	asrs = []
   	maghribs = []
   	ishas = []
+  	average = 0.0
 
   	active_users = []
 
@@ -38,10 +39,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 			asrs.push(asr)
 			maghribs.push(maghrib)
 			ishas.push(isha)
-
-			average = Float((Int(fajr) + Int(zuhr) + Int(asr) + Int(magrhib) + Int(isha))/5)
+						puts '-------------------------------------------------------------'
+			average = average + (fajr + zuhr + asr + maghrib + isha)
 
 			averages.push(average)
+			puts '-------------------------------------------------------------'
 			puts average
         rescue Exception => e
         	puts e
@@ -60,10 +62,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
 
     @average = 0.0
-    averages.each do |a|
-    	@average = @average + a
-    end
-    @average = @average/averages.count 
+    @average = average/averages.count 
     @average = @average.round(2)
 
     @fajr = 0.0
