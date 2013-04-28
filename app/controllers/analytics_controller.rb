@@ -24,25 +24,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   	active_users = []
 
-  	users.each do |user|
+  	data = OutgoingDayPrayer.where(:status => "responded")
+  	data.each do |d|
   		begin
-			performance = PerformanceData.new user # New PerformanceData object
-			average = Float(performance.userAvgCalculator)
-			prayersData = performance.prayersData
-
-			@filteredData = {
-		            missedPrayerData: prayersData[:missedPrayersData],
-		            weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
-		            avgWeekdayData: prayersData[:weekdayAvgPrayersData]
-				}
-
-			missed = missed + @filteredData[:missedPrayerData][:totalMissed]
-
-			fajr = @filteredData[:weeklyPerformedAvgData][:fajr]
-			zuhr = @filteredData[:weeklyPerformedAvgData][:zuhr]
-			asr = @filteredData[:weeklyPerformedAvgData][:asr]
-			maghrib = @filteredData[:weeklyPerformedAvgData][:maghrib]
-			isha = @filteredData[:weeklyPerformedAvgData][:isha]
+			fajr = d.fajr/2
+			zuhr = d.zuhr/2
+			asr = d.asr/2
+			maghrib = d.maghrib/2
+			isha = d.isha/2
 
 			fajrs.push(fajr)
 			zuhrs.push(zuhr)
@@ -50,8 +39,20 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 			maghribs.push(maghrib)
 			ishas.push(isha)
 
-			averages.push(average)
+			average = Float((Int(fajr) + Int(zuhr) + Int(asr) + Int(magrhib) + Int(isha))/5)
 
+			averages.push(average)
+			puts average
+        rescue Exception => e
+        	puts e
+        end
+    end
+
+  	users.each do |user|
+  		begin
+			performance = PerformanceData.new user # New PerformanceData object
+			prayersData = performance.prayersData
+			missed = missed + prayersData[:missedPrayersData][:totalMissed]
         rescue Exception => e
         	puts e
         end
@@ -62,42 +63,42 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     averages.each do |a|
     	@average = @average + a
     end
-    @average = @average/averages.count
+    @average = @average/averages.count 
     @average = @average.round(2)
 
     @fajr = 0.0
     fajrs.each do |a|
     	@fajr = @fajr + a
     end
-    @fajr = @fajr/fajrs.count
+    @fajr = (@fajr/fajrs.count) * 100
     @fajr = @fajr.round(2)
 
     @zuhr = 0.0
     zuhrs.each do |a|
     	@zuhr = @zuhr + a
     end
-    @zuhr = @zuhr/zuhrs.count
+    @zuhr = (@zuhr/zuhrs.count) * 100
     @zuhr = @zuhr.round(2)
 
     @asr = 0.0
     asrs.each do |a|
     	@asr = @asr + a
     end
-    @asr = @asr/asrs.count
+    @asr = (@asr/asrs.count) * 100
     @asr = @asr.round(2)
 
     @maghrib = 0.0
     maghribs.each do |a|
     	@maghrib = @maghrib + a
     end
-    @maghrib = @maghrib/maghribs.count
+    @maghrib = (@maghrib/maghribs.count) * 100
     @maghrib = @maghrib.round(2)
 
     @isha = 0.0
     ishas.each do |a|
     	@isha = @isha + a
     end
-    @isha = @isha/ishas.count
+    @isha = (@isha/ishas.count) * 100
     @isha = @isha.round(2)
 
     @total_prayers = OutgoingDayPrayer.where(:status => "responded").count * 5
