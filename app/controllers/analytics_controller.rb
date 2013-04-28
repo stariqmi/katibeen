@@ -72,31 +72,31 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     averages.each do |a|
     	@average = @average + a
     end
-    @average = @average/averages.count
+    @average = @average/averages.count.round(2)
 
     @fajr = 0.0
     fajrs.each do |a|
     	@fajr = @fajr + a
     end
-    @fajr = @fajr/fajrs.count
+    @fajr = @fajr/fajrs.count.round(2)
 
     @zuhr = 0.0
     zuhrs.each do |a|
     	@zuhr = @zuhr + a
     end
-    @zuhr = @zuhr/zuhrs.count
+    @zuhr = @zuhr/zuhrs.count.round(2)
 
     @asr = 0.0
     asrs.each do |a|
     	@asr = @asr + a
     end
-    @asr = @asr/asrs.count
+    @asr = @asr/asrs.count.round(2)
 
     @maghrib = 0.0
     maghribs.each do |a|
     	@maghrib = @maghrib + a
     end
-    @maghrib = @maghrib/maghribs.count
+    @maghrib = @maghrib/maghribs.count.round(2)
 
     @isha = 0.0
     ishas.each do |a|
@@ -112,6 +112,6 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @registered = User.where(:registered => true).count
     @active = active_users.count
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
-    @last_month = User.where(["created_at >= ? AND created_at <= ?", Chronic.parse('last month'), Chronic.parse('last week')]).count
+    @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
   end
 end
