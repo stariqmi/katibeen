@@ -76,33 +76,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
-    if request.post?
-        prayer = [:fajr, :zuhr, :asr, :maghrib, :isha]
-        prayerData = {}
-        counter = 0
-        prayer.each do |p|
-          if params[p].nil?
-            prayerData[p] = 0
-          elsif params[p].to_s == "2"
-            prayerData[p] = 2
-            counter += 1
-          else
-            nil
-          end
-        end
-        data = OutgoingDayPrayer.where(:url => params[:url])
-        dataCount = data.count
-        dayData = OutgoingDayPrayer.find(params[:prayer_day_id])
-        dayData.update_attributes(fajr: prayerData[:fajr], zuhr: prayerData[:zuhr], asr: prayerData[:asr], maghrib: prayerData[:maghrib], isha: prayerData[:isha], total_prayed: counter, status: "responded")
-        if dayData == nil
-          @title = 'Oops!'
-          @result = "Something went wrong"
-          redirect_to :action => "home"
-        else
-          dayData.save
-          redirect_to :action => "performance"
-        end
-    end
+    
     user = User.find_by_url(params[:url])
     if !user.registered
       redirect_to :action => "welcome", :url => params[:url]
