@@ -35,7 +35,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 		            avgWeekdayData: prayersData[:weekdayAvgPrayersData]
 				}
 			def is_active?(user)
-				data = OutgoingDayPrayer.where(:url => user.url, :status => "pending")
+				data = OutgoingDayPrayer.where(["created_at >= ? AND created_at <= ?", Chronic.parse('4 days ago'), Chronic.parse('3 days ago')])
+				data = data.where(:url => user.url, :status => "pending")
 				if data[0]
 					return true
 				else
@@ -103,7 +104,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
     @isha = @isha/ishas.count
 
-    @total_prayers = fajrs.count + zuhrs.count + asrs.count + maghribs.count + ishas.count
+    @total_prayers = OutgoingDayPrayer.where(:status => "responded").count
     @total_missed = missed
     @total_prayed = @total_prayers - @total_missed
 

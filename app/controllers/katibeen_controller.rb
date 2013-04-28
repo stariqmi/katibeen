@@ -76,7 +76,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
   # Deals with the request to the /katibeen/performance/key url
   def performance
-    
+  
     user = User.find_by_url(params[:url])
     if !user.registered
       redirect_to :action => "welcome", :url => params[:url]
