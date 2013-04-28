@@ -1,4 +1,5 @@
 class AnalyticsController < ApplicationController
+http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
 
 #Helper Code ----------------------- START ------------------------------------
 include UrlKeyGeneratorHelper # To generate a unique url key
@@ -34,18 +35,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 		            weeklyPerformedAvgData: prayersData[:weeklyPerformedAvgData],
 		            avgWeekdayData: prayersData[:weekdayAvgPrayersData]
 				}
-			def is_active?(user)
-				data = OutgoingDayPrayer.where(["created_at >= ? AND created_at <= ?", Chronic.parse('4 days ago'), Chronic.parse('3 days ago')])
-				data = data.where(:url => user.url, :status => "pending")
-				if data[0]
-					return true
-				else
-					return false
-				end
-			end
-			if is_active?(user)
-				active_users.push(user)
-			end
+
 			missed = missed + @filteredData[:missedPrayerData][:totalMissed]
 
 			fajr = @filteredData[:weeklyPerformedAvgData][:fajr]
@@ -116,7 +106,9 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
     @total_users = User.all.count
     @registered = User.where(:registered => true).count
-    @active = active_users.count
+
+    @active = OutgoingDayPrayer.where(["created_at >= ? AND created_at <= ?", Chronic.parse('4 days ago'), Chronic.parse('3 days ago')]).where(:status => "responded").count 
+
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
   end
