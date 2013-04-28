@@ -72,37 +72,43 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     averages.each do |a|
     	@average = @average + a
     end
-    @average = @average/averages.count.round(2)
+    @average = @average/averages.count
+    @average = @average.round(2)
 
     @fajr = 0.0
     fajrs.each do |a|
     	@fajr = @fajr + a
     end
-    @fajr = @fajr/fajrs.count.round(2)
+    @fajr = @fajr/fajrs.count
+    @fajr = @fajr.round(2)
 
     @zuhr = 0.0
     zuhrs.each do |a|
     	@zuhr = @zuhr + a
     end
-    @zuhr = @zuhr/zuhrs.count.round(2)
+    @zuhr = @zuhr/zuhrs.count
+    @zuhr = @zuhr.round(2)
 
     @asr = 0.0
     asrs.each do |a|
     	@asr = @asr + a
     end
-    @asr = @asr/asrs.count.round(2)
+    @asr = @asr/asrs.count
+    @asr = @asr.round(2)
 
     @maghrib = 0.0
     maghribs.each do |a|
     	@maghrib = @maghrib + a
     end
-    @maghrib = @maghrib/maghribs.count.round(2)
+    @maghrib = @maghrib/maghribs.count
+    @maghrib = @maghrib.round(2)
 
     @isha = 0.0
     ishas.each do |a|
     	@isha = @isha + a
     end
     @isha = @isha/ishas.count
+    @isha = @isha.round(2)
 
     @total_prayers = OutgoingDayPrayer.where(:status => "responded").count * 5
     @total_missed = missed
