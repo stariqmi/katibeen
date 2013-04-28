@@ -104,7 +104,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     end
     @isha = @isha/ishas.count
 
-    @total_prayers = OutgoingDayPrayer.where(:status => "responded").count
+    @total_prayers = OutgoingDayPrayer.where(:status => "responded").count * 5
     @total_missed = missed
     @total_prayed = @total_prayers - @total_missed
 
