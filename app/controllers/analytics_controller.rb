@@ -36,6 +36,13 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 			asr = @filteredData[:weeklyPerformedAvgData][:asr]
 			maghrib = @filteredData[:weeklyPerformedAvgData][:maghrib]
 			isha = @filteredData[:weeklyPerformedAvgData][:isha]
+			puts '------------------------------'
+			puts fajr
+			puts zuhr
+			puts asr
+			puts maghrib
+			puts isha
+			puts '-------------------------------'
 
 			fajrs.push(fajr)
 			zuhrs.push(zuhr)
@@ -49,6 +56,14 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
         	puts e
         end
     end
+    puts '+++++++++++++++++++++++++++'
+	puts fajrs
+	puts zuhrs
+	puts asrs
+	puts maghribs
+	puts ishas
+	puts '+++++++++++++++++++++++++++'
+
     @average = 0.0
     averages.each do |a|
     	@average = @average + a
@@ -56,31 +71,31 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @average = @average/averages.count
 
     @fajr = 0.0
-    averages.each do |a|
+    fajrs.each do |a|
     	@fajr = @fajr + a
     end
     @fajr = @fajr/fajrs.count
 
     @zuhr = 0.0
-    averages.each do |a|
+    zuhrs.each do |a|
     	@zuhr = @zuhr + a
     end
     @zuhr = @zuhr/zuhrs.count
 
     @asr = 0.0
-    averages.each do |a|
+    asrs.each do |a|
     	@asr = @asr + a
     end
     @asr = @asr/asrs.count
 
     @maghrib = 0.0
-    averages.each do |a|
+    maghribs.each do |a|
     	@maghrib = @maghrib + a
     end
     @maghrib = @maghrib/maghribs.count
 
     @isha = 0.0
-    averages.each do |a|
+    ishas.each do |a|
     	@isha = @isha + a
     end
     @isha = @isha/ishas.count
