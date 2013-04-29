@@ -4,17 +4,6 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 
-#COMMENT OUT THIS ONE IF YOU WANNA WORK ON SHIT
-#development:
-#  host: 198.199.68.202
-#  adapter: postgresql
-#  encoding: utf8
-#  database: katibean
-#  pool: 5
-#  username: root
-#  password: foobar
-
-#UNCOMMENT THIS IF YOU WANNA WORK ON SHIT
 development:
   adapter: sqlite3
   database: db/development.sqlite3
@@ -30,9 +19,10 @@ test: &TEST
   password:
 
 production:
+  host: 198.199.68.202
   adapter: postgresql
   encoding: utf8
-  database: katibeen_production
+  database: katibean
   pool: 5
-  username:
-  password:
+  username: root
+  password: foobar

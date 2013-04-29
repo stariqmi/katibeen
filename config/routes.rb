@@ -1,5 +1,7 @@
 KatApp::Application.routes.draw do
 
+  match "/analytics" => "analytics#get"
+
   root :to => "katibeen#home"
 
   match "/welcome" => "katibeen#home"

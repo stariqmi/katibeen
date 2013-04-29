@@ -1,14 +1,13 @@
 require 'capistrano'
 require 'capistrano/maintenance'
 
-require 'capistrano'
 
 
 #############################################################
 #	Application
 #############################################################
 
-set :application, "katibeen"
+set :application, "katibean"
 set :deploy_to, "/var/www/#{application}/"
 
 #############################################################
@@ -33,7 +32,7 @@ role :db, domain, :primary => true
 
 set :repository,  "git://github.com/stariqmi/katibeen.git"
 set :svn_username, "fm2munsh"
-set :svn_password, "n2v2w2w2"
+set :svn_password, ENV['GIT_PASS']
 set :checkout, "master"
 
 #############################################################
