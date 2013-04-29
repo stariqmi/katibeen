@@ -45,6 +45,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 			averages.push(average)
 			puts '-------------------------------------------------------------'
 			puts average
+		#Bad data so were just gonna skip
         rescue Exception => e
         	puts e
         end
@@ -55,6 +56,8 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 			performance = PerformanceData.new user # New PerformanceData object
 			prayersData = performance.prayersData
 			missed = missed + prayersData[:missedPrayersData][:totalMissed]
+
+		#if something goes wrong in the performance data helper
         rescue Exception => e
         	puts e
         end
@@ -112,4 +115,5 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
   end
+  
 end
