@@ -262,6 +262,8 @@ module UserPerformanceDataHelper
 
 		# Calculates the data for the main Dot chart
 		def mainWidgetData
+
+
 			# Set an empty array
 			data = []
 			# Loop through the rawData
@@ -279,13 +281,26 @@ module UserPerformanceDataHelper
 			# Generate a path for the dot chart svg
 			# Set the initial value of the path
 			path = "M10 20 "
-			# Loop through the entire data
-			(0..(@timesRequestSent-1)).each do |i|
-				# Add path based on the average per day prayer, using the "total" value
-				path += "L#{30+ 60*i} #{20 - (data[i][0][0]/5.to_f)*20} "
+			
+			if @timesRequestSent < 16
+				# Loop through the entire data
+				(0..(@timesRequestSent-1)).each do |i|
+					# Add path based on the average per day prayer, using the "total" value
+					path += "L#{30+ 60*i} #{20 - (data[i][0][0]/5.to_f)*20} "
+				end
+				path += "L#{60*@timesRequestSent - 10} 20 Z"
+			else
+				puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+				data = data[(@timesRequestSent-15),(@timesRequestSent-1)]
+				puts data.count
+				# Loop through the entire data
+				(0..14).each do |i|
+					# Add path based on the average per day prayer, using the "total" value
+					path += "L#{30+ 60*i} #{20 - (data[i][0][0]/5.to_f)*20} "
+				end
+				path += "L#{60*15 - 10} 20 Z"
 			end
-			# End path
-			path += "L#{60*@timesRequestSent - 10} 20 Z"
+			
 			# Return both the path and the day array
 			{ data: data, path: path }
 		end
