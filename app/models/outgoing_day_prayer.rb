@@ -5,6 +5,24 @@ class OutgoingDayPrayer < ActiveRecord::Base
   def get_average 
   	average = self.asr + self.fajr + self. maghrib + self.isha + self.zuhr 
   	average = average/2
-  	return average
+  	average
   end
+
+  def get_date 
+  	date = self.created_at
+  	date_end = 'st'
+  	if date.strftime("%e").to_s[-1] == '1'
+  		date_end = 'st'
+  	elsif date.strftime("%e").to_s[-1] == '2'
+  		date_end = 'nd'
+  	elsif date.strftime("%e").to_s[-1] == '3'
+  		date_end = 'rd'
+  	else 
+  		date_end = 'th'
+  	end
+  	date = date.strftime("%B").to_s + ' ' + date.strftime("%e").to_s + date_end + ' ' + date.strftime("%Y").to_s
+
+  	date
+  end
+
 end
