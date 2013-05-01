@@ -16,7 +16,7 @@ include UrlKeyGeneratorHelper # To generate a unique url key
     if @user.save!
       redirect_to root_path
     else
-     #Set @result as the error message
+
      redirect_to root_path
     end
 	end

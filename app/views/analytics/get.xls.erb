@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">USER URL</Data></Cell>
+        <Cell><Data ss:Type="String">USER EMAIL</Data></Cell>
+      </Row>
+    <% @users.each do |user| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= user.url %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= user.email %></Data></Cell>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String">Prayer Date</Data></Cell>
+        <Cell><Data ss:Type="String">Week Day</Data></Cell>
+        <Cell><Data ss:Type="String">Prayer Average</Data></Cell>
+        <Cell><Data ss:Type="String">Fajr</Data></Cell>
+        <Cell><Data ss:Type="String">Zuhr</Data></Cell>
+        <Cell><Data ss:Type="String">Asr</Data></Cell>
+        <Cell><Data ss:Type="String">Maghrib</Data></Cell>
+        <Cell><Data ss:Type="String">Isha</Data></Cell>
+      </Row>
+        <% @prayers = user.get_prayers %>
+          <% @prayers.each do |prayer| %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= prayer.created_at %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= prayer.weekday %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= prayer.average %></Data></Cell>
+              <% if prayer.fajr == 2 %>
+                <Cell><Data ss:Type="String">YES</Data></Cell>
+              <% else %>
+                <Cell><Data ss:Type="String">NO</Data></Cell>
+              <% end %>
+              <% if prayer.zuhr == 2  %>
+                <Cell><Data ss:Type="String">YES</Data></Cell>
+              <% else %>
+                <Cell><Data ss:Type="String">NO</Data></Cell>
+              <% end %>
+              <% if prayer.asr == 2 %>
+                <Cell><Data ss:Type="String">YES</Data></Cell>
+              <% else %>
+                <Cell><Data ss:Type="String">NO</Data></Cell>
+              <% end %>
+              <% if prayer.maghrib == 2 %>
+                <Cell><Data ss:Type="String">YES</Data></Cell>
+              <% else %>
+                <Cell><Data ss:Type="String">NO</Data></Cell>
+              <% end %>
+              <% if prayer.isha == 2 %>
+                <Cell><Data ss:Type="String">YES</Data></Cell>
+              <% else %>
+                <Cell><Data ss:Type="String">NO</Data></Cell>
+              <% end %>
+            </Row>
+          <% end %>
+
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

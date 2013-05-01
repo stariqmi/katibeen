@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
   def sendError
     UserMailer.error(self).deliver
   end
+
+  def get_prayers
+    prayers = OutgoingDayPrayer.where(:url => self.url, :status => "responded")
+    return prayers
+  end
 end

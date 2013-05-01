@@ -11,7 +11,7 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
   def get
 
   	require 'chronic'
-
+    @users = User.where(:registered => true)
   	users = User.where(:registered => true)
   	missed = 0
 
@@ -114,6 +114,11 @@ include UserPerformanceDataHelper # To generate missed prayers data for a user
 
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
   
 end
