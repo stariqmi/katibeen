@@ -31,7 +31,7 @@
             <Row>
               <Cell><Data ss:Type="String"><%= prayer.created_at %></Data></Cell>
               <Cell><Data ss:Type="String"><%= prayer.weekday %></Data></Cell>
-              <Cell><Data ss:Type="String"><%= prayer.average %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= prayer.get_average %></Data></Cell>
               <% if prayer.fajr == 2 %>
                 <Cell><Data ss:Type="String">YES</Data></Cell>
               <% else %>
