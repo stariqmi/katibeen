@@ -4,6 +4,7 @@ include PerformanceHelper
   def performance
   
     user = User.find_by_url(params[:url])
+    redirect_to '/404'if user.nil?
     if !user.registered
       redirect_to :controller => "users", :action => "welcome", :url => params[:url]
     else
