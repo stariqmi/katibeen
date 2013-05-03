@@ -46,7 +46,7 @@ include UserPerformanceDataHelper
     if dayData == nil
       @title = 'Oops!'
       @result = "Something went wrong"
-      redirect_to :action => "home"
+      redirect_to :controller => "katibeen", :action => "home"
     else
       if dataCount == 2
          if params[:first_day]

@@ -5,13 +5,13 @@ include UserPerformanceDataHelper
   
     user = User.find_by_url(params[:url])
     if !user.registered
-      redirect_to :action => "welcome", :url => params[:url]
+      redirect_to :controller => "katibeen", :action => "welcome", :url => params[:url]
     else
       data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
         a = 1
         data = data[0]
-        redirect_to :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
+        redirect_to :controller => "data", :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
 
       else
         url = params[:url] # Extract the url-key from the parameters
@@ -19,12 +19,12 @@ include UserPerformanceDataHelper
         @user = User.includes(:outgoing_day_prayers).find_by_url(url)
         rows = OutgoingDayPrayer.where(:url => url)
         if @user == nil
-          redirect_to :action => "home" unless request.post? # Redirect to the home page
+          redirect_to :controller => "katibeen", :action => "home" unless request.post? # Redirect to the home page
         elsif @user.outgoing_day_prayers.count == 0
-          redirect_to :action => "welcome", :url => params[:url]
+          redirect_to :controller => "katibeen", :action => "welcome", :url => params[:url]
         else
           if @user.registered == false
-            redirect_to :action => "home" unless request.post?
+            redirect_to :controller => "katibeen", :action => "home" unless request.post?
 
           else
 
@@ -98,7 +98,7 @@ include UserPerformanceDataHelper
 		@user = User.find_by_url(url)
 
 		if @user == nil
-		  redirect_to :action => "home" # Redirect to the home page
+		  redirect_to :controller => "katibeen", :action => "home" # Redirect to the home page
 
 		elsif @user.outgoing_day_prayers.count > 3
 		    redirect_to :action => "performance"

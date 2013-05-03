@@ -71,7 +71,7 @@ include UrlKeyGeneratorHelper
 		@user = User.find_by_url(url)
 
 		if @user == nil
-		  redirect_to :action => "home" # Redirect to the home page
+		  redirect_to :controller => "katibeen", :action => "home" # Redirect to the home page
 
 		# If such a user exists
 		elsif @user.registered?
