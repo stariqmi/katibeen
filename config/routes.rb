@@ -1,20 +1,27 @@
 KatApp::Application.routes.draw do
 
-  match "/analytics" => "analytics#get"
-
+  #Static pages
   root :to => "katibeen#home"
+  get "katibeen/home"
+  match "/about" => "katibeen#about", :as => "about"
+
+  #User signup
+  post "users/signup"
 
   match "/welcome" => "katibeen#home"
   match "/dash/:url"   =>  "katibeen#temporary"
   match "/welcome/:url" => "katibeen#welcome"
   match "/unsubscribe/:url" => "katibeen#unsubscribe"
-  match "/about" => "katibeen#about", :as => "about"
+  
   match "widgetData/:url" => "katibeen#widgetData"
   match "/day_data/:url/:prayer_day_id" => "katibeen#requestData"
-  get "katibeen/home"
-  post "katibeen/signup"
+  
+  
   match "/katibeen/submitDayData" => "katibeen#submitDayData", :as => "submitDayData"
   match "/:url" => "katibeen#performance", :as => "performance"
+
+  #Analytics
+  match "/analytics" => "analytics#get"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

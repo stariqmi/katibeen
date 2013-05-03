@@ -1,56 +1,56 @@
-
-
 <script>
 
-disableButton = function() {
-	$('#emailContainer').show();
-	$('#add_email').hide();
-	$('#loading').fadeIn();
-	if (document.getElementById("email_input").value == ''){
-		enableButton();
-	}
+$(document).ready(function(){
 
+	$('#add_email').click(function (){
+		console.log('Disabling button');
+	
+		$('#emailContainer').show();
+		$('#add_email').hide();
+		$('#loading').fadeIn();
+		if ($('#email_input').val() == ''){
+			enableButton();
+		}
 
-}
+	});
+
+});
+
 
 enableButton = function() {
+	console.log('Enabling button');
 
 	$('#emailContainer').hide();
 	$('#add_email').show();
 	$('#loading').hide();
-	document.getElementById("email_input").value = '';
-
+	$('#email_input').val('');
 
 }
+
 </script>
 
-<form method="post" data-remote="true" class="signupForm" action="/katibeen/signup"
-accept-charset="UTF-8" id = "signupForm">
-	<div style="margin:0;padding:0;display:inline">
-	<input type="hidden" value="✓" name="utf8"><input type="hidden" value="vZ88JZ8/UaxCXOioJOT3WD23Avuj/f5X5nBErv6N38k=" name="authenticity_token"></div>
-	<div id="email">
-	<input type="text" placeholder="youremail@something.com" name="email" id="email_input">
+<form method="post" data-remote="true" class="signupForm" action="/users/signup" accept-charset="UTF-8" id = "signupForm">
 
-	<input type="text" name="timezone" id="timezone" class="timezoneInput">
+	<div style="margin:0;padding:0;display:inline">
+
+	<input type="hidden" value="✓" name="utf8">
+	<input type="hidden" value="vZ88JZ8/UaxCXOioJOT3WD23Avuj/f5X5nBErv6N38k=" name="authenticity_token"></div>
+
+	<div id="email">
+
+		<input type="text" placeholder="youremail@something.com" name="email" id="email_input">
+		<input type="text" name="timezone" id="timezone" class="timezoneInput">
 
 	<div id = "emailContainer" style = "display: none;">
 
-<!-- TAG TO CATCH RESULT OF INPUT, THE AJAX JS IS EXECUTED IN signup.js.erb -->
-<!-- <p class="result" id = "result"></p> -->
-
-	<div class="loader" id = "loading">
-    <span></span>
-    <span></span>
-    <span></span>
-	</div>
+		<div class="loader" id = "loading">
+		    <span></span>
+		    <span></span>
+		    <span></span>
+		</div>
 
 	</div>
 
-	<input type="submit" value="Add Me" name="commit" id="add_email" onclick = "disableButton()">
-
-
-
-
+	<input type="submit" value="Add Me" name="commit" id="add_email">
 
 </form>
-
