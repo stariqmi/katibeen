@@ -86,7 +86,7 @@ include PerformanceHelper
       end
     end
     rescue Exception => e
-      redirect_to '/404'
+      redirect_to '/500'
     end
   end
 
