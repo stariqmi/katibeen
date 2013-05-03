@@ -5,10 +5,11 @@ KatApp::Application.routes.draw do
   get "katibeen/home"
   match "/about" => "katibeen#about", :as => "about"
   match "/welcome" => "katibeen#home"
-  match "/welcome/:url" => "katibeen#welcome"
+  
 
   #User signup and unsub
   post "users/signup"
+  match "/welcome/:url" => "users#welcome"
   match "/unsubscribe/:url" => "users#unsubscribe"
   
   #Data controller

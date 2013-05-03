@@ -1,0 +1,55 @@
+<% post_url = root_url() + 'katibeen/submitDayData' %>
+<h1>Dashboard</h1>
+<div class="email_send_instructions step3_instructions">
+	<div class="ins_wrapper">
+		<div class="step_number email_ins step3_num">3</div>
+		<div class="instruction email_ins step3_ins">We will work the magic and create <strong>beautiful illustrations of your salah</strong> history. </div>
+	</div>
+</div>
+
+<% post_url = root_url() + 'katibeen/submitDayData' %>
+
+<p class="before_dash"><strong>But before we go to your Dash,</strong><br/>
+<span class="dash_req">we need one more day's data <%= @last_form_title %> to make it work</span>
+
+</p>
+
+
+<form  name="last_form" id="last_form" data-remote="true" action=<%= post_url %> method="post" >
+
+	<table class="last_form">
+		<tbody>
+			<tr>
+				<td>
+					<div class="fajr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="fajr_2" name="fajr" /><label class = "labelTag labelPadding" for="fajr_2">Fajr</label></div>
+				</td>
+				<td >
+					<div class="zuhr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="zuhr_2" name="zuhr" /><label class = "labelTag labelPadding" for="zuhr_2">Zuhr</label></div>
+				</td>
+				<td>
+					<div class="asr_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="asr_2" name="asr" /><label class = "labelTag labelPadding" for="asr_2">Asr</label></div>
+				</td>
+				<td>
+					<div class="mag_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="mag_2" name="maghrib" /><label class = "labelTag labelPadding" for="mag_2">Maghrib</label></div>
+				</td>
+				<td>
+					<div class="isha_2" style = "background: #cdcdcd;"><input type="checkbox" value="2" id="isha_2" name="isha" /><label class = "labelTag labelPadding" for="isha_2">Isha</label></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<input name="prayer_day_id" type="hidden" value= <%=@prayer_day_id%> >
+<input name="url" type="hidden" value= <%=@url%> >
+<br>
+<br>
+
+<input name="welcome" type="hidden" value="true">
+<input type="submit" style = "border: 0;" value = "Submit and go to Dash" class="next_step go_to_dash"/>
+</form>
+<script type="text/javascript">
+	$("#last_form").bind("ajax:success", function() {
+		location.href = "<%= root_url() + @url %>"
+	});
+</script>
+

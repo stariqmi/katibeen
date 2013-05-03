@@ -1,11 +1,7 @@
 class AnalyticsController < ApplicationController
 http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
 
-#Helper Code ----------------------- START ------------------------------------
-include UrlKeyGeneratorHelper # To generate a unique url key
-# include TimeZoneManager
-include UserPerformanceDataHelper # To generate missed prayers data for a user
-#Helper Code ------------------------ END ----------------------------------
+include PerformanceHelper
 
 
   def get

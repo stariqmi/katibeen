@@ -1,13 +1,16 @@
 class DataController < ApplicationController
-include UserPerformanceDataHelper
+include PerformanceHelper
 
   def requestData
+
     if !params[:error].nil?
       @error_message = "Seems like you missed a day, or you are using a mail client that does not support our services"
       @data = OutgoingDayPrayer.find_by_id( params[:prayer_day_id])
     end
     @prayer_day_id = params[:prayer_day_id]
     @url = params[:url]
+    prayer = OutgoingDayPrayer.where(:url => @url, :id => @prayer_day_id)[0]
+    redirect_to :action => 'home', :controller => 'katibeen' if prayer.nil?
     @dash = root_url() + @url
     @dash = @dash[7..-1]
   end

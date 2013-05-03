@@ -1,11 +1,11 @@
 class PerformanceController < ApplicationController
-include UserPerformanceDataHelper
+include PerformanceHelper
 
   def performance
   
     user = User.find_by_url(params[:url])
     if !user.registered
-      redirect_to :controller => "katibeen", :action => "welcome", :url => params[:url]
+      redirect_to :controller => "users", :action => "welcome", :url => params[:url]
     else
       data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
@@ -21,7 +21,7 @@ include UserPerformanceDataHelper
         if @user == nil
           redirect_to :controller => "katibeen", :action => "home" unless request.post? # Redirect to the home page
         elsif @user.outgoing_day_prayers.count == 0
-          redirect_to :controller => "katibeen", :action => "welcome", :url => params[:url]
+          redirect_to :controller => "users", :action => "welcome", :url => params[:url]
         else
           if @user.registered == false
             redirect_to :controller => "katibeen", :action => "home" unless request.post?
