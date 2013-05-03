@@ -4,9 +4,13 @@ include PerformanceHelper
   def performance
   
     user = User.find_by_url(params[:url])
-    redirect_to '/404'if user.nil?
-    if !user.registered
-      redirect_to :controller => "users", :action => "welcome", :url => params[:url]
+    
+    begin
+
+      if !user.registered
+        redirect_to :controller => "users", :action => "welcome", :url => params[:url]
+
+
     else
       data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
       if !data[0].nil?
@@ -80,6 +84,9 @@ include PerformanceHelper
           end
         end
       end
+    end
+    rescue Exception => e
+      redirect_to '/404'
     end
   end
 
