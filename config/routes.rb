@@ -1,5 +1,11 @@
 KatApp::Application.routes.draw do
 
+  resources :users
+  resources :katibeen
+  resources :performance
+  resources :data
+  resources :analytics
+
   #Static pages
   root :to => "katibeen#home"
   get "katibeen/home"
