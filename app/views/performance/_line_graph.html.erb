@@ -1,0 +1,14 @@
+
+<table data-intro="<p><strong>Average Improvement:</strong><br/> This chart shows you your average improvement in the last 15 (or less) days of tracking. Your goal should be to keep improving this average till you achieve a conssistent 5 per day average</p>" data-step="2" data-position="top">
+	<tbody>
+		<tr>
+			<td class="line_average line_average_perv" style="padding-top:<%=@startHeight%>px"><p class="avg"><%= @startAvg %></p><p>per day</p></td>
+			<td>
+				<svg class="line_graph" width="710" height="160">
+					<path id="graph_averages" stroke-width="1" stroke="none" fill-opacity="1" fill="#009fe6" d="<%= @lineGraphPath %>">
+				</svg>
+			</td>
+			<td class="line_average line_average_curr" style="padding-top:<%=@endHeight%>px;"><p class="avg"><%= @endAvg %></p><p>per day</p></td>
+		</tr>
+	</tbody>
+</table>

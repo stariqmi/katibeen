@@ -4,21 +4,21 @@ KatApp::Application.routes.draw do
   root :to => "katibeen#home"
   get "katibeen/home"
   match "/about" => "katibeen#about", :as => "about"
-
-  #User signup
-  post "users/signup"
-
   match "/welcome" => "katibeen#home"
-  match "/dash/:url"   =>  "katibeen#temporary"
   match "/welcome/:url" => "katibeen#welcome"
-  match "/unsubscribe/:url" => "katibeen#unsubscribe"
+
+  #User signup and unsub
+  post "users/signup"
+  match "/unsubscribe/:url" => "users#unsubscribe"
   
-  match "widgetData/:url" => "katibeen#widgetData"
-  match "/day_data/:url/:prayer_day_id" => "katibeen#requestData"
-  
-  
-  match "/katibeen/submitDayData" => "katibeen#submitDayData", :as => "submitDayData"
-  match "/:url" => "katibeen#performance", :as => "performance"
+  #Data controller
+  match "/day_data/:url/:prayer_day_id" => "data#requestData"
+  match "/katibeen/submitDayData" => "data#submitDayData", :as => "submitDayData"
+
+  #Performance controller
+  match "/:url" => "performance#performance", :as => "performance"
+  match "widgetData/:url" => "performance#widgetData"
+  match "/dash/:url"   =>  "performance#temporary"
 
   #Analytics
   match "/analytics" => "analytics#get"

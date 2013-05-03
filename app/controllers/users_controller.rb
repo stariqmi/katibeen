@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-#Helper Code ----------------------- START ------------------------------------
-include UrlKeyGeneratorHelper # To generate a unique url key
-# include TimeZoneManager
+
+include UrlKeyGeneratorHelper
 	
 	
 	# Deals with the post request to the /katibeen/signup url
 	def signup
-		
+
 		email = params[:email] # Extract the email from the params of the signup form
 		timezone = params[:timezone] # Extract the timezone from the params of the signup form
 
@@ -63,6 +62,22 @@ include UrlKeyGeneratorHelper # To generate a unique url key
 		# Respond to only javascript, set for AJAX
 		respond_to do |format|
 			format.js
+		end
+	end
+	
+	#Unsubscribe
+	def unsubscribe
+		url = params[:url] # Extract the url key from the parameters
+		@user = User.find_by_url(url)
+
+		if @user == nil
+		  redirect_to :action => "home" # Redirect to the home page
+
+		# If such a user exists
+		elsif @user.registered?
+		  @user.sendUnsubscribe
+		  @user.registered = false
+		  @user.save!
 		end
 	end
 

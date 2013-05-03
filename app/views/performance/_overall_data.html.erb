@@ -1,0 +1,114 @@
+<style>
+    
+
+    .circle.overall_fajr {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:fajr]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #FD5737 0%, #FD5737 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#FD5737), color-stop(<%=avg%>%,#FD5737), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #FD5737 0%,#FD5737 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
+
+    .circle.overall_duhr {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:zuhr]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #F6C546 0%, #F6C546 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F6C546), color-stop(<%=avg%>%,#F6C546), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #F6C546 0%,#F6C546 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
+
+    .circle.overall_asr {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:asr]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#2BA6AE), color-stop(<%=avg%>%,#2BA6AE), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #2BA6AE 0%,#2BA6AE <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
+
+    .circle.overall_isha {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:isha]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1B2723), color-stop(<%=avg%>%,#1B2723), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #1B2723 0%,#1B2723 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
+
+    .circle.overall_maghrib {
+        <%
+            avg = @filteredData[:weeklyPerformedAvgData][:maghrib]
+        %>
+        margin-left: 1%;
+        background: #009fe6;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: -moz-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%, #eeeeee <%=avg%>%, #eeeeee 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%,#9C5193), color-stop(<%=avg%>%,#9C5193), color-stop(<%=avg%>%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(left,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* IE10+ */
+        background: linear-gradient(to right,  #9C5193 0%,#9C5193 <%=avg%>%,#eeeeee <%=avg%>%,#eeeeee 100%); /* W3C */    
+    }
+</style>
+<p class="salah_adherence">Salah Adherence</p>
+<table>
+<tbody>
+    <tr>
+        <td class="overall_circle"><div class="circle size_75px overall_fajr"></div></td>
+        <td class="overall_circle"><div class="circle size_75px overall_duhr"></div></td>
+        <td class="overall_circle"><div class="circle size_75px overall_asr"></div></td>
+        <td class="overall_circle"><div class="circle size_75px overall_maghrib"></div></td>
+        <td class="overall_circle"><div class="circle size_75px overall_isha"></div></td>
+     </tr>
+    <tr>
+        <td><div class="prayer_perc"><%=@filteredData[:weeklyPerformedAvgData][:fajr]%>%</td>
+        <td><div class="prayer_perc"><%=@filteredData[:weeklyPerformedAvgData][:zuhr]%>%</div></td>
+        <td><div class="prayer_perc"><%=@filteredData[:weeklyPerformedAvgData][:asr]%>%</div></td>
+        <td><div class="prayer_perc"><%=@filteredData[:weeklyPerformedAvgData][:maghrib]%>%</div></td>
+        <td><div class="prayer_perc"><%=@filteredData[:weeklyPerformedAvgData][:isha]%>%</div></td>
+    </tr>
+        <tr>
+        <td><div class="prayer_title">FAJR</div></td>
+        <td><div class="prayer_title">DUHR</div></td>
+        <td><div class="prayer_title">ASR</div></td>
+        <td><div class="prayer_title">MAGHRIB</div></td>
+        <td><div class="prayer_title">ISHA</div></td>
+    </tr>
+</tbody>
+</table>

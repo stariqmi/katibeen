@@ -1,7 +1,9 @@
 
 <body>
-    <%= render "dash_banner" %>
+    <%= render "katibeen/dash_banner" %>
+
     <%= render "dash_welcome_modal" %>
+
      <div class="intro_wrapper">
         <div class="intro_button welcome_dash_intro" onclick="javascript:introJs().start();" onclick="javascript:introJs().goToStep(3).start();" data-step="7" data-intro="Use this button to Launch this intro anytime." data-position="left">?</div>
     </div>
@@ -13,6 +15,7 @@
         <div id="prayers_per_week" data-intro="<p><strong>Salah Adherence:</strong><br/> Salah adherence measures the percent of time you pray each salah. (ex. If you miss Maghrib every second day, you have a 50% adherence for Maghrib)</p>" data-step="1" data-position="top">
             <%= render "overall_data" %>
         </div>
+        
         <%= render "line_graph" %>
 
         <%= render "performance_summary" %>

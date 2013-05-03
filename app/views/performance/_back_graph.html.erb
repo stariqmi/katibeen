@@ -1,0 +1,23 @@
+<div class="back_graph_container">
+	<table class="back_graph_table" style="border-collapse: collapse" cellspacing="0" >
+		<tbody>
+			<tr >
+				<% (1..15).each do |f| %>
+					<td class="back_top_td"></td>
+				<% end %>
+			</tr>
+			<% (1..5).each do |i| %>
+				<tr>
+					<% (1..15).each do |f| %>
+						<td><center><div class="empty_dot"></div></center></td>
+					<% end %>
+				</tr>
+			<% end %>
+			<tr class="back_bottom_row">
+				<% (1..15).each do |f| %>
+					<td class="back_bottom_td"></td>
+				<% end %>
+			</tr>
+		</tbody>
+	</table>
+</div>
