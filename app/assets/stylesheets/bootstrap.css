@@ -1,10 +1,10 @@
 
 .fade {
   opacity: 0;
-  -webkit-transition: opacity 0.5s linear;
-     -moz-transition: opacity 0.5s linear;
-       -o-transition: opacity 0.5s linear;
-          transition: opacity 0.5s linear;
+  -webkit-transition: opacity 0.1s linear;
+     -moz-transition: opacity 0.1s linear;
+       -o-transition: opacity 0.1s linear;
+          transition: opacity 0.1s linear;
 }
 
 .fade.in {
@@ -15,10 +15,10 @@
   position: relative;
   height: 0;
   overflow: hidden;
-  -webkit-transition: height 0.2s ease;
-     -moz-transition: height 0.2s ease;
-       -o-transition: height 0.2s ease;
-          transition: height 0.2s ease;
+  -webkit-transition: height 0.1s ease;
+     -moz-transition: height 0.1s ease;
+       -o-transition: height 0.1s ease;
+          transition: height 0.1s ease;
 }
 
 .collapse.in {
@@ -121,10 +121,10 @@ button.close {
 
 .modal.fade {
   top: -20%;
-  -webkit-transition: opacity 0.2s linear, top 0.2s ease-out;
-     -moz-transition: opacity 0.2s linear, top 0.2s ease-out;
-       -o-transition: opacity 0.2s linear, top 0.2s ease-out;
-          transition: opacity 0.2s linear, top 0.2s ease-out;
+  -webkit-transition: opacity 0.1s linear, top 0.1s ease-out;
+     -moz-transition: opacity 0.1s linear, top 0.1s ease-out;
+       -o-transition: opacity 0.1s linear, top 0.1s ease-out;
+          transition: opacity 0.1s linear, top 0.1s ease-out;
 }
 
 .modal.fade.in {
@@ -175,9 +175,9 @@ button.close {
   color: #FFF;
   background-color: #18221E;
   border-top: 1px solid #111;
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 0 0px 0px;
+     -moz-border-radius: 0 0 0px 0px;
+          border-radius: 0 0 0px 0px;
   *zoom: 1;
   -webkit-box-shadow: inset 0 1px 0 #111;
      -moz-box-shadow: inset 0 1px 0 #111;
