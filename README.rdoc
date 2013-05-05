@@ -1,13 +1,10 @@
-This is a rails application.
+Katibean is an Arabic word which loosely translated to “Scribes”. 
+Project Katibean was named after the “Kiram-ul-Katibean”, the two angel scribes that rest on a person’s shoulder and record all their good and bad deeds. 
+Project Katibean, hopes to provide beautifully designed visual data to individuals helping them better understand their Salah habits.
 
-To test the Sign up and register/welcome functionality, follow the instructions:
-  - Install rails
-  - Go into the app directory, run the command "bundle install"
-  - Then install "mailcatcher" onto your system, start and open it in your browser
-  - Run the command "rails s" , this starts the server
-  - Visit "localhost:3000", you will see a raw signup form.
-  - Enter a valid email address.
-  - Open the mail catcher tab in your browser, open the email, copy the url-key.
-  - Enter localhost:3000/welcome/url-key
-  - To check the db, close the server and type "rails console"
-  - In this, run "PotentialUser.all" to see unregistered users and "User.all" to see registered users
+Prayer, is the key to paradise: 
+It is said that on the Day of Judgment, the first question we will be asked about is our Salah. 
+If we are able to answer that question well, then the rest too will go well. 
+Katibean wants to prepare Muslims for this by asking them this very question every day. 
+
+http://www.katibean.com/
