@@ -16,7 +16,7 @@ include PerformanceHelper
       if !data[0].nil?
         a = 1
         data = data[0]
-        redirect_to :controller => "data", :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "Mail Client Not Supported"
+        redirect_to :controller => "data", :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "This day's salat info was not filled out"
 
       else
         url = params[:url] # Extract the url-key from the parameters
@@ -35,20 +35,11 @@ include PerformanceHelper
 
             # Check of the user is visiting after the welcome page
             time = rows[1].updated_at.in_time_zone("America/New_York")
-            year = time.strftime("%Y").to_i
-            month = time.strftime("%m").to_i
-            day = time.strftime("%d").to_i
-            hour = time.strftime("%H").to_i
-            minutes = time.strftime("%M").to_i
             now = Time.now.in_time_zone("America/New_York")
-            year_now = now.strftime("%Y").to_i
-            month_now = now.strftime("%m").to_i
-            day_now = now.strftime("%d").to_i
-            hour_now = now.strftime("%H").to_i
-            minutes_now = now.strftime("%M").to_i
-            @show_intro = ""
-            min_diff = minutes_now - minutes
-            if year == year_now && month == month && day == day_now && hour == hour_now && min_diff < 2 ? @show_intro = true : @show_intro = false
+            @show_intro = false
+            min_diff = (Time.parse(now.to_s) - Time.parse(time.to_s))/60
+            if min_diff < 2 ? @show_intro = true : @show_intro = false
+              
           end
             # Check ends here
 
