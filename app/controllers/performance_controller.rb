@@ -10,38 +10,35 @@ include PerformanceHelper
       if !user.registered
         redirect_to :controller => "users", :action => "welcome", :url => params[:url]
 
-
-    else
-      data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
-      if !data[0].nil?
-        a = 1
-        data = data[0]
-        redirect_to :controller => "data", :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "This day's salat info was not filled out"
-
       else
-        url = params[:url] # Extract the url-key from the parameters
-        # Find the user with the url, eager leading the prayer data aswell.
-        @user = User.includes(:outgoing_day_prayers).find_by_url(url)
-        rows = OutgoingDayPrayer.where(:url => url)
-        if @user == nil
-          redirect_to :controller => "katibeen", :action => "home" unless request.post? # Redirect to the home page
-        elsif @user.outgoing_day_prayers.count == 0
-          redirect_to :controller => "users", :action => "welcome", :url => params[:url]
+        data = OutgoingDayPrayer.where(:url => params[:url], :status => "pending")
+        if !data[0].nil?
+          a = 1
+          data = data[0]
+          redirect_to :controller => "data", :action =>"requestData", :url => params[:url], :prayer_day_id => data.id, :error => "This day's salat info was not filled out"
+
         else
-          if @user.registered == false
-            redirect_to :controller => "katibeen", :action => "home" unless request.post?
-
+          url = params[:url] # Extract the url-key from the parameters
+          # Find the user with the url, eager leading the prayer data aswell.
+          @user = User.includes(:outgoing_day_prayers).find_by_url(url)
+          rows = OutgoingDayPrayer.where(:url => url)
+          if @user == nil
+            redirect_to :controller => "katibeen", :action => "home" unless request.post? # Redirect to the home page
+          elsif @user.outgoing_day_prayers.count == 0
+            redirect_to :controller => "users", :action => "welcome", :url => params[:url]
           else
+            if @user.registered == false
+              redirect_to :controller => "katibeen", :action => "home" unless request.post?
 
-            # Check of the user is visiting after the welcome page
-            time = rows[1].updated_at.in_time_zone("America/New_York")
-            now = Time.now.in_time_zone("America/New_York")
-            @show_intro = false
-            min_diff = (Time.parse(now.to_s) - Time.parse(time.to_s))/60
-            if min_diff < 2 ? @show_intro = true : @show_intro = false
-              
-          end
-            # Check ends here
+            else
+
+              # Check of the user is visiting after the welcome page
+              time = rows[1].updated_at.in_time_zone("America/New_York")
+              now = Time.now.in_time_zone("America/New_York")
+              @show_intro = false
+              min_diff = (Time.parse(now.to_s) - Time.parse(time.to_s))/60
+              if min_diff < 2 ? @show_intro = true : @show_intro = false
+            end
 
             @url = params[:url]
             performance = PerformanceData.new @user # New PerformanceData object
@@ -76,9 +73,12 @@ include PerformanceHelper
         end
       end
     end
+
     rescue Exception => e
+      puts e
       redirect_to '/500'
     end
+
   end
 
 	def widgetData

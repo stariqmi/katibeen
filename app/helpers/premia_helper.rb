@@ -1,0 +1,2 @@
+module PremiaHelper
+end

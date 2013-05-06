@@ -5,6 +5,8 @@ KatApp::Application.routes.draw do
   resources :performance
   resources :data
   resources :analytics
+  resources :premia
+  resources :sessions
 
   #Static pages
   root :to => "katibeen#home"
@@ -12,6 +14,13 @@ KatApp::Application.routes.draw do
   match "/about" => "katibeen#about", :as => "about"
   match "/welcome" => "katibeen#home"
   
+
+  #Sessions Pages
+  match '/login',           to: 'sessions#new'
+  match '/logout',          to: 'sessions#destroy'
+
+  #Premium users controller
+  match '/signup',         to: 'premia#new'
 
   #User signup and unsub
   post "users/signup"
@@ -22,16 +31,16 @@ KatApp::Application.routes.draw do
   match "/day_data/:url/:prayer_day_id" => "data#requestData"
   match "/katibeen/submitDayData" => "data#submitDayData", :as => "submitDayData"
 
+  #Analytics
+  match "/analytics" => "analytics#get"
+
   #Performance controller
   match "/:url" => "performance#performance", :as => "performance"
   match "widgetData/:url" => "performance#widgetData"
   match "/dash/:url"   =>  "performance#temporary"
 
-  #Analytics
-  match "/analytics" => "analytics#get"
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

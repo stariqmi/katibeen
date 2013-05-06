@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330230244) do
+ActiveRecord::Schema.define(:version => 20130506155512) do
 
   create_table "outgoing_day_prayers", :force => true do |t|
     t.string   "url"
@@ -31,15 +31,33 @@ ActiveRecord::Schema.define(:version => 20130330230244) do
     t.integer  "total_prayed"
   end
 
+  create_table "premia", :force => true do |t|
+    t.string   "password"
+    t.string   "email"
+    t.string   "username"
+    t.string   "remember_token"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+  end
+
+  create_table "sessions", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "email"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "url"
     t.string   "timezone"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.float    "average"
     t.integer  "day"
     t.boolean  "registered"
+    t.boolean  "premium"
+    t.string   "password_confirmation"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

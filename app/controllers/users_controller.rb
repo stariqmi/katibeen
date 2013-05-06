@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 include UrlKeyGeneratorHelper
 	
-	
 	# Deals with the post request to the /katibeen/signup url
 	def signup
 
