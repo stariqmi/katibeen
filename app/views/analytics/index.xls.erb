@@ -1,62 +1,99 @@
-<?xml version="1.0"?>
-<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:o="urn:schemas-microsoft-com:office:office"
-  xmlns:x="urn:schemas-microsoft-com:office:excel"
-  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-  xmlns:html="http://www.w3.org/TR/REC-html40">
-  
-    <Worksheet ss:Name='Main'>
-      <Table>
+<table border = "1"> 
+    <tr>
 
-        <Row>
-          <Cell><Data ss:Type="String">Date</Data></Cell>
-        </Row>
+          <td>User url</td>
 
-        <% @dateList.each do |date| %>
-
-          <Row>
-            <Cell><Data ss:Type="String"><%= date.strftime("%D")  %></Data></Cell>
+            <% @dateList.each do |date| %>
           
-          <% @users.each do |user| %> 
-            <Cell><Data ss:Type="String"><%= user.url  %></Data></Cell>
-            <% @prayers = user.get_prayers %>
+              <td><%= date.strftime("%D") %></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+
+            <% end %>
+
+    </tr>
+
+        <tr>
+
+          <td>-</td>
+
+          <% @dateList.each do |date| %>
+ 
+            <td>Fajr</td>
+            <td>Zuhr</td>
+            <td>Asr</td>
+            <td>Maghrib</td>
+            <td>Isha</td>
+          
+          <% end %>
+          
+        </tr>
+
+        <% @users.each do |user| %> 
+          <tr>
+
+            <td><%= user.url  %></td>
+
+            <% @dateList.each do |date| %>
+
+            <% @prayer_found = false %>
+
+              <% @prayers = user.get_prayers %>
 
               <% @prayers.each do |prayer| %>
 
-              <% if (prayer.created_at - date).abs < 1 %> 
+                <% if (prayer.created_at - date).abs < 1 %> 
 
-                  <% if prayer.fajr == 2 %>
-                    <Cell><Data ss:Type="String">Y</Data></Cell>
-                  <% else %>
-                    <Cell><Data ss:Type="String">N</Data></Cell>
-                  <% end %>
-                  <% if prayer.zuhr == 2  %>
-                    <Cell><Data ss:Type="String">Y</Data></Cell>
-                  <% else %>
-                    <Cell><Data ss:Type="String">N</Data></Cell>
-                  <% end %>
-                  <% if prayer.asr == 2 %>
-                    <Cell><Data ss:Type="String">Y</Data></Cell>
-                  <% else %>
-                    <Cell><Data ss:Type="String">N</Data></Cell>
-                  <% end %>
-                  <% if prayer.maghrib == 2 %>
-                    <Cell><Data ss:Type="String">Y</Data></Cell>
-                  <% else %>
-                    <Cell><Data ss:Type="String">N</Data></Cell>
-                  <% end %>
-                  <% if prayer.isha == 2 %>
-                    <Cell><Data ss:Type="String">Y</Data></Cell>
-                  <% else %>
-                    <Cell><Data ss:Type="String">N</Data></Cell>
-                  <% end %>
-                
-              <% end %>
+                    <% if prayer.fajr == 2 %>
+                      <td>Y</td>
+                    <% else %>
+                      <td>N</td>
+                    <% end %>
+                    <% if prayer.zuhr == 2  %>
+                      <td>Y</td>
+                    <% else %>
+                      <td>N</td>
+                    <% end %>
+                    <% if prayer.asr == 2 %>
+                      <td>Y</td>
+                    <% else %>
+                      <td>N</td>
+                    <% end %>
+                    <% if prayer.maghrib == 2 %>
+                      <td>Y</td>
+                    <% else %>
+                      <td>N</td>
+                    <% end %>
+                    <% if prayer.isha == 2 %>
+                      <td>Y</td>
+                    <% else %>
+                      <td>N</td>
+                    <% end %>
+
+                    <% @prayer_found = true %>
+
+                <% else %>
+                  
+                <% end %>
+
             <% end %>
-          <% end %>
-          </Row>
-        <% end %>
-      </Table>
-  </Worksheet>
 
-</Workbook>
+                <% if !@prayer_found %>
+
+                  <td>nil</td>
+                  <td>nil</td>
+                  <td>nil</td>
+                  <td>nil</td>
+                  <td>nil</td>
+
+                <% end %>
+
+            <% @prayer_found = false %>
+
+          <% end %>
+
+          </tr>
+        <% end %>
+</table>
