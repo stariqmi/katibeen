@@ -26,6 +26,8 @@ task :populate => :environment do
 			prayer.total_prayed = prayer.average
 			prayer.status =  "responded"
 			prayer.save
+			prayer.created_at = d.days.from_now
+			prayer.save
 		end
 
 		user.save

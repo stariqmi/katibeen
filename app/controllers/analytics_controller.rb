@@ -7,6 +7,7 @@ include PerformanceHelper
   def index
 
   	require 'chronic'
+
     @users = User.where(:registered => true)
   	users = User.where(:registered => true)
   	missed = 0
@@ -22,6 +23,7 @@ include PerformanceHelper
   	active_users = []
 
   	data = OutgoingDayPrayer.where(:status => "responded")
+
   	data.each do |d|
   		begin
 			fajr = d.fajr/2
@@ -111,10 +113,28 @@ include PerformanceHelper
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
 
+
+    #SPREADSHEET STUFF
+
+    @start = OutgoingDayPrayer.find(:all, :order => "created_at desc").reverse[0]
+    @start = @start.created_at
+
+    @end = OutgoingDayPrayer.find(:all, :order => "created_at desc")[0]
+    @end = @end.created_at
+    @dateList = []
+    
+    current = @start
+
+    while @end > current
+      @dateList.push(current)
+      current = current + 1.days
+    end
+
     respond_to do |format|
       format.html
       format.xls
     end
+
   end
   
 end

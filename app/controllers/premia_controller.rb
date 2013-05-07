@@ -1,4 +1,6 @@
 class PremiaController < ApplicationController
+http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
+
 	def index
 	end
 	def new 
