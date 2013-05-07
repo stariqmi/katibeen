@@ -3,7 +3,7 @@ include SessionsHelper
 
   def new
    if signed_in?
-    redirect_to '/'
+    redirect_to '/signup'
    end
   end
 
@@ -23,11 +23,7 @@ include SessionsHelper
 
   def destroy
     session[:user_id] = nil
-    if signed_in
-      redirect_to '/'
-    else 
-      redirect_to '/signup'
-    end
+    redirect_to '/signup'
   end
 
 end

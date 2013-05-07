@@ -1,11 +1,10 @@
 module SessionsHelper
-	def sign_in(user)
-    	cookies[:katibean_token] = user.remember_token
-    	session[:user_id] = user.id
+	def sign_in(premium)
+    	session[:premium_id] = premium.id
   	end
 
   	def current_user
-    	@current_user ||= Premium.find(session[:user_id]) if session[:user_id]
+    	@current_user ||= Premium.find(session[:premium_id]) if session[:premium_id]
   	end
   	
   	def signed_in?
