@@ -6,56 +6,58 @@ include PerformanceHelper
 
   def index
 
-  	require 'chronic'
+    require 'chronic'
+
     @users = User.where(:registered => true)
-  	users = User.where(:registered => true)
-  	missed = 0
+    users = User.where(:registered => true)
+    missed = 0
 
-  	averages = []
-  	fajrs = []
-  	zuhrs = []
-  	asrs = []
-  	maghribs = []
-  	ishas = []
-  	average = 0.0
+    averages = []
+    fajrs = []
+    zuhrs = []
+    asrs = []
+    maghribs = []
+    ishas = []
+    average = 0.0
 
-  	active_users = []
+    active_users = []
 
-  	data = OutgoingDayPrayer.where(:status => "responded")
-  	data.each do |d|
-  		begin
-			fajr = d.fajr/2
-			zuhr = d.zuhr/2
-			asr = d.asr/2
-			maghrib = d.maghrib/2
-			isha = d.isha/2
+    data = OutgoingDayPrayer.where(:status => "responded")
 
-			fajrs.push(fajr)
-			zuhrs.push(zuhr)
-			asrs.push(asr)
-			maghribs.push(maghrib)
-			ishas.push(isha)
-						puts '-------------------------------------------------------------'
-			average = average + (fajr + zuhr + asr + maghrib + isha)
+    data.each do |d|
+      begin
+      fajr = d.fajr/2
+      zuhr = d.zuhr/2
+      asr = d.asr/2
+      maghrib = d.maghrib/2
+      isha = d.isha/2
 
-			averages.push(average)
-			puts '-------------------------------------------------------------'
-			puts average
-		#Bad data so were just gonna skip
+      fajrs.push(fajr)
+      zuhrs.push(zuhr)
+      asrs.push(asr)
+      maghribs.push(maghrib)
+      ishas.push(isha)
+            puts '-------------------------------------------------------------'
+      average = average + (fajr + zuhr + asr + maghrib + isha)
+
+      averages.push(average)
+      puts '-------------------------------------------------------------'
+      puts average
+    #Bad data so were just gonna skip
         rescue Exception => e
-        	puts e
+          puts e
         end
     end
 
-  	users.each do |user|
-  		begin
-			performance = PerformanceData.new user # New PerformanceData object
-			prayersData = performance.prayersData
-			missed = missed + prayersData[:missedPrayersData][:totalMissed]
+    users.each do |user|
+      begin
+      performance = PerformanceData.new user # New PerformanceData object
+      prayersData = performance.prayersData
+      missed = missed + prayersData[:missedPrayersData][:totalMissed]
 
-		#if something goes wrong in the performance data helper
+    #if something goes wrong in the performance data helper
         rescue Exception => e
-        	puts e
+          puts e
         end
     end
 
@@ -66,35 +68,35 @@ include PerformanceHelper
 
     @fajr = 0.0
     fajrs.each do |a|
-    	@fajr = @fajr + a
+      @fajr = @fajr + a
     end
     @fajr = (@fajr/fajrs.count) * 100
     @fajr = @fajr.round(2)
 
     @zuhr = 0.0
     zuhrs.each do |a|
-    	@zuhr = @zuhr + a
+      @zuhr = @zuhr + a
     end
     @zuhr = (@zuhr/zuhrs.count) * 100
     @zuhr = @zuhr.round(2)
 
     @asr = 0.0
     asrs.each do |a|
-    	@asr = @asr + a
+      @asr = @asr + a
     end
     @asr = (@asr/asrs.count) * 100
     @asr = @asr.round(2)
 
     @maghrib = 0.0
     maghribs.each do |a|
-    	@maghrib = @maghrib + a
+      @maghrib = @maghrib + a
     end
     @maghrib = (@maghrib/maghribs.count) * 100
     @maghrib = @maghrib.round(2)
 
     @isha = 0.0
     ishas.each do |a|
-    	@isha = @isha + a
+      @isha = @isha + a
     end
     @isha = (@isha/ishas.count) * 100
     @isha = @isha.round(2)
@@ -111,10 +113,28 @@ include PerformanceHelper
     @last_week = User.where(["created_at >= ?", Chronic.parse('last week')]).count
     @last_month = User.where(["created_at >= ?", Chronic.parse('last month')]).count
 
+
+    #SPREADSHEET STUFF
+
+    @start = OutgoingDayPrayer.find(:all, :order => "created_at desc").reverse[0]
+    @start = @start.created_at
+
+    @end = OutgoingDayPrayer.find(:all, :order => "created_at desc")[0]
+    @end = @end.created_at
+    @dateList = []
+    
+    current = @start
+
+    while @end > current
+      @dateList.push(current)
+      current = current + 1.days
+    end
+
     respond_to do |format|
       format.html
       format.xls
     end
+
   end
   
 end

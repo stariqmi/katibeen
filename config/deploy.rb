@@ -31,7 +31,7 @@ role :db, domain, :primary => true
 set :repository,  "git://github.com/stariqmi/katibeen.git"
 set :svn_username, "fm2munsh"
 set :svn_password, ENV['GIT_PASS']
-set :checkout, "master"
+set :checkout, "fixed"
 
 #############################################################
 #	Passenger
