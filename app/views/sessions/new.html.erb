@@ -1,15 +1,6 @@
-<%= form_for @session do |f| %>
-  <% if @session.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @session.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(:session, url: sessions_path) do |f| %>
   <p>
+    <%= flash[:error] %>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
