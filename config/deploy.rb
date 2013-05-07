@@ -5,7 +5,7 @@ require 'capistrano/maintenance'
 #	Application
 #############################################################
 
-set :application, "katibean_fix"
+set :application, "katibean"
 set :deploy_to, "/var/www/#{application}/"
 
 #############################################################
