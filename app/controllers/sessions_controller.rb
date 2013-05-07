@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
-http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
+include SessionsHelper
 
   def new
-  	@session = Session.new
    if signed_in?
     redirect_to '/'
    end
@@ -11,7 +10,7 @@ http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
   def create
     user = Premium.find_by_email(params[:session][:email].downcase)
     if user.nil? 
-      user = Premium.find_by_name(params[:session][:email])
+      user = Premium.find_by_username(params[:session][:email])
     end
     if user && user.authenticate(params[:session][:password])
       sign_in user
@@ -23,10 +22,12 @@ http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
   end
 
   def destroy
-    self.current_user = nil
-    puts '----------------------------------'
-    puts self.current_user
-    cookies.delete(:katibean_token)
-    redirect_to '/'
+    session[:user_id] = nil
+    if signed_in
+      redirect_to '/'
+    else 
+      redirect_to '/signup'
+    end
   end
+
 end
