@@ -10,6 +10,7 @@ gem 'better_errors'
 gem 'rufus-scheduler'
 gem "binding_of_caller"
 gem "chronic"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
