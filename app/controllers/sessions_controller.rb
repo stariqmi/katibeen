@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-http_basic_authenticate_with :name => "katibean", :password => "What'sup!"
+
 include SessionsHelper
 
   def new
