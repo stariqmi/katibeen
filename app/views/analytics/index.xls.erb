@@ -42,7 +42,7 @@
 
               <% @prayers.each do |prayer| %>
 
-                <% if (prayer.created_at - date).abs < 1 %> 
+                <% if (prayer.created_at - date).abs < 43200 %> 
 
                     <% if prayer.fajr == 2 %>
                       <td>Y</td>
@@ -73,7 +73,7 @@
                     <% @prayer_found = true %>
 
                 <% else %>
-                  
+
                 <% end %>
 
             <% end %>
