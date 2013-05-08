@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507191530) do
+ActiveRecord::Schema.define(:version => 20130508002336) do
 
   create_table "outgoing_day_prayers", :force => true do |t|
     t.string   "url"
@@ -36,9 +36,12 @@ ActiveRecord::Schema.define(:version => 20130507191530) do
     t.string   "email"
     t.string   "username"
     t.string   "remember_token"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "password_digest"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.string   "password_confirmation"
   end
 
   create_table "sessions", :force => true do |t|

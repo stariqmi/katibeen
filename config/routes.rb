@@ -7,6 +7,7 @@ KatApp::Application.routes.draw do
   resources :analytics
   resources :premia
   resources :sessions
+  resources :password_resets
 
   #Static pages
   root :to => "katibeen#home"
@@ -18,6 +19,9 @@ KatApp::Application.routes.draw do
   #Sessions Pages
   match '/login',           to: 'sessions#new'
   match '/logout',          to: 'sessions#destroy'
+
+  #Password Resets
+  match '/reset',           to: 'password_resets#new'
 
   #Premium users controller
   match '/signup',         to: 'premia#new'

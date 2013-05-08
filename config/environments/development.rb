@@ -5,7 +5,7 @@ KatApp::Application.configure do
 
 
   config.action_mailer.default_url_options = {
-  :host => "localhost:4000"
+  :host => "localhost:1337"
 }
 
   # In the development environment your application's code is reloaded on
