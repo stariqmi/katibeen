@@ -1,5 +1,5 @@
 class Premium < ActiveRecord::Base
-  attr_accessible :email, :password, :remember_token, :username, :password_confirmation
+  attr_accessible :email, :password, :remember_token, :username, :password_confirmation, :stripe_token, :last_4_digits
   has_secure_password
 
   def send_password_reset

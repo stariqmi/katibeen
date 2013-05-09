@@ -1,4 +1,46 @@
+<script>
+
+$(document).ready(function() {
+
+  $("#new_premium").submit(function() {
+    var form = this;
+
+    console.log("Form submit");
+
+    var card = {
+      number:   $("#credit_card_number").val(),
+      expMonth: $("#_expiry_date_2i").val(),
+      expYear:  $("#_expiry_date_1i").val(),
+      cvc:      $("#cvv").val()
+    };
+
+
+    Stripe.createToken(card, function(status, response) {
+      if (status === 200) {
+        $("#premium_last_4_digits").val(response.card.last4);
+        $("#premium_stripe_token").val(response.id);
+        form.submit();
+        
+      } else {
+        console.log(status)
+        $("#stripe-error-message").text(response.error.message);
+        $("#credit-card-errors").show();
+        $("#premium_submit").attr("disabled", true);
+      }
+    });
+
+    return false;
+  });
+
+});
+
+</script>
+
 <%= form_for @premium do |f| %>
+
+<noscript>
+  <p>This form requires Javascript to use</p>
+</noscript>
 
   <% if @premium.errors.any? %>
     <div class="error_messages">
@@ -11,13 +53,27 @@
     </div>
   <% end %>
 
-    <input id="premium_email" name="premium[email]" type="text" placeholder="Email" >
-    <br>
-    <input id="premium_password" name="premium[password]" type="password" placeholder = 'Password'>
-    <br>
-    <input id="premium_password" name="premium[password]" type="password" placeholder = 'Password Confirmation'>
-    <br>
-    <input name="commit" type="submit" value="Create Account">
+  <input id="premium_email" name="premium[email]" type="text" placeholder="Email" >
+  <br>
+  <input id="premium_password" name="premium[password]" type="password" placeholder = 'Password'>
+  <br>
+  <input id="premium_password" name="premium[password]" type="password" placeholder = 'Password Confirmation'>
+  <br>
+
+  <%= f.hidden_field :stripe_token %>
+  <%= f.hidden_field :last_4_digits %>
+
+  
+  <%= label_tag :credit_card_number %>
+  <%= text_field_tag :credit_card_number, params[:credit_card_number], :class => "field" %>
+
+  <%= label_tag :cvv, "Security code (CVV)" %>
+  <%= text_field_tag :cvv, params[:cvv], :class => "small" %>
+
+  <%= label_tag :expiry_date %>
+  <%= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class => "small"} %>
+
+  <input name="commit" type="submit" value="Create Account">
 
 </form>
 
