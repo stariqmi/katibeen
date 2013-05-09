@@ -71,7 +71,7 @@ $(document).ready(function() {
   <%= text_field_tag :cvv, params[:cvv], :class => "small" %>
 
   <%= label_tag :expiry_date %>
-  <%= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class => "small"} %>
+  <%= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 10}, {:class => "small"} %>
 
   <input name="commit" type="submit" value="Create Account">
 

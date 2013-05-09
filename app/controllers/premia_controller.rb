@@ -29,7 +29,7 @@ class PremiaController < ApplicationController
 		    else
 		    	render 'new'
 		    end
-
+		    
 	    rescue Stripe::CardError => e
 		    @premium.errors.add :base, e.message
 		    @premium.stripe_token = nil
