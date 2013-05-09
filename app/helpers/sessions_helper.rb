@@ -8,6 +8,6 @@ module SessionsHelper
   	end
   	
   	def signed_in?
-      !session[:user_id].nil?
+      !session[:premium_id].nil?
   	end
 end
